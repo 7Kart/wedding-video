@@ -1,0 +1,7 @@
+{
+    "main.js" : [
+        "./bower_components/jquery/dist/jquery.js",
+        "./bower_components/fullpage.js/dist/jquery.fullpage.js",
+        "./assets/js/app.js"
+    ]
+}
