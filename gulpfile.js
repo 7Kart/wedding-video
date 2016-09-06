@@ -8,7 +8,12 @@ const fs = require('fs');
 
 gulp.task('less', function(){
     // return gulp.src(['assets/less/**/*.less', 'bower_components/fullpage.js/dist/jquery.fullpage.css'])
-    return gulp.src(['assets/less/*.less', 'bower_components/fullpage.js/dist/jquery.fullpage.css'])
+    return gulp.src([
+      'assets/less/*.less',
+      'bower_components/fullpage.js/dist/jquery.fullpage.css',
+      './bower_components/lightcase-2.3.4/src/css/lightcase.css'
+
+    ])
 
         .pipe(gulpIf(isDevelopment, sourceMaps.init()))
         .pipe(gLess({
