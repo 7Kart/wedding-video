@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f6267f4-1961-4fba-9d9c-b9a30e5a4469" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/7bZap9_6Gz0.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/U9VMxIXiVGc.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/Zf3_qxlrG5o.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/pew7wnWGq9c.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/picture.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/tEeGpnlgE74.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/tR_aT3eTGMk.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/vm34V3Mf8YE.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/images/yLiDp05Fff4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/video/shortFon1.mp4" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js-map-file.json" afterPath="$PROJECT_DIR$/assets/js-map-file.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/app.js" afterPath="$PROJECT_DIR$/assets/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/less/grid.css.less" afterPath="$PROJECT_DIR$/assets/less/grid.css.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/less/pageStyles/mainMenuStyle.less" afterPath="$PROJECT_DIR$/assets/less/pageStyles/mainMenuStyle.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gulpfile.js" afterPath="$PROJECT_DIR$/gulpfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/less/main.less" afterPath="$PROJECT_DIR$/assets/less/main.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/less/pageStyles/galary.less" afterPath="$PROJECT_DIR$/assets/less/pageStyles/galary.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/main.js" afterPath="$PROJECT_DIR$/public/javascripts/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/main.css" afterPath="$PROJECT_DIR$/public/stylesheets/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
@@ -47,8 +35,8 @@
           <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
-                  <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+                <state relative-caret-position="504">
+                  <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -58,7 +46,7 @@
             <entry file="file://$PROJECT_DIR$/assets/js-map-file.json">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="180">
-                  <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+                  <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -67,18 +55,8 @@
           <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/assets/js/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="360">
-                  <caret line="20" column="8" selection-start-line="20" selection-start-column="10" selection-end-line="26" selection-end-column="12" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="mainMenuStyle.less" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/mainMenuStyle.less">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="540">
-                  <caret line="30" column="2" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
+                <state relative-caret-position="468">
+                  <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
                   <folding />
                 </state>
               </provider>
@@ -91,8 +69,8 @@
           <file leaf-file-name="index.ejs" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/views/index.ejs">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="521">
-                  <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+                <state relative-caret-position="515">
+                  <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
                   <folding />
                 </state>
               </provider>
@@ -101,8 +79,28 @@
           <file leaf-file-name="galary.less" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/galary.less">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+                <state relative-caret-position="162">
+                  <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="videBackground.less" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/videBackground.less">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="558">
+                  <caret line="31" column="68" selection-start-line="31" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gulpfile.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="738">
+                  <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -118,19 +116,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/assets/less/utility/responsive-utilities.less" />
         <option value="$PROJECT_DIR$/public/stylesheets/main.css" />
         <option value="$PROJECT_DIR$/assets/js-map-file.js" />
         <option value="$PROJECT_DIR$/assets/less/grid.css.less" />
         <option value="$PROJECT_DIR$/assets/less/pageStyles/videBackground.less" />
-        <option value="$PROJECT_DIR$/assets/less/main.less" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/assets/less/pageStyles/mainMenuStyle.less" />
-        <option value="$PROJECT_DIR$/assets/less/pageStyles/galary.less" />
         <option value="$PROJECT_DIR$/assets/js-map-file.json" />
-        <option value="$PROJECT_DIR$/views/index.ejs" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/assets/less/main.less" />
+        <option value="$PROJECT_DIR$/assets/less/pageStyles/galary.less" />
         <option value="$PROJECT_DIR$/assets/js/app.js" />
+        <option value="$PROJECT_DIR$/views/index.ejs" />
       </list>
     </option>
   </component>
@@ -140,6 +138,30 @@
   </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+    <gulpfiles>
+      <GulpfileState>
+        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
+        <tasks>
+          <GulpTaskState>
+            <task-name>less</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>js</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>watch</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <dependencies>
+              <dependency value="less" />
+              <dependency value="watch" />
+              <dependency value="js" />
+            </dependencies>
+            <task-name>default</task-name>
+          </GulpTaskState>
+        </tasks>
+      </GulpfileState>
+    </gulpfiles>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
@@ -147,6 +169,55 @@
     <option name="y" value="24" />
     <option name="width" value="1920" />
     <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Code style issuesCSS</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>HTML</id>
+          </State>
+          <State>
+            <id>Invalid elementsCSS</id>
+          </State>
+          <State>
+            <id>Jade</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Probable bugsCSS</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AngularJS</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -173,6 +244,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -201,7 +274,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="bin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -234,28 +307,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="less" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="video-wedding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="video-wedding" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="less" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utility" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -281,26 +332,44 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="video-wedding" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="video-wedding" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="less" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mixins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gulpfile.js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="TODO_SCOPE" value="Project Files" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
   </component>
   <component name="RunManager" selected="Node.js.app.js">
-    <configuration default="false" name="app.js (1)" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="app.js" working-dir="$PROJECT_DIR$/assets/js">
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -319,6 +388,10 @@
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
+    <configuration default="true" type="NodeJSRemoteDebug" factoryName="Node.js Remote Debug">
+      <node-js-remote-debug />
+      <method />
+    </configuration>
     <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
       <option name="cucumberJsArguments" value="" />
       <option name="executablePath" />
@@ -328,7 +401,7 @@
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
-      <gulpfile />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
       <tasks />
       <arguments />
       <envs />
@@ -354,18 +427,16 @@
       <recursive>false</recursive>
       <method />
     </configuration>
-    <configuration default="false" name="app.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
+    <configuration default="false" name="debug" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:3000">
+      <method />
+    </configuration>
+    <configuration default="false" name="app.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" path-to-js-file="www" working-dir="$PROJECT_DIR$/bin">
       <method />
     </configuration>
     <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Node.js.app.js" />
-      <item index="1" class="java.lang.String" itemvalue="Node.js.app.js (1)" />
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.debug" />
+      <item index="1" class="java.lang.String" itemvalue="Node.js.app.js" />
     </list>
-    <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Node.js.app.js (1)" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -392,12 +463,15 @@
       <workItem from="1465501303758" duration="35000" />
       <workItem from="1472295164455" duration="14336000" />
       <workItem from="1472758453163" duration="1197000" />
-      <workItem from="1473065464253" duration="14463000" />
+      <workItem from="1473065464253" duration="31371000" />
+      <workItem from="1473275496326" duration="237000" />
+      <workItem from="1473275750524" duration="7214000" />
+      <workItem from="1473325880786" duration="1839000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112680000" />
+    <option name="totallyTimeSpent" value="138878000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -412,15 +486,16 @@
     <frame x="1920" y="24" width="1920" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18239325" sideWeight="0.66490763" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18239325" sideWeight="0.45031056" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18239325" sideWeight="0.5496894" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27395833" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18239325" sideWeight="0.33509234" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18239325" sideWeight="0.3715278" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986821" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21041666" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18239325" sideWeight="0.30992368" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986821" sideWeight="0.484375" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21041666" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18239325" sideWeight="0.3715278" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -430,6 +505,25 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27395833" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18239325" sideWeight="0.33509234" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21041666" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18239325" sideWeight="0.66490763" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986821" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18239325" sideWeight="0.33509234" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -443,34 +537,15 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="5" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/mainMenuStyle.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="648">
@@ -695,13 +770,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/www">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-304">
-          <caret line="28" column="26" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/bootstrapGrid/grid.css.less" />
     <entry file="file://$PROJECT_DIR$/public/stylesheets/grid-framework.css" />
     <entry file="file://$PROJECT_DIR$/public/stylesheets/grid.css" />
@@ -740,24 +808,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/less/main.less">
+    <entry file="file://$PROJECT_DIR$/bin/www">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="35" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+        <state relative-caret-position="162">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/less/grid.css.less">
+    <entry file="file://$PROJECT_DIR$/assets/js-map-file.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="37" />
+        <state relative-caret-position="180">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/videBackground.less">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        <state relative-caret-position="504">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -765,53 +835,86 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="738">
           <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/galary.less">
+    <entry file="file://$PROJECT_DIR$/assets/less/mixins/grid.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+        <state relative-caret-position="-1731">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/less/main.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/less/mixins/responsive-visibility.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/less/mixins/grid-framework.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/less/grid.css.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/mainMenuStyle.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="2" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
+        <state relative-caret-position="18">
+          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js-map-file.json">
+    <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/videBackground.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="558">
+          <caret line="31" column="68" selection-start-line="31" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/assets/less/pageStyles/galary.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        <state relative-caret-position="162">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="10" selection-end-line="26" selection-end-column="12" />
+        <state relative-caret-position="468">
+          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
           <folding />
         </state>
       </provider>
