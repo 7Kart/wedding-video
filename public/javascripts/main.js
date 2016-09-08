@@ -14915,7 +14915,7 @@ jQuery(document).ready(function(){
         afterLoad: function(anchorLink, index){
             if(index == 1){
                 console.log("$('#video')", $('#video'));
-                var videBg = $('#video')[0];
+                var videBg = document.getElementById('video');
                 videBg.play();
             }else if(index == 2){
                 $('.massonry-grid').masonry({
