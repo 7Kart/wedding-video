@@ -6,7 +6,11 @@ jQuery(document).ready(function(){
         menu: '#mainMenu',
         scrollOverflow:true,
         afterLoad: function(anchorLink, index){
-            if(index == 2){
+            if(index == 1){
+                console.log("$('#video')", $('#video'));
+                var videBg = $('#video')[0];
+                videBg.play();
+            }else if(index == 2){
                 $('.massonry-grid').masonry({
                     itemSelector: '.item'
                 });
