@@ -1,75 +1,81 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><%= title %></title>
-        <meta name="viewport" content="width=device-width, user-scalable=no"/>
-        <link rel='stylesheet' href='/stylesheets/main.css' />
-        <script type="text/javascript" src="javascripts/main.js"></script>
-    </head>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+    <link rel='stylesheet' href='/stylesheets/main.css'/>
+    <script type="text/javascript" src="javascripts/main.js"></script>
+</head>
+    <body>
+        <div id="app">
+            <div  class="nav col-xs-12 hidden-xs">
+                <ul id="mainMenu" class="col-xs-11 col-xs-offset-1 main-sait-menu">
+                    <li class="site-logo">
+                        <img src="images/whiteCamera.png" height="25px"/>
+                    </li>
+                    <li data-menuanchor="firstPage" class="active">
+                        <a href="#firstPage">Домашняя</a>
+                    </li>
+                    <li data-menuanchor="secondPage">
+                        <a href="#secondPage">Портфолио</a>
+                    </li>
+                    <li data-menuanchor="thirdPage">
+                        <a href="#thirdPage">Контакты</a>
+                    </li>
+                    <li data-menuanchor="fourthPage">
+                        <a href="#fourthPage">Прочее</a>
+                    </li>
+                    <li class="addBut" >
+                        <a href="#" v-on:click="modalWindShow()" >Администратор</a>
+                    </li>
 
-<div class="nav col-xs-12 hidden-xs">
-  <ul id="mainMenu" class="col-xs-11 col-xs-offset-1 main-sait-menu">
-    <li class="site-logo">
-      <img src="images/whiteCamera.png" height="25px"/>
-    </li>
-    <li data-menuanchor="firstPage" class="active">
-      <a href="#firstPage">Домашняя</a>
-    </li>
-    <li data-menuanchor="secondPage">
-      <a href="#secondPage">Портфолио</a>
-    </li>
-    <li data-menuanchor="thirdPage">
-      <a href="#thirdPage">Контакты</a>
-    </li>
-    <li data-menuanchor="fourthPage">
-      <a href="#fourthPage">Прочее</a>
-    </li>
-  </ul>
-</div>
+                </ul>
+            </div>
+            <modal-window v-on:hide="modalWindShow" v-bind:visible="modalWindowOpen" ></modal-window>
 
-<div class="row" id="fullpage">
 
-  <div class="section col-xs-12">
-    <div class="main-page-content col-xs-12">
-      <h1>Видео фото съемка</h1>
-      <p>ALEXANDR GORBANEV</p>
-    </div>
-    <div class="but-scr col-xs-12">
-      <div align="center">Scroll &#8595</div>
+            <div class="row" id="fullpage" v-onepage="portfolioList">
+                <div class="section col-xs-12">
+                    <div class="main-page-content col-xs-12">
+                        <h1>Видео фото съемка</h1>
+                        <p>ALEXANDR GORBANEV</p>
+                    </div>
+                    <div class="but-scr col-xs-12">
+                        <div align="center">Scroll &#8595</div>
 
-    </div>
-    <div id="trailer" class="is_overlay">
-        <video muted="muted" id="video" width="100%" height="100%" autoplay="autoplay" loop="loop" preload="auto">
-        <!--<source src="book.mp4"></source>-->
-            <source data-src="video/shortFon.mp4" type="video/webm"></source>
-        </video>
-    </div>
-
-  </div>
-  <div class="section col-xs-12 ">
-    <div class="slide">
-        <div class="container-fluid galary-container">
-            <div class="row">
-                <div class="massonry-grid">
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/1.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/1.jpg"/> </a></div>
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/2.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/2.jpg"/> </a></div>
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/3.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/3.jpg"/> </a></div>
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/4.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/4.jpg"/> </a></div>
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/4.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/4.jpg"/> </a></div>
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/2.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/2.jpg"/> </a></div>
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/3.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/3.jpg"/> </a></div>
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/3.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/3.jpg"/> </a></div>
-                    <div class="col-xs-6 col-lg-2 item"><a data-lc-href="images/portfolio/firstPage/3.jpg" data-rel="lightcase:myCollection"> <img src="images/portfolio/firstPage/3.jpg"/> </a></div>
+                    </div>
+                    <div id="trailer" class="is_overlay">
+                        <video muted="muted" id="video" width="100%" height="100%" autoplay="autoplay" loop="loop" preload="auto">
+                            <source data-src="video/shortFon.mp4" type="video/webm"/>
+                        </video>
+                    </div>
                 </div>
+                <div class="section col-xs-12 ">
+                    <div class="slide">
+                        <div class="container-fluid galary-container">
+                            <div class="row portfolio">
+                                <div class="massonry-grid">
+                                    <!--<div v-for="portfolio in portfolioList" class="col-xs-6 col-md-4 col-lg-3 item">-->
+                                        <!--<a v-bind:data-lc-href="portfolio.fileContent" data-rel="lightcase:myCollection">-->
+                                            <!--<img v-bind:src="portfolio.fileContent"/>-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                    <div v-for="portfolio in portfolioLinks" class="col-xs-6 col-md-4 col-lg-3 item">
+                                        <a v-bind:data-lc-href="portfolio.link" data-rel="lightcase:myCollection">
+                                            <img v-bind:src="portfolio.link"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide"> Slide 3</div>
+                    <div class="slide"> Slide 2</div>
+                    <div class="slide"> Slide 4</div>
+                </div>
+                <div class="section col-xs-12">Some section3</div>
+                <div class="section col-xs-12">Some section4</div>
             </div>
         </div>
-    </div>
-    <div class="slide"> Slide 3 </div>
-    <div class="slide"> Slide 2 </div>
-    <div class="slide"> Slide 4 </div>
-  </div>
-  <div class="section col-xs-12">Some section3</div>
-  <div class="section col-xs-12">Some section4</div>
-</div>
-
+    </body>
 </html>

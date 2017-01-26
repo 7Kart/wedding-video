@@ -1,0 +1,15 @@
+{
+  "app":{
+    "port":3000
+  },
+  "session":{
+    "secret":"secretForAll",
+    "path":"/",
+    "maxAge": null
+  },
+  "mongo":{
+    "connectionString":"mongodb://localhost/wedding",
+    "debug":true
+  }
+}
+

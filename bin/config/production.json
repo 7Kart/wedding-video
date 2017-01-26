@@ -1,0 +1,14 @@
+{
+  "app":{
+    "port":3000
+  },
+  "session":{
+    "secret":"secretForAll",
+    "path":"/",
+    "maxAge": null
+  },
+  "mongo":{
+    "connectionString":"mongodb://root:23022003ART@ds039000.mlab.com:39000/wedding",
+    "debug":false
+  }
+}

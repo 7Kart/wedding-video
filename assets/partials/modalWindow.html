@@ -1,0 +1,51 @@
+<div>
+    <transition name="fade">
+        <div v-show="visible" v-on:click="modalEmitWindHide()" id="background-mask"></div>
+    </transition>
+    <transition name="modal">
+        <div class="modal-form" v-show="visible" >
+            <h2 class="modal-header"> Добавить запись </h2>
+            <div class="modal-body">
+                <form>
+                    <ul class="modal-inputs">
+                        <li>
+                            <span>Наименование</span><input type="text" name="name" v-model="modalData.name"/>
+                        </li>
+                        <li>
+                            <span>Комментарий</span><input type="text" name="note" v-model="modalData.note"/>
+                        </li>
+                        <li>
+                            <span>Номер страницы</span>
+                            <select name="slideNumber" v-model="modalData.slideNumber">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span>Что добавить</span>
+                            <select id="docType" v-on:change="changeFiletype(event)">
+                                <option value="filePhoto">Файл фото</option>
+                                <option value="linkPhoto">Ссылка на фото</option>
+                                <option value="fileVideo">Видео файл</option>
+                                <option value="linkVideo">Ссылка на видео</option>
+                            </select>
+                        </li>
+                        <li>
+                            <component v-on:fileLoad="showFile" v-bind:is="inputType"></component>
+                        </li>
+                    </ul>
+                    <ul class="modal-button">
+                        <li>
+                            <input v-on:click="serialiseForm(modalData.fileData)" type="button" value="Добавить"/>
+                        </li>
+                        <li>
+                            <input v-on:click="modalEmitWindHide()" id="cancelModal" type="button"  value="Отмена"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </transition>
+</div>

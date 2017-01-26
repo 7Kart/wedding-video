@@ -1,0 +1,1 @@
+{"modalWindow":"<p> modalWindow </p>\n","otherPartials":"<h1>other partials</h1>\n"}

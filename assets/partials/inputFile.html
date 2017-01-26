@@ -1,0 +1,7 @@
+<li id="file" class="portfolioVariant">
+    <span>Файл</span>
+    <input id="fileLoad" type="file" name="files" v-on:change="loadFile(event)"/>
+    <div class="previewFileList">
+        <img class="prev-photo-img" :src="fileUrl" />
+    </div>
+</li>

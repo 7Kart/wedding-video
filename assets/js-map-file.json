@@ -1,12 +1,16 @@
 {
-    "main.js" : [
-        "./bower_components/jquery/dist/jquery.js",
-        "./bower_components/fullpage.js/dist/jquery.fullpage.js",
-        "./bower_components/fullpage.js/vendors/jquery.slimscroll.js",
-        "./bower_components/lightcase-2.3.4/src/js/lightcase.js",
-        "./assets/js/libs/masonry.pkgd.min.js",
-        "./assets/js/app.js",
-        "./assets/js/galary.js"
-    ]
+  "main.js": [
+    "./assets/js/partials.js",
+    "./assets/js/modalWindow.js",
+    "./assets/js/downloader.js",
+    "./bower_components/jquery/dist/jquery.js",
+    "./bower_components/fullpage.js/dist/jquery.fullpage.js",
+    "./bower_components/fullpage.js/vendors/jquery.slimscroll.js",
+    "./bower_components/lightcase-2.3.4/src/js/lightcase.js",
+    "./assets/js/libs/masonry.pkgd.min.js",
+    "./assets/js/libs/vue.min.js",
+    "./assets/js/app.js",
+    "./assets/js/galary.js"
+  ]
 }
 

@@ -12,7 +12,6 @@ gulp.task('less', function(){
       'assets/less/*.less',
       'bower_components/fullpage.js/dist/jquery.fullpage.css',
       './bower_components/lightcase-2.3.4/src/css/lightcase.css'
-
     ])
 
         .pipe(gulpIf(isDevelopment, sourceMaps.init()))
@@ -33,9 +32,33 @@ gulp.task('js', function(){
 
 });
 
+gulp.task('partials', function(){
+    console.log("read partials");
+    var dirPath = "assets/partials";
+    fs.readdir(dirPath, function(err, dirFileList){
+        if(!err)
+            if(dirFileList.length > 0){
+                var templateObject = {};
+                for(var i=0; i< dirFileList.length; i++){
+                    var fileName = dirFileList[i];
+                    var field = fileName.split('.')[0];
+                    var fileData = fs.readFileSync(dirPath+"/"+fileName);
+                    templateObject[field] = fileData.toString();
+                }
+                fs.writeFile('./assets/js/partials.js', "window['template']="+JSON.stringify(templateObject), function(err){
+                    if(!err)
+                        console.log("file write");
+                });
+            }
+        else
+            console.log("read dir error");
+    });
+});
+
 gulp.task('watch',  function(){
     gulp.watch('assets/less/**/*.less', ['less']);
     gulp.watch('assets/js/**/*.js', ['js']);
+    gulp.watch('assets/partials/*.html',['partials','js']);
 });
 
-gulp.task('default', ['less', 'watch', 'js']);
+gulp.task('default', ['partials', 'less', 'watch', 'js']);
