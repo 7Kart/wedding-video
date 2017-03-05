@@ -1,12 +1,8 @@
 var express = require('express');
 var fs = require('fs');
 var router = express.Router();
-var YandexDisk = require("yandex-disk").YandexDisk;
 var Portfolio = require("../models/portfolio");
 /* GET home page. */
-
-var disk = new YandexDisk("lorkris", "disk5pass");
-
 
 router.get('/disk', function(req, res){
     disk.readFile("Хлебные крошки.mp4", "base64", function(err, data){
