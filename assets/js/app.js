@@ -89,16 +89,16 @@ jQuery(document).ready(function () {
                 scrollOverflow: true,
                 afterLoad: function (anchorLink, index) {
                     if (index == 2) {
+                        $('.massonry-grid').masonry({
+                            itemSelector: '.item'
+                        });
                         getPortfolio(1, function(data){
                             binding.value.splice(0,binding.value.length);
                             for(var i=0; i< data.portfolios.length; i++){
-                                console.log("data.portfolios[i]",data.portfolios[i]);
                                 binding.value.push(data.portfolios[i]);
-                                $('.massonry-grid').masonry({
-                                    itemSelector: '.item'
-                                });
                             }
                             console.log("binding",binding);
+
                         });
 
                     }
