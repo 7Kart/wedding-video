@@ -25,7 +25,7 @@
                         </li>
                         <li>
                             <span>Что добавить</span>
-                            <select id="docType" v-on:change="changeFiletype(event)">
+                            <select id="docType" v-on:change="changeFiletype(event)" v-model="modalData.portfolioType">
                                 <option value="filePhoto">Файл фото</option>
                                 <option value="linkPhoto">Ссылка на фото</option>
                                 <option value="fileVideo">Видео файл</option>
@@ -33,12 +33,12 @@
                             </select>
                         </li>
                         <li>
-                            <component v-on:fileLoad="showFile" v-bind:is="inputType"></component>
+                            <component v-on:linkInp="setlinkPath" v-on:coverLoad="setCover" v-on:fileLoad="setFile" v-bind:is="inputType"></component>
                         </li>
                     </ul>
                     <ul class="modal-button">
                         <li>
-                            <input v-on:click="serialiseForm(modalData.fileData)" type="button" value="Добавить"/>
+                            <input v-on:click="serialiseForm(modalData)" type="button" value="Добавить"/>
                         </li>
                         <li>
                             <input v-on:click="modalEmitWindHide()" id="cancelModal" type="button"  value="Отмена"/>

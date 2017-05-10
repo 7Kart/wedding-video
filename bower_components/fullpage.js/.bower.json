@@ -6,11 +6,8 @@
   ],
   "description": "Create  beautiful fullscreen scrolling websites",
   "main": [
-    "jquery.fullPage.js",
-    "jquery.fullPage.css",
-    "jquery.fullPage.scss",
-    "vendors/jquery.easings.min.js",
-    "vendors/jquery.slimscroll.min.js"
+    "dist/jquery.fullpage.js",
+    "dist/jquery.fullpage.css"
   ],
   "keywords": [
     "jquery",
@@ -31,15 +28,14 @@
   "dependencies": {
     "jquery": ">=1.6.0"
   },
-  "version": "2.7.9",
-  "_release": "2.7.9",
+  "version": "2.9.4",
+  "_release": "2.9.4",
   "_resolution": {
     "type": "version",
-    "tag": "2.7.9",
-    "commit": "777389eab848132f88be2071cac780284d3ffd43"
+    "tag": "2.9.4",
+    "commit": "c2d3fb5793790ed2af173e0915803dc967158777"
   },
   "_source": "https://github.com/alvarotrigo/fullPage.js.git",
   "_target": "^2.7.9",
-  "_originalSource": "fullpage.js",
-  "_direct": true
+  "_originalSource": "fullpage.js"
 }

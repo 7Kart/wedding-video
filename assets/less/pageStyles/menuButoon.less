@@ -1,0 +1,55 @@
+.toggle-menu-but{
+  display: block;
+  position: relative;
+  overflow: hidden;
+  //right: 0px;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height:50px;
+  font-size: 0;
+  text-indent: -9999px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  float: right;
+  //border-radius: none;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.toggle-menu-but:focus{
+  outline: none;
+}
+
+.toggle-menu-but span{
+  display: block;
+  position: absolute;
+  top: 24px;
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  background: white;
+}
+
+.toggle-menu-but span::before,
+.toggle-menu-but span::after {
+  position: absolute;
+  display: block;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  content: "";
+}
+
+.toggle-menu-but span::before {
+  top: -7px;
+}
+
+.toggle-menu-but span::after {
+  bottom: -7px;
+}

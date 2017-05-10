@@ -10,5 +10,10 @@
   "mongo":{
     "connectionString":"mongodb://root:23022003ART@ds039000.mlab.com:39000/wedding",
     "debug":false
+  },
+  "cloudinary":{
+    "loud_name": "art72",
+    "api_key": "877247799549918",
+    "api_secret": "-Lfj5Xfu5VqcTMERC_wF94XXjOQ"
   }
 }

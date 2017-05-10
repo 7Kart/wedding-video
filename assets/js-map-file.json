@@ -4,12 +4,19 @@
     "./assets/js/modalWindow.js",
     "./assets/js/downloader.js",
     "./bower_components/jquery/dist/jquery.js",
-    "./bower_components/fullpage.js/dist/jquery.fullpage.js",
-    "./bower_components/fullpage.js/vendors/jquery.slimscroll.js",
+    "./bower_components/fullpage.js/vendors/scrolloverflow.min.js",
+    "./bower_components/fullpage.js/dist/jquery.fullpage.extensions.min.js",
     "./bower_components/lightcase-2.3.4/src/js/lightcase.js",
     "./assets/js/libs/masonry.pkgd.min.js",
     "./assets/js/libs/vue.min.js",
     "./assets/js/app.js",
+    "./assets/js/VueComponents/modalWindowComponent.js",
+    "./assets/js/VueComponents/PhotoLoader.js",
+    "./assets/js/VueComponents/VideoLoader.js",
+    "./assets/js/VueComponents/VideoLinkLoader.js",
+    "./assets/js/VueComponents/linkPhotoLoader.js",
+    "./assets/js/VueDirective/OnePage.js",
+    "./assets/js/VueDirective/LightCaseGalary.js",
     "./assets/js/galary.js"
   ]
 }

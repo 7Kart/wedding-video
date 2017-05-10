@@ -1,3 +1,7 @@
 <li id="linkFile" class="portfolioVariant">
-    <span>Ссылка на видео</span><input type="text"  name="linkFile"/>
+    <span>Ссылка на видео</span><input v-on:input="addFileLink(event)" type="text" name="linkFile"/>
+    <span>Обложка</span><input v-on:change="coverLoad(event)" type="file" id="imgVideoLoad" accept="image/*"/>
+    <div class="cover-img">
+        <img :src="coverImgPath"/>
+    </div>
 </li>

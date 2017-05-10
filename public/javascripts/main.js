@@ -1,4 +1,4 @@
-window['template']={"inputFile":"<li id=\"file\" class=\"portfolioVariant\">\n    <span>Файл</span>\n    <input id=\"fileLoad\" type=\"file\" name=\"files\" v-on:change=\"loadFile(event)\"/>\n    <div class=\"previewFileList\">\n        <img class=\"prev-photo-img\" :src=\"fileUrl\" />\n    </div>\n</li>","inputLink":"<li id=\"linkFile\" class=\"portfolioVariant\">\n    <span>Ссылка на файл</span><input type=\"text\"  name=\"linkFile\"/>\n</li>\n","inputVideo":"<li id=\"file\" class=\"portfolioVariant\">\n    <span>Файл видео</span><input id=\"fileLoad\" type=\"file\" name=\"files\"/>\n    <div class=\"previewFileList\"></div>\n</li>","linkVideo":"<li id=\"linkFile\" class=\"portfolioVariant\">\n    <span>Ссылка на видео</span><input type=\"text\"  name=\"linkFile\"/>\n</li>\n","modalWindow":"<div>\n    <transition name=\"fade\">\n        <div v-show=\"visible\" v-on:click=\"modalEmitWindHide()\" id=\"background-mask\"></div>\n    </transition>\n    <transition name=\"modal\">\n        <div class=\"modal-form\" v-show=\"visible\" >\n            <h2 class=\"modal-header\"> Добавить запись </h2>\n            <div class=\"modal-body\">\n                <form>\n                    <ul class=\"modal-inputs\">\n                        <li>\n                            <span>Наименование</span><input type=\"text\" name=\"name\" v-model=\"modalData.name\"/>\n                        </li>\n                        <li>\n                            <span>Комментарий</span><input type=\"text\" name=\"note\" v-model=\"modalData.note\"/>\n                        </li>\n                        <li>\n                            <span>Номер страницы</span>\n                            <select name=\"slideNumber\" v-model=\"modalData.slideNumber\">\n                                <option value=\"1\">1</option>\n                                <option value=\"2\">2</option>\n                                <option value=\"3\">3</option>\n                                <option value=\"4\">4</option>\n                            </select>\n                        </li>\n                        <li>\n                            <span>Что добавить</span>\n                            <select id=\"docType\" v-on:change=\"changeFiletype(event)\">\n                                <option value=\"filePhoto\">Файл фото</option>\n                                <option value=\"linkPhoto\">Ссылка на фото</option>\n                                <option value=\"fileVideo\">Видео файл</option>\n                                <option value=\"linkVideo\">Ссылка на видео</option>\n                            </select>\n                        </li>\n                        <li>\n                            <component v-on:fileLoad=\"showFile\" v-bind:is=\"inputType\"></component>\n                        </li>\n                    </ul>\n                    <ul class=\"modal-button\">\n                        <li>\n                            <input v-on:click=\"serialiseForm(modalData.fileData)\" type=\"button\" value=\"Добавить\"/>\n                        </li>\n                        <li>\n                            <input v-on:click=\"modalEmitWindHide()\" id=\"cancelModal\" type=\"button\"  value=\"Отмена\"/>\n                        </li>\n                    </ul>\n                </form>\n            </div>\n        </div>\n    </transition>\n</div>"}
+window['template']={"inputFile":"<li id=\"file\" class=\"portfolioVariant\">\n    <span>Файл</span>\n    <input id=\"fileLoad\" type=\"file\" name=\"file\" v-on:change=\"loadFile(event)\"/>\n    <div class=\"previewFileList\">\n        <img class=\"prev-photo-img\" :src=\"fileUrl\"/>\n    </div>\n</li>","inputLink":"<li id=\"linkFile\" class=\"portfolioVariant\">\n    <span>Ссылка на файл</span><input type=\"text\" v-on:input=\"addFileLink(event)\" name=\"linkFile\"/>\n\n</li>","inputVideo":"<li id=\"file\" class=\"portfolioVariant\">\n    <span>Файл видео</span><input id=\"fileLoad\" accept=\"video/*\" type=\"file\" name=\"files\" v-on:change=\"loadVideo(event)\"/>\n    <div class=\"previewFileList\">\n        <video :src=\"videoUrl\" width=\"150\" height=\"150\" >\n        </video>\n    </div>\n    <span>Обложка</span><input v-on:change=\"coverLoad(event)\" type=\"file\" id=\"imgVideoLoad\" accept=\"image/*\"/>\n    <div class=\"cover-img\">\n        <img :src=\"coverImgPath\"/>\n    </div>\n</li>\n","linkVideo":"<li id=\"linkFile\" class=\"portfolioVariant\">\n    <span>Ссылка на видео</span><input v-on:input=\"addFileLink(event)\" type=\"text\" name=\"linkFile\"/>\n    <span>Обложка</span><input v-on:change=\"coverLoad(event)\" type=\"file\" id=\"imgVideoLoad\" accept=\"image/*\"/>\n    <div class=\"cover-img\">\n        <img :src=\"coverImgPath\"/>\n    </div>\n</li>\n","modalWindow":"<div>\n    <transition name=\"fade\">\n        <div v-show=\"visible\" v-on:click=\"modalEmitWindHide()\" id=\"background-mask\"></div>\n    </transition>\n    <transition name=\"modal\">\n        <div class=\"modal-form\" v-show=\"visible\" >\n            <h2 class=\"modal-header\"> Добавить запись </h2>\n            <div class=\"modal-body\">\n                <form>\n                    <ul class=\"modal-inputs\">\n                        <li>\n                            <span>Наименование</span><input type=\"text\" name=\"name\" v-model=\"modalData.name\"/>\n                        </li>\n                        <li>\n                            <span>Комментарий</span><input type=\"text\" name=\"note\" v-model=\"modalData.note\"/>\n                        </li>\n                        <li>\n                            <span>Номер страницы</span>\n                            <select name=\"slideNumber\" v-model=\"modalData.slideNumber\">\n                                <option value=\"1\">1</option>\n                                <option value=\"2\">2</option>\n                                <option value=\"3\">3</option>\n                                <option value=\"4\">4</option>\n                            </select>\n                        </li>\n                        <li>\n                            <span>Что добавить</span>\n                            <select id=\"docType\" v-on:change=\"changeFiletype(event)\" v-model=\"modalData.portfolioType\">\n                                <option value=\"filePhoto\">Файл фото</option>\n                                <option value=\"linkPhoto\">Ссылка на фото</option>\n                                <option value=\"fileVideo\">Видео файл</option>\n                                <option value=\"linkVideo\">Ссылка на видео</option>\n                            </select>\n                        </li>\n                        <li>\n                            <component v-on:linkInp=\"setlinkPath\" v-on:coverLoad=\"setCover\" v-on:fileLoad=\"setFile\" v-bind:is=\"inputType\"></component>\n                        </li>\n                    </ul>\n                    <ul class=\"modal-button\">\n                        <li>\n                            <input v-on:click=\"serialiseForm(modalData)\" type=\"button\" value=\"Добавить\"/>\n                        </li>\n                        <li>\n                            <input v-on:click=\"modalEmitWindHide()\" id=\"cancelModal\" type=\"button\"  value=\"Отмена\"/>\n                        </li>\n                    </ul>\n                </form>\n            </div>\n        </div>\n    </transition>\n</div>"}
 var ModalWindow = function(mask, form){
     var mask = mask;
     var form = form;
@@ -9890,3287 +9890,80 @@ if ( !noGlobal ) {
 return jQuery;
 }));
 
+/*! iScroll v5.2.0 ~ (c) 2008-2016 Matteo Spinelli ~ http://cubiq.org/license */
+(function(g,q,f){function p(a,b){this.wrapper="string"==typeof a?q.querySelector(a):a;this.scroller=this.wrapper.children[0];this.scrollerStyle=this.scroller.style;this.options={resizeScrollbars:!0,mouseWheelSpeed:20,snapThreshold:.334,disablePointer:!d.hasPointer,disableTouch:d.hasPointer||!d.hasTouch,disableMouse:d.hasPointer||d.hasTouch,startX:0,startY:0,scrollY:!0,directionLockThreshold:5,momentum:!0,bounce:!0,bounceTime:600,bounceEasing:"",preventDefault:!0,preventDefaultException:{tagName:/^(INPUT|TEXTAREA|BUTTON|SELECT)$/},
+HWCompositing:!0,useTransition:!0,useTransform:!0,bindToWrapper:"undefined"===typeof g.onmousedown};for(var c in b)this.options[c]=b[c];this.translateZ=this.options.HWCompositing&&d.hasPerspective?" translateZ(0)":"";this.options.useTransition=d.hasTransition&&this.options.useTransition;this.options.useTransform=d.hasTransform&&this.options.useTransform;this.options.eventPassthrough=!0===this.options.eventPassthrough?"vertical":this.options.eventPassthrough;this.options.preventDefault=!this.options.eventPassthrough&&
+this.options.preventDefault;this.options.scrollY="vertical"==this.options.eventPassthrough?!1:this.options.scrollY;this.options.scrollX="horizontal"==this.options.eventPassthrough?!1:this.options.scrollX;this.options.freeScroll=this.options.freeScroll&&!this.options.eventPassthrough;this.options.directionLockThreshold=this.options.eventPassthrough?0:this.options.directionLockThreshold;this.options.bounceEasing="string"==typeof this.options.bounceEasing?d.ease[this.options.bounceEasing]||d.ease.circular:
+this.options.bounceEasing;this.options.resizePolling=void 0===this.options.resizePolling?60:this.options.resizePolling;!0===this.options.tap&&(this.options.tap="tap");this.options.useTransition||this.options.useTransform||/relative|absolute/i.test(this.scrollerStyle.position)||(this.scrollerStyle.position="relative");"scale"==this.options.shrinkScrollbars&&(this.options.useTransition=!1);this.options.invertWheelDirection=this.options.invertWheelDirection?-1:1;this.directionY=this.directionX=this.y=
+this.x=0;this._events={};this._init();this.refresh();this.scrollTo(this.options.startX,this.options.startY);this.enable()}function u(a,b,c){var e=q.createElement("div"),d=q.createElement("div");!0===c&&(e.style.cssText="position:absolute;z-index:9999",d.style.cssText="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px");d.className="iScrollIndicator";"h"==a?(!0===c&&(e.style.cssText+=
+";height:7px;left:2px;right:2px;bottom:0",d.style.height="100%"),e.className="iScrollHorizontalScrollbar"):(!0===c&&(e.style.cssText+=";width:7px;bottom:2px;top:2px;right:1px",d.style.width="100%"),e.className="iScrollVerticalScrollbar");e.style.cssText+=";overflow:hidden";b||(e.style.pointerEvents="none");e.appendChild(d);return e}function v(a,b){this.wrapper="string"==typeof b.el?q.querySelector(b.el):b.el;this.wrapperStyle=this.wrapper.style;this.indicator=this.wrapper.children[0];this.indicatorStyle=
+this.indicator.style;this.scroller=a;this.options={listenX:!0,listenY:!0,interactive:!1,resize:!0,defaultScrollbars:!1,shrink:!1,fade:!1,speedRatioX:0,speedRatioY:0};for(var c in b)this.options[c]=b[c];this.sizeRatioY=this.sizeRatioX=1;this.maxPosY=this.maxPosX=0;this.options.interactive&&(this.options.disableTouch||(d.addEvent(this.indicator,"touchstart",this),d.addEvent(g,"touchend",this)),this.options.disablePointer||(d.addEvent(this.indicator,d.prefixPointerEvent("pointerdown"),this),d.addEvent(g,
+d.prefixPointerEvent("pointerup"),this)),this.options.disableMouse||(d.addEvent(this.indicator,"mousedown",this),d.addEvent(g,"mouseup",this)));if(this.options.fade){this.wrapperStyle[d.style.transform]=this.scroller.translateZ;var e=d.style.transitionDuration;if(e){this.wrapperStyle[e]=d.isBadAndroid?"0.0001ms":"0ms";var f=this;d.isBadAndroid&&t(function(){"0.0001ms"===f.wrapperStyle[e]&&(f.wrapperStyle[e]="0s")});this.wrapperStyle.opacity="0"}}}var t=g.requestAnimationFrame||g.webkitRequestAnimationFrame||
+g.mozRequestAnimationFrame||g.oRequestAnimationFrame||g.msRequestAnimationFrame||function(a){g.setTimeout(a,1E3/60)},d=function(){function a(a){return!1===e?!1:""===e?a:e+a.charAt(0).toUpperCase()+a.substr(1)}var b={},c=q.createElement("div").style,e=function(){for(var a=["t","webkitT","MozT","msT","OT"],b,e=0,d=a.length;e<d;e++)if(b=a[e]+"ransform",b in c)return a[e].substr(0,a[e].length-1);return!1}();b.getTime=Date.now||function(){return(new Date).getTime()};b.extend=function(a,b){for(var c in b)a[c]=
+b[c]};b.addEvent=function(a,b,c,e){a.addEventListener(b,c,!!e)};b.removeEvent=function(a,b,c,e){a.removeEventListener(b,c,!!e)};b.prefixPointerEvent=function(a){return g.MSPointerEvent?"MSPointer"+a.charAt(7).toUpperCase()+a.substr(8):a};b.momentum=function(a,b,c,e,d,k){b=a-b;c=f.abs(b)/c;var g;k=void 0===k?6E-4:k;g=a+c*c/(2*k)*(0>b?-1:1);k=c/k;g<e?(g=d?e-d/2.5*(c/8):e,b=f.abs(g-a),k=b/c):0<g&&(g=d?d/2.5*(c/8):0,b=f.abs(a)+g,k=b/c);return{destination:f.round(g),duration:k}};var d=a("transform");b.extend(b,
+{hasTransform:!1!==d,hasPerspective:a("perspective")in c,hasTouch:"ontouchstart"in g,hasPointer:!(!g.PointerEvent&&!g.MSPointerEvent),hasTransition:a("transition")in c});b.isBadAndroid=function(){var a=g.navigator.appVersion;return/Android/.test(a)&&!/Chrome\/\d/.test(a)?(a=a.match(/Safari\/(\d+.\d)/))&&"object"===typeof a&&2<=a.length?535.19>parseFloat(a[1]):!0:!1}();b.extend(b.style={},{transform:d,transitionTimingFunction:a("transitionTimingFunction"),transitionDuration:a("transitionDuration"),
+transitionDelay:a("transitionDelay"),transformOrigin:a("transformOrigin")});b.hasClass=function(a,b){return(new RegExp("(^|\\s)"+b+"(\\s|$)")).test(a.className)};b.addClass=function(a,c){if(!b.hasClass(a,c)){var e=a.className.split(" ");e.push(c);a.className=e.join(" ")}};b.removeClass=function(a,c){b.hasClass(a,c)&&(a.className=a.className.replace(new RegExp("(^|\\s)"+c+"(\\s|$)","g")," "))};b.offset=function(a){for(var b=-a.offsetLeft,c=-a.offsetTop;a=a.offsetParent;)b-=a.offsetLeft,c-=a.offsetTop;
+return{left:b,top:c}};b.preventDefaultException=function(a,b){for(var c in b)if(b[c].test(a[c]))return!0;return!1};b.extend(b.eventType={},{touchstart:1,touchmove:1,touchend:1,mousedown:2,mousemove:2,mouseup:2,pointerdown:3,pointermove:3,pointerup:3,MSPointerDown:3,MSPointerMove:3,MSPointerUp:3});b.extend(b.ease={},{quadratic:{style:"cubic-bezier(0.25, 0.46, 0.45, 0.94)",fn:function(a){return a*(2-a)}},circular:{style:"cubic-bezier(0.1, 0.57, 0.1, 1)",fn:function(a){return f.sqrt(1- --a*a)}},back:{style:"cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+fn:function(a){return--a*a*(5*a+4)+1}},bounce:{style:"",fn:function(a){return(a/=1)<1/2.75?7.5625*a*a:a<2/2.75?7.5625*(a-=1.5/2.75)*a+.75:a<2.5/2.75?7.5625*(a-=2.25/2.75)*a+.9375:7.5625*(a-=2.625/2.75)*a+.984375}},elastic:{style:"",fn:function(a){return 0===a?0:1==a?1:.4*f.pow(2,-10*a)*f.sin(2*(a-.055)*f.PI/.22)+1}}});b.tap=function(a,b){var c=q.createEvent("Event");c.initEvent(b,!0,!0);c.pageX=a.pageX;c.pageY=a.pageY;a.target.dispatchEvent(c)};b.click=function(a){var b=a.target,c;/(SELECT|INPUT|TEXTAREA)/i.test(b.tagName)||
+(c=q.createEvent(g.MouseEvent?"MouseEvents":"Event"),c.initEvent("click",!0,!0),c.view=a.view||g,c.detail=1,c.screenX=b.screenX||0,c.screenY=b.screenY||0,c.clientX=b.clientX||0,c.clientY=b.clientY||0,c.ctrlKey=!!a.ctrlKey,c.altKey=!!a.altKey,c.shiftKey=!!a.shiftKey,c.metaKey=!!a.metaKey,c.button=0,c.relatedTarget=null,c._constructed=!0,b.dispatchEvent(c))};return b}();p.prototype={version:"5.2.0",_init:function(){this._initEvents();(this.options.scrollbars||this.options.indicators)&&this._initIndicators();
+this.options.mouseWheel&&this._initWheel();this.options.snap&&this._initSnap();this.options.keyBindings&&this._initKeys()},destroy:function(){this._initEvents(!0);clearTimeout(this.resizeTimeout);this.resizeTimeout=null;this._execEvent("destroy")},_transitionEnd:function(a){a.target==this.scroller&&this.isInTransition&&(this._transitionTime(),this.resetPosition(this.options.bounceTime)||(this.isInTransition=!1,this._execEvent("scrollEnd")))},_start:function(a){if(!(1!=d.eventType[a.type]&&0!==(a.which?
+a.button:2>a.button?0:4==a.button?1:2)||!this.enabled||this.initiated&&d.eventType[a.type]!==this.initiated)){!this.options.preventDefault||d.isBadAndroid||d.preventDefaultException(a.target,this.options.preventDefaultException)||a.preventDefault();var b=a.touches?a.touches[0]:a;this.initiated=d.eventType[a.type];this.moved=!1;this.directionLocked=this.directionY=this.directionX=this.distY=this.distX=0;this.startTime=d.getTime();this.options.useTransition&&this.isInTransition?(this._transitionTime(),
+this.isInTransition=!1,a=this.getComputedPosition(),this._translate(f.round(a.x),f.round(a.y)),this._execEvent("scrollEnd")):!this.options.useTransition&&this.isAnimating&&(this.isAnimating=!1,this._execEvent("scrollEnd"));this.startX=this.x;this.startY=this.y;this.absStartX=this.x;this.absStartY=this.y;this.pointX=b.pageX;this.pointY=b.pageY;this._execEvent("beforeScrollStart")}},_move:function(a){if(this.enabled&&d.eventType[a.type]===this.initiated){this.options.preventDefault&&a.preventDefault();
+var b=a.touches?a.touches[0]:a,c=b.pageX-this.pointX,e=b.pageY-this.pointY,k=d.getTime(),h;this.pointX=b.pageX;this.pointY=b.pageY;this.distX+=c;this.distY+=e;b=f.abs(this.distX);h=f.abs(this.distY);if(!(300<k-this.endTime&&10>b&&10>h)){this.directionLocked||this.options.freeScroll||(this.directionLocked=b>h+this.options.directionLockThreshold?"h":h>=b+this.options.directionLockThreshold?"v":"n");if("h"==this.directionLocked){if("vertical"==this.options.eventPassthrough)a.preventDefault();else if("horizontal"==
+this.options.eventPassthrough){this.initiated=!1;return}e=0}else if("v"==this.directionLocked){if("horizontal"==this.options.eventPassthrough)a.preventDefault();else if("vertical"==this.options.eventPassthrough){this.initiated=!1;return}c=0}c=this.hasHorizontalScroll?c:0;e=this.hasVerticalScroll?e:0;a=this.x+c;b=this.y+e;if(0<a||a<this.maxScrollX)a=this.options.bounce?this.x+c/3:0<a?0:this.maxScrollX;if(0<b||b<this.maxScrollY)b=this.options.bounce?this.y+e/3:0<b?0:this.maxScrollY;this.directionX=
+0<c?-1:0>c?1:0;this.directionY=0<e?-1:0>e?1:0;this.moved||this._execEvent("scrollStart");this.moved=!0;this._translate(a,b);300<k-this.startTime&&(this.startTime=k,this.startX=this.x,this.startY=this.y)}}},_end:function(a){if(this.enabled&&d.eventType[a.type]===this.initiated){this.options.preventDefault&&!d.preventDefaultException(a.target,this.options.preventDefaultException)&&a.preventDefault();var b,c;c=d.getTime()-this.startTime;var e=f.round(this.x),k=f.round(this.y),h=f.abs(e-this.startX),
+g=f.abs(k-this.startY);b=0;var l="";this.initiated=this.isInTransition=0;this.endTime=d.getTime();if(!this.resetPosition(this.options.bounceTime))if(this.scrollTo(e,k),this.moved)if(this._events.flick&&200>c&&100>h&&100>g)this._execEvent("flick");else if(this.options.momentum&&300>c&&(b=this.hasHorizontalScroll?d.momentum(this.x,this.startX,c,this.maxScrollX,this.options.bounce?this.wrapperWidth:0,this.options.deceleration):{destination:e,duration:0},c=this.hasVerticalScroll?d.momentum(this.y,this.startY,
+c,this.maxScrollY,this.options.bounce?this.wrapperHeight:0,this.options.deceleration):{destination:k,duration:0},e=b.destination,k=c.destination,b=f.max(b.duration,c.duration),this.isInTransition=1),this.options.snap&&(this.currentPage=l=this._nearestSnap(e,k),b=this.options.snapSpeed||f.max(f.max(f.min(f.abs(e-l.x),1E3),f.min(f.abs(k-l.y),1E3)),300),e=l.x,k=l.y,this.directionY=this.directionX=0,l=this.options.bounceEasing),e!=this.x||k!=this.y){if(0<e||e<this.maxScrollX||0<k||k<this.maxScrollY)l=
+d.ease.quadratic;this.scrollTo(e,k,b,l)}else this._execEvent("scrollEnd");else this.options.tap&&d.tap(a,this.options.tap),this.options.click&&d.click(a),this._execEvent("scrollCancel")}},_resize:function(){var a=this;clearTimeout(this.resizeTimeout);this.resizeTimeout=setTimeout(function(){a.refresh()},this.options.resizePolling)},resetPosition:function(a){var b=this.x,c=this.y;!this.hasHorizontalScroll||0<this.x?b=0:this.x<this.maxScrollX&&(b=this.maxScrollX);!this.hasVerticalScroll||0<this.y?c=
+0:this.y<this.maxScrollY&&(c=this.maxScrollY);if(b==this.x&&c==this.y)return!1;this.scrollTo(b,c,a||0,this.options.bounceEasing);return!0},disable:function(){this.enabled=!1},enable:function(){this.enabled=!0},refresh:function(){this.wrapperWidth=this.wrapper.clientWidth;this.wrapperHeight=this.wrapper.clientHeight;this.scrollerWidth=this.scroller.offsetWidth;this.scrollerHeight=this.scroller.offsetHeight;this.maxScrollX=this.wrapperWidth-this.scrollerWidth;this.maxScrollY=this.wrapperHeight-this.scrollerHeight;
+this.hasHorizontalScroll=this.options.scrollX&&0>this.maxScrollX;this.hasVerticalScroll=this.options.scrollY&&0>this.maxScrollY;this.hasHorizontalScroll||(this.maxScrollX=0,this.scrollerWidth=this.wrapperWidth);this.hasVerticalScroll||(this.maxScrollY=0,this.scrollerHeight=this.wrapperHeight);this.directionY=this.directionX=this.endTime=0;this.wrapperOffset=d.offset(this.wrapper);this._execEvent("refresh");this.resetPosition()},on:function(a,b){this._events[a]||(this._events[a]=[]);this._events[a].push(b)},
+off:function(a,b){if(this._events[a]){var c=this._events[a].indexOf(b);-1<c&&this._events[a].splice(c,1)}},_execEvent:function(a){if(this._events[a]){var b=0,c=this._events[a].length;if(c)for(;b<c;b++)this._events[a][b].apply(this,[].slice.call(arguments,1))}},scrollBy:function(a,b,c,e){a=this.x+a;b=this.y+b;this.scrollTo(a,b,c||0,e)},scrollTo:function(a,b,c,e){e=e||d.ease.circular;this.isInTransition=this.options.useTransition&&0<c;var f=this.options.useTransition&&e.style;!c||f?(f&&(this._transitionTimingFunction(e.style),
+this._transitionTime(c)),this._translate(a,b)):this._animate(a,b,c,e.fn)},scrollToElement:function(a,b,c,e,k){if(a=a.nodeType?a:this.scroller.querySelector(a)){var h=d.offset(a);h.left-=this.wrapperOffset.left;h.top-=this.wrapperOffset.top;!0===c&&(c=f.round(a.offsetWidth/2-this.wrapper.offsetWidth/2));!0===e&&(e=f.round(a.offsetHeight/2-this.wrapper.offsetHeight/2));h.left-=c||0;h.top-=e||0;h.left=0<h.left?0:h.left<this.maxScrollX?this.maxScrollX:h.left;h.top=0<h.top?0:h.top<this.maxScrollY?this.maxScrollY:
+h.top;b=void 0===b||null===b||"auto"===b?f.max(f.abs(this.x-h.left),f.abs(this.y-h.top)):b;this.scrollTo(h.left,h.top,b,k)}},_transitionTime:function(a){if(this.options.useTransition){a=a||0;var b=d.style.transitionDuration;if(b){this.scrollerStyle[b]=a+"ms";if(!a&&d.isBadAndroid){this.scrollerStyle[b]="0.0001ms";var c=this;t(function(){"0.0001ms"===c.scrollerStyle[b]&&(c.scrollerStyle[b]="0s")})}if(this.indicators)for(var e=this.indicators.length;e--;)this.indicators[e].transitionTime(a)}}},_transitionTimingFunction:function(a){this.scrollerStyle[d.style.transitionTimingFunction]=
+a;if(this.indicators)for(var b=this.indicators.length;b--;)this.indicators[b].transitionTimingFunction(a)},_translate:function(a,b){this.options.useTransform?this.scrollerStyle[d.style.transform]="translate("+a+"px,"+b+"px)"+this.translateZ:(a=f.round(a),b=f.round(b),this.scrollerStyle.left=a+"px",this.scrollerStyle.top=b+"px");this.x=a;this.y=b;if(this.indicators)for(var c=this.indicators.length;c--;)this.indicators[c].updatePosition()},_initEvents:function(a){a=a?d.removeEvent:d.addEvent;var b=
+this.options.bindToWrapper?this.wrapper:g;a(g,"orientationchange",this);a(g,"resize",this);this.options.click&&a(this.wrapper,"click",this,!0);this.options.disableMouse||(a(this.wrapper,"mousedown",this),a(b,"mousemove",this),a(b,"mousecancel",this),a(b,"mouseup",this));d.hasPointer&&!this.options.disablePointer&&(a(this.wrapper,d.prefixPointerEvent("pointerdown"),this),a(b,d.prefixPointerEvent("pointermove"),this),a(b,d.prefixPointerEvent("pointercancel"),this),a(b,d.prefixPointerEvent("pointerup"),
+this));d.hasTouch&&!this.options.disableTouch&&(a(this.wrapper,"touchstart",this),a(b,"touchmove",this),a(b,"touchcancel",this),a(b,"touchend",this));a(this.scroller,"transitionend",this);a(this.scroller,"webkitTransitionEnd",this);a(this.scroller,"oTransitionEnd",this);a(this.scroller,"MSTransitionEnd",this)},getComputedPosition:function(){var a=g.getComputedStyle(this.scroller,null),b;this.options.useTransform?(a=a[d.style.transform].split(")")[0].split(", "),b=+(a[12]||a[4]),a=+(a[13]||a[5])):
+(b=+a.left.replace(/[^-\d.]/g,""),a=+a.top.replace(/[^-\d.]/g,""));return{x:b,y:a}},_initIndicators:function(){function a(a){if(f.indicators)for(var b=f.indicators.length;b--;)a.call(f.indicators[b])}var b=this.options.interactiveScrollbars,c="string"!=typeof this.options.scrollbars,e=[],d,f=this;this.indicators=[];this.options.scrollbars&&(this.options.scrollY&&(d={el:u("v",b,this.options.scrollbars),interactive:b,defaultScrollbars:!0,customStyle:c,resize:this.options.resizeScrollbars,shrink:this.options.shrinkScrollbars,
+fade:this.options.fadeScrollbars,listenX:!1},this.wrapper.appendChild(d.el),e.push(d)),this.options.scrollX&&(d={el:u("h",b,this.options.scrollbars),interactive:b,defaultScrollbars:!0,customStyle:c,resize:this.options.resizeScrollbars,shrink:this.options.shrinkScrollbars,fade:this.options.fadeScrollbars,listenY:!1},this.wrapper.appendChild(d.el),e.push(d)));this.options.indicators&&(e=e.concat(this.options.indicators));for(b=e.length;b--;)this.indicators.push(new v(this,e[b]));this.options.fadeScrollbars&&
+(this.on("scrollEnd",function(){a(function(){this.fade()})}),this.on("scrollCancel",function(){a(function(){this.fade()})}),this.on("scrollStart",function(){a(function(){this.fade(1)})}),this.on("beforeScrollStart",function(){a(function(){this.fade(1,!0)})}));this.on("refresh",function(){a(function(){this.refresh()})});this.on("destroy",function(){a(function(){this.destroy()});delete this.indicators})},_initWheel:function(){d.addEvent(this.wrapper,"wheel",this);d.addEvent(this.wrapper,"mousewheel",
+this);d.addEvent(this.wrapper,"DOMMouseScroll",this);this.on("destroy",function(){clearTimeout(this.wheelTimeout);this.wheelTimeout=null;d.removeEvent(this.wrapper,"wheel",this);d.removeEvent(this.wrapper,"mousewheel",this);d.removeEvent(this.wrapper,"DOMMouseScroll",this)})},_wheel:function(a){if(this.enabled){var b,c,e,d=this;void 0===this.wheelTimeout&&d._execEvent("scrollStart");clearTimeout(this.wheelTimeout);this.wheelTimeout=setTimeout(function(){d.options.snap||d._execEvent("scrollEnd");d.wheelTimeout=
+void 0},400);if("deltaX"in a)1===a.deltaMode?(b=-a.deltaX*this.options.mouseWheelSpeed,a=-a.deltaY*this.options.mouseWheelSpeed):(b=-a.deltaX,a=-a.deltaY);else if("wheelDeltaX"in a)b=a.wheelDeltaX/120*this.options.mouseWheelSpeed,a=a.wheelDeltaY/120*this.options.mouseWheelSpeed;else if("wheelDelta"in a)b=a=a.wheelDelta/120*this.options.mouseWheelSpeed;else if("detail"in a)b=a=-a.detail/3*this.options.mouseWheelSpeed;else return;b*=this.options.invertWheelDirection;a*=this.options.invertWheelDirection;
+this.hasVerticalScroll||(b=a,a=0);this.options.snap?(c=this.currentPage.pageX,e=this.currentPage.pageY,0<b?c--:0>b&&c++,0<a?e--:0>a&&e++,this.goToPage(c,e)):(c=this.x+f.round(this.hasHorizontalScroll?b:0),e=this.y+f.round(this.hasVerticalScroll?a:0),this.directionX=0<b?-1:0>b?1:0,this.directionY=0<a?-1:0>a?1:0,0<c?c=0:c<this.maxScrollX&&(c=this.maxScrollX),0<e?e=0:e<this.maxScrollY&&(e=this.maxScrollY),this.scrollTo(c,e,0))}},_initSnap:function(){this.currentPage={};"string"==typeof this.options.snap&&
+(this.options.snap=this.scroller.querySelectorAll(this.options.snap));this.on("refresh",function(){var a=0,b,c=0,e,d,g,n=0,l;e=this.options.snapStepX||this.wrapperWidth;var m=this.options.snapStepY||this.wrapperHeight;this.pages=[];if(this.wrapperWidth&&this.wrapperHeight&&this.scrollerWidth&&this.scrollerHeight){if(!0===this.options.snap)for(d=f.round(e/2),g=f.round(m/2);n>-this.scrollerWidth;){this.pages[a]=[];for(l=b=0;l>-this.scrollerHeight;)this.pages[a][b]={x:f.max(n,this.maxScrollX),y:f.max(l,
+this.maxScrollY),width:e,height:m,cx:n-d,cy:l-g},l-=m,b++;n-=e;a++}else for(m=this.options.snap,b=m.length,e=-1;a<b;a++){if(0===a||m[a].offsetLeft<=m[a-1].offsetLeft)c=0,e++;this.pages[c]||(this.pages[c]=[]);n=f.max(-m[a].offsetLeft,this.maxScrollX);l=f.max(-m[a].offsetTop,this.maxScrollY);d=n-f.round(m[a].offsetWidth/2);g=l-f.round(m[a].offsetHeight/2);this.pages[c][e]={x:n,y:l,width:m[a].offsetWidth,height:m[a].offsetHeight,cx:d,cy:g};n>this.maxScrollX&&c++}this.goToPage(this.currentPage.pageX||
+0,this.currentPage.pageY||0,0);0===this.options.snapThreshold%1?this.snapThresholdY=this.snapThresholdX=this.options.snapThreshold:(this.snapThresholdX=f.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width*this.options.snapThreshold),this.snapThresholdY=f.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height*this.options.snapThreshold))}});this.on("flick",function(){var a=this.options.snapSpeed||f.max(f.max(f.min(f.abs(this.x-this.startX),1E3),f.min(f.abs(this.y-
+this.startY),1E3)),300);this.goToPage(this.currentPage.pageX+this.directionX,this.currentPage.pageY+this.directionY,a)})},_nearestSnap:function(a,b){if(!this.pages.length)return{x:0,y:0,pageX:0,pageY:0};var c=0,e=this.pages.length,d=0;if(f.abs(a-this.absStartX)<this.snapThresholdX&&f.abs(b-this.absStartY)<this.snapThresholdY)return this.currentPage;0<a?a=0:a<this.maxScrollX&&(a=this.maxScrollX);0<b?b=0:b<this.maxScrollY&&(b=this.maxScrollY);for(;c<e;c++)if(a>=this.pages[c][0].cx){a=this.pages[c][0].x;
+break}for(e=this.pages[c].length;d<e;d++)if(b>=this.pages[0][d].cy){b=this.pages[0][d].y;break}c==this.currentPage.pageX&&(c+=this.directionX,0>c?c=0:c>=this.pages.length&&(c=this.pages.length-1),a=this.pages[c][0].x);d==this.currentPage.pageY&&(d+=this.directionY,0>d?d=0:d>=this.pages[0].length&&(d=this.pages[0].length-1),b=this.pages[0][d].y);return{x:a,y:b,pageX:c,pageY:d}},goToPage:function(a,b,c,d){d=d||this.options.bounceEasing;a>=this.pages.length?a=this.pages.length-1:0>a&&(a=0);b>=this.pages[a].length?
+b=this.pages[a].length-1:0>b&&(b=0);var g=this.pages[a][b].x,h=this.pages[a][b].y;c=void 0===c?this.options.snapSpeed||f.max(f.max(f.min(f.abs(g-this.x),1E3),f.min(f.abs(h-this.y),1E3)),300):c;this.currentPage={x:g,y:h,pageX:a,pageY:b};this.scrollTo(g,h,c,d)},next:function(a,b){var c=this.currentPage.pageX,d=this.currentPage.pageY;c++;c>=this.pages.length&&this.hasVerticalScroll&&(c=0,d++);this.goToPage(c,d,a,b)},prev:function(a,b){var c=this.currentPage.pageX,d=this.currentPage.pageY;c--;0>c&&this.hasVerticalScroll&&
+(c=0,d--);this.goToPage(c,d,a,b)},_initKeys:function(a){a={pageUp:33,pageDown:34,end:35,home:36,left:37,up:38,right:39,down:40};var b;if("object"==typeof this.options.keyBindings)for(b in this.options.keyBindings)"string"==typeof this.options.keyBindings[b]&&(this.options.keyBindings[b]=this.options.keyBindings[b].toUpperCase().charCodeAt(0));else this.options.keyBindings={};for(b in a)this.options.keyBindings[b]=this.options.keyBindings[b]||a[b];d.addEvent(g,"keydown",this);this.on("destroy",function(){d.removeEvent(g,
+"keydown",this)})},_key:function(a){if(this.enabled){var b=this.options.snap,c=b?this.currentPage.pageX:this.x,e=b?this.currentPage.pageY:this.y,g=d.getTime(),h=this.keyTime||0,n;this.options.useTransition&&this.isInTransition&&(n=this.getComputedPosition(),this._translate(f.round(n.x),f.round(n.y)),this.isInTransition=!1);this.keyAcceleration=200>g-h?f.min(this.keyAcceleration+.25,50):0;switch(a.keyCode){case this.options.keyBindings.pageUp:this.hasHorizontalScroll&&!this.hasVerticalScroll?c+=b?
+1:this.wrapperWidth:e+=b?1:this.wrapperHeight;break;case this.options.keyBindings.pageDown:this.hasHorizontalScroll&&!this.hasVerticalScroll?c-=b?1:this.wrapperWidth:e-=b?1:this.wrapperHeight;break;case this.options.keyBindings.end:c=b?this.pages.length-1:this.maxScrollX;e=b?this.pages[0].length-1:this.maxScrollY;break;case this.options.keyBindings.home:e=c=0;break;case this.options.keyBindings.left:c+=b?-1:5+this.keyAcceleration>>0;break;case this.options.keyBindings.up:e+=b?1:5+this.keyAcceleration>>
+0;break;case this.options.keyBindings.right:c-=b?-1:5+this.keyAcceleration>>0;break;case this.options.keyBindings.down:e-=b?1:5+this.keyAcceleration>>0;break;default:return}b?this.goToPage(c,e):(0<c?this.keyAcceleration=c=0:c<this.maxScrollX&&(c=this.maxScrollX,this.keyAcceleration=0),0<e?this.keyAcceleration=e=0:e<this.maxScrollY&&(e=this.maxScrollY,this.keyAcceleration=0),this.scrollTo(c,e,0),this.keyTime=g)}},_animate:function(a,b,c,e){function f(){var r=d.getTime(),p;r>=q?(g.isAnimating=!1,g._translate(a,
+b),g.resetPosition(g.options.bounceTime)||g._execEvent("scrollEnd")):(r=(r-m)/c,p=e(r),r=(a-n)*p+n,p=(b-l)*p+l,g._translate(r,p),g.isAnimating&&t(f))}var g=this,n=this.x,l=this.y,m=d.getTime(),q=m+c;this.isAnimating=!0;f()},handleEvent:function(a){switch(a.type){case "touchstart":case "pointerdown":case "MSPointerDown":case "mousedown":this._start(a);break;case "touchmove":case "pointermove":case "MSPointerMove":case "mousemove":this._move(a);break;case "touchend":case "pointerup":case "MSPointerUp":case "mouseup":case "touchcancel":case "pointercancel":case "MSPointerCancel":case "mousecancel":this._end(a);
+break;case "orientationchange":case "resize":this._resize();break;case "transitionend":case "webkitTransitionEnd":case "oTransitionEnd":case "MSTransitionEnd":this._transitionEnd(a);break;case "wheel":case "DOMMouseScroll":case "mousewheel":this._wheel(a);break;case "keydown":this._key(a);break;case "click":this.enabled&&!a._constructed&&(a.preventDefault(),a.stopPropagation())}}};v.prototype={handleEvent:function(a){switch(a.type){case "touchstart":case "pointerdown":case "MSPointerDown":case "mousedown":this._start(a);
+break;case "touchmove":case "pointermove":case "MSPointerMove":case "mousemove":this._move(a);break;case "touchend":case "pointerup":case "MSPointerUp":case "mouseup":case "touchcancel":case "pointercancel":case "MSPointerCancel":case "mousecancel":this._end(a)}},destroy:function(){this.options.fadeScrollbars&&(clearTimeout(this.fadeTimeout),this.fadeTimeout=null);this.options.interactive&&(d.removeEvent(this.indicator,"touchstart",this),d.removeEvent(this.indicator,d.prefixPointerEvent("pointerdown"),
+this),d.removeEvent(this.indicator,"mousedown",this),d.removeEvent(g,"touchmove",this),d.removeEvent(g,d.prefixPointerEvent("pointermove"),this),d.removeEvent(g,"mousemove",this),d.removeEvent(g,"touchend",this),d.removeEvent(g,d.prefixPointerEvent("pointerup"),this),d.removeEvent(g,"mouseup",this));this.options.defaultScrollbars&&this.wrapper.parentNode.removeChild(this.wrapper)},_start:function(a){var b=a.touches?a.touches[0]:a;a.preventDefault();a.stopPropagation();this.transitionTime();this.initiated=
+!0;this.moved=!1;this.lastPointX=b.pageX;this.lastPointY=b.pageY;this.startTime=d.getTime();this.options.disableTouch||d.addEvent(g,"touchmove",this);this.options.disablePointer||d.addEvent(g,d.prefixPointerEvent("pointermove"),this);this.options.disableMouse||d.addEvent(g,"mousemove",this);this.scroller._execEvent("beforeScrollStart")},_move:function(a){var b=a.touches?a.touches[0]:a,c,e;d.getTime();this.moved||this.scroller._execEvent("scrollStart");this.moved=!0;c=b.pageX-this.lastPointX;this.lastPointX=
+b.pageX;e=b.pageY-this.lastPointY;this.lastPointY=b.pageY;this._pos(this.x+c,this.y+e);a.preventDefault();a.stopPropagation()},_end:function(a){if(this.initiated){this.initiated=!1;a.preventDefault();a.stopPropagation();d.removeEvent(g,"touchmove",this);d.removeEvent(g,d.prefixPointerEvent("pointermove"),this);d.removeEvent(g,"mousemove",this);if(this.scroller.options.snap){a=this.scroller._nearestSnap(this.scroller.x,this.scroller.y);var b=this.options.snapSpeed||f.max(f.max(f.min(f.abs(this.scroller.x-
+a.x),1E3),f.min(f.abs(this.scroller.y-a.y),1E3)),300);if(this.scroller.x!=a.x||this.scroller.y!=a.y)this.scroller.directionX=0,this.scroller.directionY=0,this.scroller.currentPage=a,this.scroller.scrollTo(a.x,a.y,b,this.scroller.options.bounceEasing)}this.moved&&this.scroller._execEvent("scrollEnd")}},transitionTime:function(a){a=a||0;var b=d.style.transitionDuration;if(b&&(this.indicatorStyle[b]=a+"ms",!a&&d.isBadAndroid)){this.indicatorStyle[b]="0.0001ms";var c=this;t(function(){"0.0001ms"===c.indicatorStyle[b]&&
+(c.indicatorStyle[b]="0s")})}},transitionTimingFunction:function(a){this.indicatorStyle[d.style.transitionTimingFunction]=a},refresh:function(){this.transitionTime();this.indicatorStyle.display=this.options.listenX&&!this.options.listenY?this.scroller.hasHorizontalScroll?"block":"none":this.options.listenY&&!this.options.listenX?this.scroller.hasVerticalScroll?"block":"none":this.scroller.hasHorizontalScroll||this.scroller.hasVerticalScroll?"block":"none";this.scroller.hasHorizontalScroll&&this.scroller.hasVerticalScroll?
+(d.addClass(this.wrapper,"iScrollBothScrollbars"),d.removeClass(this.wrapper,"iScrollLoneScrollbar"),this.options.defaultScrollbars&&this.options.customStyle&&(this.options.listenX?this.wrapper.style.right="8px":this.wrapper.style.bottom="8px")):(d.removeClass(this.wrapper,"iScrollBothScrollbars"),d.addClass(this.wrapper,"iScrollLoneScrollbar"),this.options.defaultScrollbars&&this.options.customStyle&&(this.options.listenX?this.wrapper.style.right="2px":this.wrapper.style.bottom="2px"));this.options.listenX&&
+(this.wrapperWidth=this.wrapper.clientWidth,this.options.resize?(this.indicatorWidth=f.max(f.round(this.wrapperWidth*this.wrapperWidth/(this.scroller.scrollerWidth||this.wrapperWidth||1)),8),this.indicatorStyle.width=this.indicatorWidth+"px"):this.indicatorWidth=this.indicator.clientWidth,this.maxPosX=this.wrapperWidth-this.indicatorWidth,"clip"==this.options.shrink?(this.minBoundaryX=-this.indicatorWidth+8,this.maxBoundaryX=this.wrapperWidth-8):(this.minBoundaryX=0,this.maxBoundaryX=this.maxPosX),
+this.sizeRatioX=this.options.speedRatioX||this.scroller.maxScrollX&&this.maxPosX/this.scroller.maxScrollX);this.options.listenY&&(this.wrapperHeight=this.wrapper.clientHeight,this.options.resize?(this.indicatorHeight=f.max(f.round(this.wrapperHeight*this.wrapperHeight/(this.scroller.scrollerHeight||this.wrapperHeight||1)),8),this.indicatorStyle.height=this.indicatorHeight+"px"):this.indicatorHeight=this.indicator.clientHeight,this.maxPosY=this.wrapperHeight-this.indicatorHeight,"clip"==this.options.shrink?
+(this.minBoundaryY=-this.indicatorHeight+8,this.maxBoundaryY=this.wrapperHeight-8):(this.minBoundaryY=0,this.maxBoundaryY=this.maxPosY),this.maxPosY=this.wrapperHeight-this.indicatorHeight,this.sizeRatioY=this.options.speedRatioY||this.scroller.maxScrollY&&this.maxPosY/this.scroller.maxScrollY);this.updatePosition()},updatePosition:function(){var a=this.options.listenX&&f.round(this.sizeRatioX*this.scroller.x)||0,b=this.options.listenY&&f.round(this.sizeRatioY*this.scroller.y)||0;this.options.ignoreBoundaries||
+(a<this.minBoundaryX?("scale"==this.options.shrink&&(this.width=f.max(this.indicatorWidth+a,8),this.indicatorStyle.width=this.width+"px"),a=this.minBoundaryX):a>this.maxBoundaryX?"scale"==this.options.shrink?(this.width=f.max(this.indicatorWidth-(a-this.maxPosX),8),this.indicatorStyle.width=this.width+"px",a=this.maxPosX+this.indicatorWidth-this.width):a=this.maxBoundaryX:"scale"==this.options.shrink&&this.width!=this.indicatorWidth&&(this.width=this.indicatorWidth,this.indicatorStyle.width=this.width+
+"px"),b<this.minBoundaryY?("scale"==this.options.shrink&&(this.height=f.max(this.indicatorHeight+3*b,8),this.indicatorStyle.height=this.height+"px"),b=this.minBoundaryY):b>this.maxBoundaryY?"scale"==this.options.shrink?(this.height=f.max(this.indicatorHeight-3*(b-this.maxPosY),8),this.indicatorStyle.height=this.height+"px",b=this.maxPosY+this.indicatorHeight-this.height):b=this.maxBoundaryY:"scale"==this.options.shrink&&this.height!=this.indicatorHeight&&(this.height=this.indicatorHeight,this.indicatorStyle.height=
+this.height+"px"));this.x=a;this.y=b;this.scroller.options.useTransform?this.indicatorStyle[d.style.transform]="translate("+a+"px,"+b+"px)"+this.scroller.translateZ:(this.indicatorStyle.left=a+"px",this.indicatorStyle.top=b+"px")},_pos:function(a,b){0>a?a=0:a>this.maxPosX&&(a=this.maxPosX);0>b?b=0:b>this.maxPosY&&(b=this.maxPosY);a=this.options.listenX?f.round(a/this.sizeRatioX):this.scroller.x;b=this.options.listenY?f.round(b/this.sizeRatioY):this.scroller.y;this.scroller.scrollTo(a,b)},fade:function(a,
+b){if(!b||this.visible){clearTimeout(this.fadeTimeout);this.fadeTimeout=null;var c=a?0:300;this.wrapperStyle[d.style.transitionDuration]=(a?250:500)+"ms";this.fadeTimeout=setTimeout(function(a){this.wrapperStyle.opacity=a;this.visible=+a}.bind(this,a?"1":"0"),c)}}};p.utils=d;"undefined"!=typeof module&&module.exports?module.exports=p:"function"==typeof define&&define.amd?define(function(){return p}):g.IScroll=p})(window,document,Math);
 /*!
- * fullPage 2.7.9
+ * fullPage 2.9.4 - Extensions 0.0.8
  * https://github.com/alvarotrigo/fullPage.js
- * @license MIT licensed
+ * @license http://alvarotrigo.com/fullPage/extensions/#license
  *
  * Copyright (C) 2015 alvarotrigo.com - A project by Alvaro Trigo
  */
-(function(global, factory) {
-    'use strict';
-    if (typeof define === 'function' && define.amd) {
-        define(['jquery'], function($) {
-          return factory($, global, global.document, global.Math);
-        });
-    } else if (typeof exports !== 'undefined') {
-        module.exports = factory(require('jquery'), global, global.document, global.Math);
-    } else {
-        factory(jQuery, global, global.document, global.Math);
-    }
-})(typeof window !== 'undefined' ? window : this, function($, window, document, Math, undefined) {
-    'use strict';
-
-    // keeping central set of classnames and selectors
-    var WRAPPER =               'fullpage-wrapper';
-    var WRAPPER_SEL =           '.' + WRAPPER;
-
-    // slimscroll
-    var SCROLLABLE =            'fp-scrollable';
-    var SCROLLABLE_SEL =        '.' + SCROLLABLE;
-    var SLIMSCROLL_BAR_SEL =    '.slimScrollBar';
-    var SLIMSCROLL_RAIL_SEL =   '.slimScrollRail';
-
-    // util
-    var RESPONSIVE =            'fp-responsive';
-    var NO_TRANSITION =         'fp-notransition';
-    var DESTROYED =             'fp-destroyed';
-    var ENABLED =               'fp-enabled';
-    var VIEWING_PREFIX =        'fp-viewing';
-    var ACTIVE =                'active';
-    var ACTIVE_SEL =            '.' + ACTIVE;
-    var COMPLETELY =            'fp-completely';
-    var COMPLETELY_SEL =        '.' + COMPLETELY;
-
-    // section
-    var SECTION_DEFAULT_SEL =   '.section';
-    var SECTION =               'fp-section';
-    var SECTION_SEL =           '.' + SECTION;
-    var SECTION_ACTIVE_SEL =    SECTION_SEL + ACTIVE_SEL;
-    var SECTION_FIRST_SEL =     SECTION_SEL + ':first';
-    var SECTION_LAST_SEL =      SECTION_SEL + ':last';
-    var TABLE_CELL =            'fp-tableCell';
-    var TABLE_CELL_SEL =        '.' + TABLE_CELL;
-    var AUTO_HEIGHT =           'fp-auto-height';
-    var AUTO_HEIGHT_SEL =       '.fp-auto-height';
-    var NORMAL_SCROLL =         'fp-normal-scroll';
-    var NORMAL_SCROLL_SEL =     '.fp-normal-scroll';
-
-    // section nav
-    var SECTION_NAV =           'fp-nav';
-    var SECTION_NAV_SEL =       '#' + SECTION_NAV;
-    var SECTION_NAV_TOOLTIP =   'fp-tooltip';
-    var SECTION_NAV_TOOLTIP_SEL='.'+SECTION_NAV_TOOLTIP;
-    var SHOW_ACTIVE_TOOLTIP =   'fp-show-active';
-
-    // slide
-    var SLIDE_DEFAULT_SEL =     '.slide';
-    var SLIDE =                 'fp-slide';
-    var SLIDE_SEL =             '.' + SLIDE;
-    var SLIDE_ACTIVE_SEL =      SLIDE_SEL + ACTIVE_SEL;
-    var SLIDES_WRAPPER =        'fp-slides';
-    var SLIDES_WRAPPER_SEL =    '.' + SLIDES_WRAPPER;
-    var SLIDES_CONTAINER =      'fp-slidesContainer';
-    var SLIDES_CONTAINER_SEL =  '.' + SLIDES_CONTAINER;
-    var TABLE =                 'fp-table';
-
-    // slide nav
-    var SLIDES_NAV =            'fp-slidesNav';
-    var SLIDES_NAV_SEL =        '.' + SLIDES_NAV;
-    var SLIDES_NAV_LINK_SEL =   SLIDES_NAV_SEL + ' a';
-    var SLIDES_ARROW =          'fp-controlArrow';
-    var SLIDES_ARROW_SEL =      '.' + SLIDES_ARROW;
-    var SLIDES_PREV =           'fp-prev';
-    var SLIDES_PREV_SEL =       '.' + SLIDES_PREV;
-    var SLIDES_ARROW_PREV =     SLIDES_ARROW + ' ' + SLIDES_PREV;
-    var SLIDES_ARROW_PREV_SEL = SLIDES_ARROW_SEL + SLIDES_PREV_SEL;
-    var SLIDES_NEXT =           'fp-next';
-    var SLIDES_NEXT_SEL =       '.' + SLIDES_NEXT;
-    var SLIDES_ARROW_NEXT =     SLIDES_ARROW + ' ' + SLIDES_NEXT;
-    var SLIDES_ARROW_NEXT_SEL = SLIDES_ARROW_SEL + SLIDES_NEXT_SEL;
-
-    var $window = $(window);
-    var $document = $(document);
-
-    var defaultScrollHandler;
-
-    $.fn.fullpage = function(options) {
-        //only once my friend!
-        if($('html').hasClass(ENABLED)){ displayWarnings(); return };
-
-        // common jQuery objects
-        var $htmlBody = $('html, body');
-        var $body = $('body');
-
-        var FP = $.fn.fullpage;
-        // Create some defaults, extending them with any options that were provided
-        options = $.extend({
-            //navigation
-            menu: false,
-            anchors:[],
-            lockAnchors: false,
-            navigation: false,
-            navigationPosition: 'right',
-            navigationTooltips: [],
-            showActiveTooltip: false,
-            slidesNavigation: false,
-            slidesNavPosition: 'bottom',
-            scrollBar: false,
-            hybrid: false,
-
-            //scrolling
-            css3: true,
-            scrollingSpeed: 700,
-            autoScrolling: true,
-            fitToSection: true,
-            fitToSectionDelay: 1000,
-            easing: 'easeInOutCubic',
-            easingcss3: 'ease',
-            loopBottom: false,
-            loopTop: false,
-            loopHorizontal: true,
-            continuousVertical: false,
-            normalScrollElements: null,
-            scrollOverflow: false,
-            scrollOverflowHandler: defaultScrollHandler,
-            touchSensitivity: 5,
-            normalScrollElementTouchThreshold: 5,
-
-            //Accessibility
-            keyboardScrolling: true,
-            animateAnchor: true,
-            recordHistory: true,
-
-            //design
-            controlArrows: true,
-            controlArrowColor: '#fff',
-            verticalCentered: true,
-            resize: false,
-            sectionsColor : [],
-            paddingTop: 0,
-            paddingBottom: 0,
-            fixedElements: null,
-            responsive: 0, //backwards compabitility with responsiveWiddth
-            responsiveWidth: 0,
-            responsiveHeight: 0,
-
-            //Custom selectors
-            sectionSelector: SECTION_DEFAULT_SEL,
-            slideSelector: SLIDE_DEFAULT_SEL,
-
-
-            //events
-            afterLoad: null,
-            onLeave: null,
-            afterRender: null,
-            afterResize: null,
-            afterReBuild: null,
-            afterSlideLoad: null,
-            onSlideLeave: null
-        }, options);
-
-        displayWarnings();
-
-        //easeInOutCubic animation included in the plugin
-        $.extend($.easing,{ easeInOutCubic: function (x, t, b, c, d) {if ((t/=d/2) < 1) return c/2*t*t*t + b;return c/2*((t-=2)*t*t + 2) + b;}});
-
-        /**
-        * Sets the autoScroll option.
-        * It changes the scroll bar visibility and the history of the site as a result.
-        */
-        FP.setAutoScrolling = function(value, type){
-            setVariableState('autoScrolling', value, type);
-
-            var element = $(SECTION_ACTIVE_SEL);
-
-            if(options.autoScrolling && !options.scrollBar){
-                $htmlBody.css({
-                    'overflow' : 'hidden',
-                    'height' : '100%'
-                });
-
-                FP.setRecordHistory(originals.recordHistory, 'internal');
-
-                //for IE touch devices
-                container.css({
-                    '-ms-touch-action': 'none',
-                    'touch-action': 'none'
-                });
-
-                if(element.length){
-                    //moving the container up
-                    silentScroll(element.position().top);
-                }
-
-            }else{
-                $htmlBody.css({
-                    'overflow' : 'visible',
-                    'height' : 'initial'
-                });
-
-                FP.setRecordHistory(false, 'internal');
-
-                //for IE touch devices
-                container.css({
-                    '-ms-touch-action': '',
-                    'touch-action': ''
-                });
-
-                silentScroll(0);
-
-                //scrolling the page to the section with no animation
-                if (element.length) {
-                    $htmlBody.scrollTop(element.position().top);
-                }
-            }
-        };
-
-        /**
-        * Defines wheter to record the history for each hash change in the URL.
-        */
-        FP.setRecordHistory = function(value, type){
-            setVariableState('recordHistory', value, type);
-        };
-
-        /**
-        * Defines the scrolling speed
-        */
-        FP.setScrollingSpeed = function(value, type){
-            setVariableState('scrollingSpeed', value, type);
-        };
-
-        /**
-        * Sets fitToSection
-        */
-        FP.setFitToSection = function(value, type){
-            setVariableState('fitToSection', value, type);
-        };
-
-        /**
-        * Sets lockAnchors
-        */
-        FP.setLockAnchors = function(value){
-            options.lockAnchors = value;
-        };
-
-        /**
-        * Adds or remove the possiblity of scrolling through sections by using the mouse wheel or the trackpad.
-        */
-        FP.setMouseWheelScrolling = function (value){
-            if(value){
-                addMouseWheelHandler();
-                addMiddleWheelHandler();
-            }else{
-                removeMouseWheelHandler();
-                removeMiddleWheelHandler();
-            }
-        };
-
-        /**
-        * Adds or remove the possiblity of scrolling through sections by using the mouse wheel/trackpad or touch gestures.
-        * Optionally a second parameter can be used to specify the direction for which the action will be applied.
-        *
-        * @param directions string containing the direction or directions separated by comma.
-        */
-        FP.setAllowScrolling = function (value, directions){
-            if(typeof directions !== 'undefined'){
-                directions = directions.replace(/ /g,'').split(',');
-
-                $.each(directions, function (index, direction){
-                    setIsScrollAllowed(value, direction, 'm');
-                });
-            }
-            else if(value){
-                FP.setMouseWheelScrolling(true);
-                addTouchHandler();
-            }else{
-                FP.setMouseWheelScrolling(false);
-                removeTouchHandler();
-            }
-        };
-
-        /**
-        * Adds or remove the possiblity of scrolling through sections by using the keyboard arrow keys
-        */
-        FP.setKeyboardScrolling = function (value, directions){
-            if(typeof directions !== 'undefined'){
-                directions = directions.replace(/ /g,'').split(',');
-
-                $.each(directions, function (index, direction){
-                    setIsScrollAllowed(value, direction, 'k');
-                });
-            }else{
-                options.keyboardScrolling = value;
-            }
-        };
-
-        /**
-        * Moves the page up one section.
-        */
-        FP.moveSectionUp = function(){
-            var prev = $(SECTION_ACTIVE_SEL).prev(SECTION_SEL);
-
-            //looping to the bottom if there's no more sections above
-            if (!prev.length && (options.loopTop || options.continuousVertical)) {
-                prev = $(SECTION_SEL).last();
-            }
-
-            if (prev.length) {
-                scrollPage(prev, null, true);
-            }
-        };
-
-        /**
-        * Moves the page down one section.
-        */
-        FP.moveSectionDown = function (){
-            var next = $(SECTION_ACTIVE_SEL).next(SECTION_SEL);
-
-            //looping to the top if there's no more sections below
-            if(!next.length &&
-                (options.loopBottom || options.continuousVertical)){
-                next = $(SECTION_SEL).first();
-            }
-
-            if(next.length){
-                scrollPage(next, null, false);
-            }
-        };
-
-        /**
-        * Moves the page to the given section and slide with no animation.
-        * Anchors or index positions can be used as params.
-        */
-        FP.silentMoveTo = function(sectionAnchor, slideAnchor){
-            FP.setScrollingSpeed (0, 'internal');
-            FP.moveTo(sectionAnchor, slideAnchor)
-            FP.setScrollingSpeed (originals.scrollingSpeed, 'internal');
-        };
-
-        /**
-        * Moves the page to the given section and slide.
-        * Anchors or index positions can be used as params.
-        */
-        FP.moveTo = function (sectionAnchor, slideAnchor){
-            var destiny = getSectionByAnchor(sectionAnchor);
-
-            if (typeof slideAnchor !== 'undefined'){
-                scrollPageAndSlide(sectionAnchor, slideAnchor);
-            }else if(destiny.length > 0){
-                scrollPage(destiny);
-            }
-        };
-
-        /**
-        * Slides right the slider of the active section.
-        * Optional `section` param.
-        */
-        FP.moveSlideRight = function(section){
-            moveSlide('next', section);
-        };
-
-        /**
-        * Slides left the slider of the active section.
-        * Optional `section` param.
-        */
-        FP.moveSlideLeft = function(section){
-            moveSlide('prev', section);
-        };
-
-        /**
-         * When resizing is finished, we adjust the slides sizes and positions
-         */
-        FP.reBuild = function(resizing){
-            if(container.hasClass(DESTROYED)){ return; }  //nothing to do if the plugin was destroyed
-
-            isResizing = true;
-
-            var windowsWidth = $window.outerWidth();
-            windowsHeight = $window.height();  //updating global var
-
-            //text resizing
-            if (options.resize) {
-                resizeMe(windowsHeight, windowsWidth);
-            }
-
-            $(SECTION_SEL).each(function(){
-                var slidesWrap = $(this).find(SLIDES_WRAPPER_SEL);
-                var slides = $(this).find(SLIDE_SEL);
-
-                //adjusting the height of the table-cell for IE and Firefox
-                if(options.verticalCentered){
-                    $(this).find(TABLE_CELL_SEL).css('height', getTableHeight($(this)) + 'px');
-                }
-
-                $(this).css('height', windowsHeight + 'px');
-
-                //resizing the scrolling divs
-                if(options.scrollOverflow){
-                    if(slides.length){
-                        slides.each(function(){
-                            createSlimScrolling($(this));
-                        });
-                    }else{
-                        createSlimScrolling($(this));
-                    }
-                }
-
-                //adjusting the position fo the FULL WIDTH slides...
-                if (slides.length > 1) {
-                    landscapeScroll(slidesWrap, slidesWrap.find(SLIDE_ACTIVE_SEL));
-                }
-            });
-
-            var activeSection = $(SECTION_ACTIVE_SEL);
-            var sectionIndex = activeSection.index(SECTION_SEL);
-
-            //isn't it the first section?
-            if(sectionIndex){
-                //adjusting the position for the current section
-                FP.silentMoveTo(sectionIndex + 1);
-            }
-
-            isResizing = false;
-            $.isFunction( options.afterResize ) && resizing && options.afterResize.call(container);
-            $.isFunction( options.afterReBuild ) && !resizing && options.afterReBuild.call(container);
-        };
-
-        /**
-        * Turns fullPage.js to normal scrolling mode when the viewport `width` or `height`
-        * are smaller than the set limit values.
-        */
-        FP.setResponsive = function (active){
-            var isResponsive = $body.hasClass(RESPONSIVE);
-
-            if(active){
-                if(!isResponsive){
-                    FP.setAutoScrolling(false, 'internal');
-                    FP.setFitToSection(false, 'internal');
-                    $(SECTION_NAV_SEL).hide();
-                    $body.addClass(RESPONSIVE);
-                }
-            }
-            else if(isResponsive){
-                FP.setAutoScrolling(originals.autoScrolling, 'internal');
-                FP.setFitToSection(originals.autoScrolling, 'internal');
-                $(SECTION_NAV_SEL).show();
-                $body.removeClass(RESPONSIVE);
-            }
-        }
-
-        //flag to avoid very fast sliding for landscape sliders
-        var slideMoving = false;
-
-        var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
-        var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
-        var container = $(this);
-        var windowsHeight = $window.height();
-        var isResizing = false;
-        var isWindowFocused = true;
-        var lastScrolledDestiny;
-        var lastScrolledSlide;
-        var canScroll = true;
-        var scrollings = [];
-        var nav;
-        var controlPressed;
-        var isScrollAllowed = {};
-        isScrollAllowed.m = {  'up':true, 'down':true, 'left':true, 'right':true };
-        isScrollAllowed.k = $.extend(true,{}, isScrollAllowed.m);
-        var originals = $.extend(true, {}, options); //deep copy
-
-        //timeouts
-        var resizeId;
-        var afterSectionLoadsId;
-        var afterSlideLoadsId;
-        var scrollId;
-        var scrollId2;
-        var keydownId;
-
-        if($(this).length){
-            init();
-            bindEvents();
-        }
-
-        function init(){
-            //if css3 is not supported, it will use jQuery animations
-            if(options.css3){
-                options.css3 = support3d();
-            }
-
-            options.scrollBar = options.scrollBar || options.hybrid;
-
-
-            setOptionsFromDOM();
-
-            prepareDom();
-            FP.setAllowScrolling(true);
-
-            FP.setAutoScrolling(options.autoScrolling, 'internal');
-
-            //the starting point is a slide?
-            var activeSlide = $(SECTION_ACTIVE_SEL).find(SLIDE_ACTIVE_SEL);
-
-            //the active section isn't the first one? Is not the first slide of the first section? Then we load that section/slide by default.
-            if( activeSlide.length &&  ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) !== 0 || ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) === 0 && activeSlide.index() !== 0))){
-                silentLandscapeScroll(activeSlide);
-            }
-
-            responsive();
-
-            //setting the class for the body element
-            setBodyClass();
-
-            $window.on('load', function() {
-                scrollToAnchor();
-            });
-        }
-
-        function bindEvents(){
-            $window
-                //when scrolling...
-                .on('scroll', scrollHandler)
-
-                //detecting any change on the URL to scroll to the given anchor link
-                //(a way to detect back history button as we play with the hashes on the URL)
-                .on('hashchange', hashChangeHandler)
-
-                //when opening a new tab (ctrl + t), `control` won't be pressed when comming back.
-                .blur(blurHandler)
-
-                //when resizing the site, we adjust the heights of the sections, slimScroll...
-                .resize(resizeHandler);
-
-            $document
-                //Sliding with arrow keys, both, vertical and horizontal
-                .keydown(keydownHandler)
-
-                //to prevent scrolling while zooming
-                .keyup(keyUpHandler)
-
-                //Scrolls to the section when clicking the navigation bullet
-                .on('click touchstart', SECTION_NAV_SEL + ' a', sectionBulletHandler)
-
-                //Scrolls the slider to the given slide destination for the given section
-                .on('click touchstart', SLIDES_NAV_LINK_SEL, slideBulletHandler)
-
-                .on('click', SECTION_NAV_TOOLTIP_SEL, tooltipTextHandler);
-
-            //Scrolling horizontally when clicking on the slider controls.
-            $(SECTION_SEL).on('click touchstart', SLIDES_ARROW_SEL, slideArrowHandler);
-
-            /**
-            * Applying normalScroll elements.
-            * Ignoring the scrolls over the specified selectors.
-            */
-            if(options.normalScrollElements){
-                $document.on('mouseenter', options.normalScrollElements, function () {
-                    FP.setMouseWheelScrolling(false);
-                });
-
-                $document.on('mouseleave', options.normalScrollElements, function(){
-                    FP.setMouseWheelScrolling(true);
-                });
-            }
-        }
-
-        /**
-        * Setting options from DOM elements if they are not provided.
-        */
-        function setOptionsFromDOM(){
-            //no anchors option? Checking for them in the DOM attributes
-            if(!options.anchors.length){
-                options.anchors = $(options.sectionSelector + '[data-anchor]').map(function(){
-                    return $(this).data('anchor').toString();
-                }).get();
-            }
-
-            //no tooltipos option? Checking for them in the DOM attributes
-            if(!options.navigationTooltips.length){
-                options.navigationTooltips = $(options.sectionSelector + '[data-tooltip]').map(function(){
-                    return $(this).data('tooltip').toString();
-                }).get();
-            }
-        }
-
-        /**
-        * Works over the DOM structure to set it up for the current fullpage optionss.
-        */
-        function prepareDom(){
-            container.css({
-                'height': '100%',
-                'position': 'relative'
-            });
-
-            //adding a class to recognize the container internally in the code
-            container.addClass(WRAPPER);
-            $('html').addClass(ENABLED);
-
-            //due to https://github.com/alvarotrigo/fullPage.js/issues/1502
-            windowsHeight = $window.height();
-
-            container.removeClass(DESTROYED); //in case it was destroyed before initilizing it again
-
-            addInternalSelectors();
-
-             //styling the sections / slides / menu
-            $(SECTION_SEL).each(function(index){
-                var section = $(this);
-                var slides = section.find(SLIDE_SEL);
-                var numSlides = slides.length;
-
-                styleSection(section, index);
-                styleMenu(section, index);
-
-                // if there's any slide
-                if (numSlides > 0) {
-                    styleSlides(section, slides, numSlides);
-                }else{
-                    if(options.verticalCentered){
-                        addTableClass(section);
-                    }
-                }
-            });
-
-            //fixed elements need to be moved out of the plugin container due to problems with CSS3.
-            if(options.fixedElements && options.css3){
-                $(options.fixedElements).appendTo($body);
-            }
-
-            //vertical centered of the navigation + active bullet
-            if(options.navigation){
-                addVerticalNavigation();
-            }
-
-            if(options.scrollOverflow){
-                if(document.readyState === 'complete'){
-                    createSlimScrollingHandler();
-                }
-                //after DOM and images are loaded
-                $window.on('load', createSlimScrollingHandler);
-            }else{
-                afterRenderActions();
-            }
-        }
-
-        /**
-        * Styles the horizontal slides for a section.
-        */
-        function styleSlides(section, slides, numSlides){
-            var sliderWidth = numSlides * 100;
-            var slideWidth = 100 / numSlides;
-
-            slides.wrapAll('<div class="' + SLIDES_CONTAINER + '" />');
-            slides.parent().wrap('<div class="' + SLIDES_WRAPPER + '" />');
-
-            section.find(SLIDES_CONTAINER_SEL).css('width', sliderWidth + '%');
-
-            if(numSlides > 1){
-                if(options.controlArrows){
-                    createSlideArrows(section);
-                }
-
-                if(options.slidesNavigation){
-                    addSlidesNavigation(section, numSlides);
-                }
-            }
-
-            slides.each(function(index) {
-                $(this).css('width', slideWidth + '%');
-
-                if(options.verticalCentered){
-                    addTableClass($(this));
-                }
-            });
-
-            var startingSlide = section.find(SLIDE_ACTIVE_SEL);
-
-            //if the slide won't be an starting point, the default will be the first one
-            //the active section isn't the first one? Is not the first slide of the first section? Then we load that section/slide by default.
-            if( startingSlide.length &&  ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) !== 0 || ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) === 0 && startingSlide.index() !== 0))){
-                silentLandscapeScroll(startingSlide);
-            }else{
-                slides.eq(0).addClass(ACTIVE);
-            }
-        }
-
-        /**
-        * Styling vertical sections
-        */
-        function styleSection(section, index){
-            //if no active section is defined, the 1st one will be the default one
-            if(!index && $(SECTION_ACTIVE_SEL).length === 0) {
-                section.addClass(ACTIVE);
-            }
-
-            section.css('height', windowsHeight + 'px');
-
-            if(options.paddingTop){
-                section.css('padding-top', options.paddingTop);
-            }
-
-            if(options.paddingBottom){
-                section.css('padding-bottom', options.paddingBottom);
-            }
-
-            if (typeof options.sectionsColor[index] !==  'undefined') {
-                section.css('background-color', options.sectionsColor[index]);
-            }
-
-            if (typeof options.anchors[index] !== 'undefined') {
-                section.attr('data-anchor', options.anchors[index]);
-            }
-        }
-
-        /**
-        * Sets the data-anchor attributes to the menu elements and activates the current one.
-        */
-        function styleMenu(section, index){
-            if (typeof options.anchors[index] !== 'undefined') {
-                //activating the menu / nav element on load
-                if(section.hasClass(ACTIVE)){
-                    activateMenuAndNav(options.anchors[index], index);
-                }
-            }
-
-            //moving the menu outside the main container if it is inside (avoid problems with fixed positions when using CSS3 tranforms)
-            if(options.menu && options.css3 && $(options.menu).closest(WRAPPER_SEL).length){
-                $(options.menu).appendTo($body);
-            }
-        }
-
-        /**
-        * Adds internal classes to be able to provide customizable selectors
-        * keeping the link with the style sheet.
-        */
-        function addInternalSelectors(){
-            //adding internal class names to void problem with common ones
-            $(options.sectionSelector).each(function(){
-                $(this).addClass(SECTION);
-            });
-            $(options.slideSelector).each(function(){
-                $(this).addClass(SLIDE);
-            });
-        }
-
-        /**
-        * Creates the control arrows for the given section
-        */
-        function createSlideArrows(section){
-            section.find(SLIDES_WRAPPER_SEL).after('<div class="' + SLIDES_ARROW_PREV + '"></div><div class="' + SLIDES_ARROW_NEXT + '"></div>');
-
-            if(options.controlArrowColor!='#fff'){
-                section.find(SLIDES_ARROW_NEXT_SEL).css('border-color', 'transparent transparent transparent '+options.controlArrowColor);
-                section.find(SLIDES_ARROW_PREV_SEL).css('border-color', 'transparent '+ options.controlArrowColor + ' transparent transparent');
-            }
-
-            if(!options.loopHorizontal){
-                section.find(SLIDES_ARROW_PREV_SEL).hide();
-            }
-        }
-
-        /**
-        * Creates a vertical navigation bar.
-        */
-        function addVerticalNavigation(){
-            $body.append('<div id="' + SECTION_NAV + '"><ul></ul></div>');
-            var nav = $(SECTION_NAV_SEL);
-
-            nav.addClass(function() {
-                return options.showActiveTooltip ? SHOW_ACTIVE_TOOLTIP + ' ' + options.navigationPosition : options.navigationPosition;
-            });
-
-            for (var i = 0; i < $(SECTION_SEL).length; i++) {
-                var link = '';
-                if (options.anchors.length) {
-                    link = options.anchors[i];
-                }
-
-                var li = '<li><a href="#' + link + '"><span></span></a>';
-
-                // Only add tooltip if needed (defined by user)
-                var tooltip = options.navigationTooltips[i];
-
-                if (typeof tooltip !== 'undefined' && tooltip !== '') {
-                    li += '<div class="' + SECTION_NAV_TOOLTIP + ' ' + options.navigationPosition + '">' + tooltip + '</div>';
-                }
-
-                li += '</li>';
-
-                nav.find('ul').append(li);
-            }
-
-            //centering it vertically
-            $(SECTION_NAV_SEL).css('margin-top', '-' + ($(SECTION_NAV_SEL).height()/2) + 'px');
-
-            //activating the current active section
-            $(SECTION_NAV_SEL).find('li').eq($(SECTION_ACTIVE_SEL).index(SECTION_SEL)).find('a').addClass(ACTIVE);
-        }
-
-        /**
-        * Creates the slim scroll scrollbar for the sections and slides inside them.
-        */
-        function createSlimScrollingHandler(){
-            $(SECTION_SEL).each(function(){
-                var slides = $(this).find(SLIDE_SEL);
-
-                if(slides.length){
-                    slides.each(function(){
-                        createSlimScrolling($(this));
-                    });
-                }else{
-                    createSlimScrolling($(this));
-                }
-
-            });
-            afterRenderActions();
-        }
-
-        /**
-        * Actions and callbacks to fire afterRender
-        */
-        function afterRenderActions(){
-            var section = $(SECTION_ACTIVE_SEL);
-
-            section.addClass(COMPLETELY);
-
-            if(options.scrollOverflowHandler.afterRender){
-                options.scrollOverflowHandler.afterRender(section);
-            }
-            lazyLoad(section);
-            playMedia(section);
-
-            $.isFunction( options.afterLoad ) && options.afterLoad.call(section, section.data('anchor'), (section.index(SECTION_SEL) + 1));
-            $.isFunction( options.afterRender ) && options.afterRender.call(container);
-        }
-
-
-        var isScrolling = false;
-        var lastScroll = 0;
-
-        //when scrolling...
-        function scrollHandler(){
-            var currentSection;
-
-            if(!options.autoScrolling || options.scrollBar){
-                var currentScroll = $window.scrollTop();
-                var scrollDirection = getScrollDirection(currentScroll);
-                var visibleSectionIndex = 0;
-                var screen_mid = currentScroll + ($window.height() / 2.0);
-
-                //taking the section which is showing more content in the viewport
-                var sections =  document.querySelectorAll(SECTION_SEL);
-                for (var i = 0; i < sections.length; ++i) {
-                    var section = sections[i];
-
-                    // Pick the the last section which passes the middle line of the screen.
-                    if (section.offsetTop <= screen_mid)
-                    {
-                        visibleSectionIndex = i;
-                    }
-                }
-
-                if(isCompletelyInViewPort(scrollDirection)){
-                    if(!$(SECTION_ACTIVE_SEL).hasClass(COMPLETELY)){
-                        $(SECTION_ACTIVE_SEL).addClass(COMPLETELY).siblings().removeClass(COMPLETELY);
-                    }
-                }
-
-                //geting the last one, the current one on the screen
-                currentSection = $(sections).eq(visibleSectionIndex);
-
-                //setting the visible section as active when manually scrolling
-                //executing only once the first time we reach the section
-                if(!currentSection.hasClass(ACTIVE)){
-                    isScrolling = true;
-                    var leavingSection = $(SECTION_ACTIVE_SEL);
-                    var leavingSectionIndex = leavingSection.index(SECTION_SEL) + 1;
-                    var yMovement = getYmovement(currentSection);
-                    var anchorLink  = currentSection.data('anchor');
-                    var sectionIndex = currentSection.index(SECTION_SEL) + 1;
-                    var activeSlide = currentSection.find(SLIDE_ACTIVE_SEL);
-
-                    if(activeSlide.length){
-                        var slideAnchorLink = activeSlide.data('anchor');
-                        var slideIndex = activeSlide.index();
-                    }
-
-                    if(canScroll){
-                        currentSection.addClass(ACTIVE).siblings().removeClass(ACTIVE);
-
-                        $.isFunction( options.onLeave ) && options.onLeave.call( leavingSection, leavingSectionIndex, sectionIndex, yMovement);
-
-                        $.isFunction( options.afterLoad ) && options.afterLoad.call( currentSection, anchorLink, sectionIndex);
-                        lazyLoad(currentSection);
-
-                        activateMenuAndNav(anchorLink, sectionIndex - 1);
-
-                        if(options.anchors.length){
-                            //needed to enter in hashChange event when using the menu with anchor links
-                            lastScrolledDestiny = anchorLink;
-
-                            setState(slideIndex, slideAnchorLink, anchorLink, sectionIndex);
-                        }
-                    }
-
-                    //small timeout in order to avoid entering in hashChange event when scrolling is not finished yet
-                    clearTimeout(scrollId);
-                    scrollId = setTimeout(function(){
-                        isScrolling = false;
-                    }, 100);
-                }
-
-                if(options.fitToSection){
-                    //for the auto adjust of the viewport to fit a whole section
-                    clearTimeout(scrollId2);
-
-                    scrollId2 = setTimeout(function(){
-                        //checking fitToSection again in case it was set to false before the timeout delay
-                        if(canScroll && options.fitToSection){
-                            //allows to scroll to an active section and
-                            //if the section is already active, we prevent firing callbacks
-                            if($(SECTION_ACTIVE_SEL).is(currentSection)){
-                                isResizing = true;
-                            }
-                            scrollPage($(SECTION_ACTIVE_SEL));
-
-                            isResizing = false;
-                        }
-                    }, options.fitToSectionDelay);
-                }
-            }
-        }
-
-        /**
-        * Determines whether the active section has seen in its whole or not.
-        */
-        function isCompletelyInViewPort(movement){
-            var top = $(SECTION_ACTIVE_SEL).position().top;
-            var bottom = top + $window.height();
-
-            if(movement == 'up'){
-                return bottom >= ($window.scrollTop() + $window.height());
-            }
-            return top <= $window.scrollTop();
-        }
-
-        /**
-        * Gets the directon of the the scrolling fired by the scroll event.
-        */
-        function getScrollDirection(currentScroll){
-            var direction = currentScroll > lastScroll ? 'down' : 'up';
-
-            lastScroll = currentScroll;
-
-            return direction;
-        }
-
-        /**
-        * Determines the way of scrolling up or down:
-        * by 'automatically' scrolling a section or by using the default and normal scrolling.
-        */
-        function scrolling(type, scrollable){
-            if (!isScrollAllowed.m[type]){
-                return;
-            }
-            var check, scrollSection;
-
-            if(type == 'down'){
-                check = 'bottom';
-                scrollSection = FP.moveSectionDown;
-            }else{
-                check = 'top';
-                scrollSection = FP.moveSectionUp;
-            }
-
-            if(scrollable.length > 0 ){
-                //is the scrollbar at the start/end of the scroll?
-                if(options.scrollOverflowHandler.isScrolled(check, scrollable)){
-                    scrollSection();
-                }else{
-                    return true;
-                }
-            }else{
-                // moved up/down
-                scrollSection();
-            }
-        }
-
-
-        var touchStartY = 0;
-        var touchStartX = 0;
-        var touchEndY = 0;
-        var touchEndX = 0;
-
-        /* Detecting touch events
-
-        * As we are changing the top property of the page on scrolling, we can not use the traditional way to detect it.
-        * This way, the touchstart and the touch moves shows an small difference between them which is the
-        * used one to determine the direction.
-        */
-        function touchMoveHandler(event){
-            var e = event.originalEvent;
-
-            // additional: if one of the normalScrollElements isn't within options.normalScrollElementTouchThreshold hops up the DOM chain
-            if (!checkParentForNormalScrollElement(event.target) && isReallyTouch(e) ) {
-
-                if(options.autoScrolling){
-                    //preventing the easing on iOS devices
-                    event.preventDefault();
-                }
-
-                var activeSection = $(SECTION_ACTIVE_SEL);
-                var scrollable = options.scrollOverflowHandler.scrollable(activeSection);
-
-                if (canScroll && !slideMoving) { //if theres any #
-                    var touchEvents = getEventsPage(e);
-
-                    touchEndY = touchEvents.y;
-                    touchEndX = touchEvents.x;
-
-                    //if movement in the X axys is greater than in the Y and the currect section has slides...
-                    if (activeSection.find(SLIDES_WRAPPER_SEL).length && Math.abs(touchStartX - touchEndX) > (Math.abs(touchStartY - touchEndY))) {
-
-                        //is the movement greater than the minimum resistance to scroll?
-                        if (Math.abs(touchStartX - touchEndX) > ($window.outerWidth() / 100 * options.touchSensitivity)) {
-                            if (touchStartX > touchEndX) {
-                                if(isScrollAllowed.m.right){
-                                    FP.moveSlideRight(); //next
-                                }
-                            } else {
-                                if(isScrollAllowed.m.left){
-                                    FP.moveSlideLeft(); //prev
-                                }
-                            }
-                        }
-                    }
-
-                    //vertical scrolling (only when autoScrolling is enabled)
-                    else if(options.autoScrolling){
-
-                        //is the movement greater than the minimum resistance to scroll?
-                        if (Math.abs(touchStartY - touchEndY) > ($window.height() / 100 * options.touchSensitivity)) {
-                            if (touchStartY > touchEndY) {
-                                scrolling('down', scrollable);
-                            } else if (touchEndY > touchStartY) {
-                                scrolling('up', scrollable);
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        /**
-         * recursive function to loop up the parent nodes to check if one of them exists in options.normalScrollElements
-         * Currently works well for iOS - Android might need some testing
-         * @param  {Element} el  target element / jquery selector (in subsequent nodes)
-         * @param  {int}     hop current hop compared to options.normalScrollElementTouchThreshold
-         * @return {boolean} true if there is a match to options.normalScrollElements
-         */
-        function checkParentForNormalScrollElement (el, hop) {
-            hop = hop || 0;
-            var parent = $(el).parent();
-
-            if (hop < options.normalScrollElementTouchThreshold &&
-                parent.is(options.normalScrollElements) ) {
-                return true;
-            } else if (hop == options.normalScrollElementTouchThreshold) {
-                return false;
-            } else {
-                return checkParentForNormalScrollElement(parent, ++hop);
-            }
-        }
-
-        /**
-        * As IE >= 10 fires both touch and mouse events when using a mouse in a touchscreen
-        * this way we make sure that is really a touch event what IE is detecting.
-        */
-        function isReallyTouch(e){
-            //if is not IE   ||  IE is detecting `touch` or `pen`
-            return typeof e.pointerType === 'undefined' || e.pointerType != 'mouse';
-        }
-
-        /**
-        * Handler for the touch start event.
-        */
-        function touchStartHandler(event){
-            var e = event.originalEvent;
-
-            //stopping the auto scroll to adjust to a section
-            if(options.fitToSection){
-                $htmlBody.stop();
-            }
-
-            if(isReallyTouch(e)){
-                var touchEvents = getEventsPage(e);
-                touchStartY = touchEvents.y;
-                touchStartX = touchEvents.x;
-            }
-        }
-
-        /**
-        * Gets the average of the last `number` elements of the given array.
-        */
-        function getAverage(elements, number){
-            var sum = 0;
-
-            //taking `number` elements from the end to make the average, if there are not enought, 1
-            var lastElements = elements.slice(Math.max(elements.length - number, 1));
-
-            for(var i = 0; i < lastElements.length; i++){
-                sum = sum + lastElements[i];
-            }
-
-            return Math.ceil(sum/number);
-        }
-
-        /**
-         * Detecting mousewheel scrolling
-         *
-         * http://blogs.sitepointstatic.com/examples/tech/mouse-wheel/index.html
-         * http://www.sitepoint.com/html5-javascript-mouse-wheel/
-         */
-        var prevTime = new Date().getTime();
-
-        function MouseWheelHandler(e) {
-            var curTime = new Date().getTime();
-            var isNormalScroll = $(COMPLETELY_SEL).hasClass(NORMAL_SCROLL);
-
-            //autoscrolling and not zooming?
-            if(options.autoScrolling && !controlPressed && !isNormalScroll){
-                // cross-browser wheel delta
-                e = e || window.event;
-                var value = e.wheelDelta || -e.deltaY || -e.detail;
-                var delta = Math.max(-1, Math.min(1, value));
-
-                var horizontalDetection = typeof e.wheelDeltaX !== 'undefined' || typeof e.deltaX !== 'undefined';
-                var isScrollingVertically = (Math.abs(e.wheelDeltaX) < Math.abs(e.wheelDelta)) || (Math.abs(e.deltaX ) < Math.abs(e.deltaY) || !horizontalDetection);
-
-                //Limiting the array to 150 (lets not waste memory!)
-                if(scrollings.length > 149){
-                    scrollings.shift();
-                }
-
-                //keeping record of the previous scrollings
-                scrollings.push(Math.abs(value));
-
-                //preventing to scroll the site on mouse wheel when scrollbar is present
-                if(options.scrollBar){
-                    e.preventDefault ? e.preventDefault() : e.returnValue = false;
-                }
-
-                var activeSection = $(SECTION_ACTIVE_SEL);
-                var scrollable = options.scrollOverflowHandler.scrollable(activeSection);
-
-                //time difference between the last scroll and the current one
-                var timeDiff = curTime-prevTime;
-                prevTime = curTime;
-
-                //haven't they scrolled in a while?
-                //(enough to be consider a different scrolling action to scroll another section)
-                if(timeDiff > 200){
-                    //emptying the array, we dont care about old scrollings for our averages
-                    scrollings = [];
-                }
-
-                if(canScroll){
-                    var averageEnd = getAverage(scrollings, 10);
-                    var averageMiddle = getAverage(scrollings, 70);
-                    var isAccelerating = averageEnd >= averageMiddle;
-
-                    //to avoid double swipes...
-                    if(isAccelerating && isScrollingVertically){
-                        //scrolling down?
-                        if (delta < 0) {
-                            scrolling('down', scrollable);
-
-                        //scrolling up?
-                        }else {
-                            scrolling('up', scrollable);
-                        }
-                    }
-                }
-
-                return false;
-            }
-
-            if(options.fitToSection){
-                //stopping the auto scroll to adjust to a section
-                $htmlBody.stop();
-            }
-        }
-
-        /**
-        * Slides a slider to the given direction.
-        * Optional `section` param.
-        */
-        function moveSlide(direction, section){
-            var activeSection = typeof section === 'undefined' ? $(SECTION_ACTIVE_SEL) : section;
-            var slides = activeSection.find(SLIDES_WRAPPER_SEL);
-            var numSlides = slides.find(SLIDE_SEL).length;
-
-            // more than one slide needed and nothing should be sliding
-            if (!slides.length || slideMoving || numSlides < 2) {
-                return;
-            }
-
-            var currentSlide = slides.find(SLIDE_ACTIVE_SEL);
-            var destiny = null;
-
-            if(direction === 'prev'){
-                destiny = currentSlide.prev(SLIDE_SEL);
-            }else{
-                destiny = currentSlide.next(SLIDE_SEL);
-            }
-
-            //isn't there a next slide in the secuence?
-            if(!destiny.length){
-                //respect loopHorizontal settin
-                if (!options.loopHorizontal) return;
-
-                if(direction === 'prev'){
-                    destiny = currentSlide.siblings(':last');
-                }else{
-                    destiny = currentSlide.siblings(':first');
-                }
-            }
-
-            slideMoving = true;
-
-            landscapeScroll(slides, destiny);
-        }
-
-        /**
-        * Maintains the active slides in the viewport
-        * (Because he `scroll` animation might get lost with some actions, such as when using continuousVertical)
-        */
-        function keepSlidesPosition(){
-            $(SLIDE_ACTIVE_SEL).each(function(){
-                silentLandscapeScroll($(this), 'internal');
-            });
-        }
-
-        var previousDestTop = 0;
-        /**
-        * Returns the destination Y position based on the scrolling direction and
-        * the height of the section.
-        */
-        function getDestinationPosition(element){
-            var elemPosition = element.position();
-
-            //top of the desination will be at the top of the viewport
-            var position = elemPosition.top;
-            var isScrollingDown =  elemPosition.top > previousDestTop;
-            var sectionBottom = position - windowsHeight + element.outerHeight();
-
-            //is the destination element bigger than the viewport?
-            if(element.outerHeight() > windowsHeight){
-                //scrolling up?
-                if(!isScrollingDown){
-                    position = sectionBottom;
-                }
-            }
-
-            //sections equal or smaller than the viewport height && scrolling down? ||  is resizing and its in the last section
-            else if(isScrollingDown || (isResizing && element.is(':last-child')) ){
-                //The bottom of the destination will be at the bottom of the viewport
-                position = sectionBottom;
-            }
-
-            /*
-            Keeping record of the last scrolled position to determine the scrolling direction.
-            No conventional methods can be used as the scroll bar might not be present
-            AND the section might not be active if it is auto-height and didnt reach the middle
-            of the viewport.
-            */
-            previousDestTop = position;
-            return position;
-        }
-
-        /**
-        * Scrolls the site to the given element and scrolls to the slide if a callback is given.
-        */
-        function scrollPage(element, callback, isMovementUp){
-            if(typeof element === 'undefined'){ return; } //there's no element to scroll, leaving the function
-
-            var dtop = getDestinationPosition(element);
-
-            //local variables
-            var v = {
-                element: element,
-                callback: callback,
-                isMovementUp: isMovementUp,
-                dtop: dtop,
-                yMovement: getYmovement(element),
-                anchorLink: element.data('anchor'),
-                sectionIndex: element.index(SECTION_SEL),
-                activeSlide: element.find(SLIDE_ACTIVE_SEL),
-                activeSection: $(SECTION_ACTIVE_SEL),
-                leavingSection: $(SECTION_ACTIVE_SEL).index(SECTION_SEL) + 1,
-
-                //caching the value of isResizing at the momment the function is called
-                //because it will be checked later inside a setTimeout and the value might change
-                localIsResizing: isResizing
-            };
-
-            //quiting when destination scroll is the same as the current one
-            if((v.activeSection.is(element) && !isResizing) || (options.scrollBar && $window.scrollTop() === v.dtop && !element.hasClass(AUTO_HEIGHT) )){ return; }
-
-            if(v.activeSlide.length){
-                var slideAnchorLink = v.activeSlide.data('anchor');
-                var slideIndex = v.activeSlide.index();
-            }
-
-            // If continuousVertical && we need to wrap around
-            if (options.autoScrolling && options.continuousVertical && typeof (v.isMovementUp) !== "undefined" &&
-                ((!v.isMovementUp && v.yMovement == 'up') || // Intending to scroll down but about to go up or
-                (v.isMovementUp && v.yMovement == 'down'))) { // intending to scroll up but about to go down
-
-                v = createInfiniteSections(v);
-            }
-
-            //callback (onLeave) if the site is not just resizing and readjusting the slides
-            if($.isFunction(options.onLeave) && !v.localIsResizing){
-                if(options.onLeave.call(v.activeSection, v.leavingSection, (v.sectionIndex + 1), v.yMovement) === false){
-                    return;
-                }
-            }
-            stopMedia(v.activeSection);
-
-            element.addClass(ACTIVE).siblings().removeClass(ACTIVE);
-            lazyLoad(element);
-
-            //preventing from activating the MouseWheelHandler event
-            //more than once if the page is scrolling
-            canScroll = false;
-
-            setState(slideIndex, slideAnchorLink, v.anchorLink, v.sectionIndex);
-
-            performMovement(v);
-
-            //flag to avoid callingn `scrollPage()` twice in case of using anchor links
-            lastScrolledDestiny = v.anchorLink;
-
-            //avoid firing it twice (as it does also on scroll)
-            activateMenuAndNav(v.anchorLink, v.sectionIndex);
-        }
-
-        /**
-        * Performs the movement (by CSS3 or by jQuery)
-        */
-        function performMovement(v){
-            // using CSS3 translate functionality
-            if (options.css3 && options.autoScrolling && !options.scrollBar) {
-                var translate3d = 'translate3d(0px, -' + v.dtop + 'px, 0px)';
-                transformContainer(translate3d, true);
-
-                //even when the scrollingSpeed is 0 there's a little delay, which might cause the
-                //scrollingSpeed to change in case of using silentMoveTo();
-                if(options.scrollingSpeed){
-                    afterSectionLoadsId = setTimeout(function () {
-                        afterSectionLoads(v);
-                    }, options.scrollingSpeed);
-                }else{
-                    afterSectionLoads(v);
-                }
-            }
-
-            // using jQuery animate
-            else{
-                var scrollSettings = getScrollSettings(v);
-
-                $(scrollSettings.element).animate(
-                    scrollSettings.options,
-                options.scrollingSpeed, options.easing).promise().done(function () { //only one single callback in case of animating  `html, body`
-                    if(options.scrollBar){
-
-                        /* Hack!
-                        The timeout prevents setting the most dominant section in the viewport as "active" when the user
-                        scrolled to a smaller section by using the mousewheel (auto scrolling) rather than draging the scroll bar.
-
-                        When using scrollBar:true It seems like the scroll events still getting propagated even after the scrolling animation has finished.
-                        */
-                        setTimeout(function(){
-                            afterSectionLoads(v);
-                        },30);
-                    }else{
-                        afterSectionLoads(v);
-                    }
-                });
-            }
-        }
-
-        /**
-        * Gets the scrolling settings depending on the plugin autoScrolling option
-        */
-        function getScrollSettings(v){
-            var scroll = {};
-
-            if(options.autoScrolling && !options.scrollBar){
-                scroll.options = { 'top': -v.dtop};
-                scroll.element = WRAPPER_SEL;
-            }else{
-                scroll.options = { 'scrollTop': v.dtop};
-                scroll.element = 'html, body';
-            }
-
-            return scroll;
-        }
-
-        /**
-        * Adds sections before or after the current one to create the infinite effect.
-        */
-        function createInfiniteSections(v){
-            // Scrolling down
-            if (!v.isMovementUp) {
-                // Move all previous sections to after the active section
-                $(SECTION_ACTIVE_SEL).after(v.activeSection.prevAll(SECTION_SEL).get().reverse());
-            }
-            else { // Scrolling up
-                // Move all next sections to before the active section
-                $(SECTION_ACTIVE_SEL).before(v.activeSection.nextAll(SECTION_SEL));
-            }
-
-            // Maintain the displayed position (now that we changed the element order)
-            silentScroll($(SECTION_ACTIVE_SEL).position().top);
-
-            // Maintain the active slides visible in the viewport
-            keepSlidesPosition();
-
-            // save for later the elements that still need to be reordered
-            v.wrapAroundElements = v.activeSection;
-
-            // Recalculate animation variables
-            v.dtop = v.element.position().top;
-            v.yMovement = getYmovement(v.element);
-
-            return v;
-        }
-
-        /**
-        * Fix section order after continuousVertical changes have been animated
-        */
-        function continuousVerticalFixSectionOrder (v) {
-            // If continuousVertical is in effect (and autoScrolling would also be in effect then),
-            // finish moving the elements around so the direct navigation will function more simply
-            if (!v.wrapAroundElements || !v.wrapAroundElements.length) {
-                return;
-            }
-
-            if (v.isMovementUp) {
-                $(SECTION_FIRST_SEL).before(v.wrapAroundElements);
-            }
-            else {
-                $(SECTION_LAST_SEL).after(v.wrapAroundElements);
-            }
-
-            silentScroll($(SECTION_ACTIVE_SEL).position().top);
-
-            // Maintain the active slides visible in the viewport
-            keepSlidesPosition();
-        }
-
-
-        /**
-        * Actions to do once the section is loaded.
-        */
-        function afterSectionLoads (v){
-            continuousVerticalFixSectionOrder(v);
-
-            v.element.find('.fp-scrollable').mouseover();
-
-            //callback (afterLoad) if the site is not just resizing and readjusting the slides
-            $.isFunction(options.afterLoad) && !v.localIsResizing && options.afterLoad.call(v.element, v.anchorLink, (v.sectionIndex + 1));
-
-            playMedia(v.element);
-            v.element.addClass(COMPLETELY).siblings().removeClass(COMPLETELY);
-
-            canScroll = true;
-
-            $.isFunction(v.callback) && v.callback.call(this);
-        }
-
-        /**
-        * Lazy loads image, video and audio elements.
-        */
-        function lazyLoad(destiny){
-            var destiny = getSlideOrSection(destiny);
-
-            destiny.find('img[data-src], source[data-src], audio[data-src]').each(function(){
-                $(this).attr('src', $(this).data('src'));
-                $(this).removeAttr('data-src');
-
-                if($(this).is('source')){
-                    $(this).closest('video').get(0).load();
-                }
-            });
-        }
-
-        /**
-        * Plays video and audio elements.
-        */
-        function playMedia(destiny){
-            var destiny = getSlideOrSection(destiny);
-
-            //playing HTML5 media elements
-            destiny.find('video, audio').each(function(){
-                var element = $(this).get(0);
-
-                if( element.hasAttribute('autoplay') && typeof element.play === 'function' ) {
-                    element.play();
-                }
-            });
-        }
-
-        /**
-        * Stops video and audio elements.
-        */
-        function stopMedia(destiny){
-            var destiny = getSlideOrSection(destiny);
-
-            //stopping HTML5 media elements
-            destiny.find('video, audio').each(function(){
-                var element = $(this).get(0);
-
-                if( !element.hasAttribute('data-ignore') && typeof element.pause === 'function' ) {
-                    element.pause();
-                }
-            });
-        }
-
-        /**
-        * Gets the active slide (or section) for the given section
-        */
-        function getSlideOrSection(destiny){
-            var slide = destiny.find(SLIDE_ACTIVE_SEL);
-            if( slide.length ) {
-                destiny = $(slide);
-            }
-
-            return destiny;
-        }
-
-        /**
-        * Scrolls to the anchor in the URL when loading the site
-        */
-        function scrollToAnchor(){
-            //getting the anchor link in the URL and deleting the `#`
-            var value =  window.location.hash.replace('#', '').split('/');
-            var section = value[0];
-            var slide = value[1];
-
-            if(section){  //if theres any #
-                if(options.animateAnchor){
-                    scrollPageAndSlide(section, slide);
-                }else{
-                    FP.silentMoveTo(section, slide);
-                }
-            }
-        }
-
-        /**
-        * Detecting any change on the URL to scroll to the given anchor link
-        * (a way to detect back history button as we play with the hashes on the URL)
-        */
-        function hashChangeHandler(){
-            if(!isScrolling && !options.lockAnchors){
-                var value =  window.location.hash.replace('#', '').split('/');
-                var section = value[0];
-                var slide = value[1];
-
-                    //when moving to a slide in the first section for the first time (first time to add an anchor to the URL)
-                    var isFirstSlideMove =  (typeof lastScrolledDestiny === 'undefined');
-                    var isFirstScrollMove = (typeof lastScrolledDestiny === 'undefined' && typeof slide === 'undefined' && !slideMoving);
-
-
-                if(section.length){
-                    /*in order to call scrollpage() only once for each destination at a time
-                    It is called twice for each scroll otherwise, as in case of using anchorlinks `hashChange`
-                    event is fired on every scroll too.*/
-                    if ((section && section !== lastScrolledDestiny) && !isFirstSlideMove || isFirstScrollMove || (!slideMoving && lastScrolledSlide != slide ))  {
-                        scrollPageAndSlide(section, slide);
-                    }
-                }
-            }
-        }
-
-        //Sliding with arrow keys, both, vertical and horizontal
-        function keydownHandler(e) {
-
-            clearTimeout(keydownId);
-
-            var activeElement = $(':focus');
-
-            if(!activeElement.is('textarea') && !activeElement.is('input') && !activeElement.is('select') &&
-                activeElement.attr('contentEditable') !== "true" && activeElement.attr('contentEditable') !== '' &&
-                options.keyboardScrolling && options.autoScrolling){
-                var keyCode = e.which;
-
-                //preventing the scroll with arrow keys & spacebar & Page Up & Down keys
-                var keyControls = [40, 38, 32, 33, 34];
-                if($.inArray(keyCode, keyControls) > -1){
-                    e.preventDefault();
-                }
-
-                controlPressed = e.ctrlKey;
-
-                keydownId = setTimeout(function(){
-                    onkeydown(e);
-                },150);
-            }
-        }
-
-        function tooltipTextHandler(){
-            $(this).prev().trigger('click');
-        }
-
-        //to prevent scrolling while zooming
-        function keyUpHandler(e){
-            if(isWindowFocused){ //the keyup gets fired on new tab ctrl + t in Firefox
-                controlPressed = e.ctrlKey;
-            }
-        }
-
-        //binding the mousemove when the mouse's middle button is released
-        function mouseDownHandler(e){
-            //middle button
-            if (e.which == 2){
-                oldPageY = e.pageY;
-                container.on('mousemove', mouseMoveHandler);
-            }
-        }
-
-        //unbinding the mousemove when the mouse's middle button is released
-        function mouseUpHandler(e){
-            //middle button
-            if (e.which == 2){
-                container.off('mousemove');
-            }
-        }
-
-        //Scrolling horizontally when clicking on the slider controls.
-        function slideArrowHandler(){
-            var section = $(this).closest(SECTION_SEL);
-
-            if ($(this).hasClass(SLIDES_PREV)) {
-                if(isScrollAllowed.m.left){
-                    FP.moveSlideLeft(section);
-                }
-            } else {
-                if(isScrollAllowed.m.right){
-                    FP.moveSlideRight(section);
-                }
-            }
-        }
-
-        //when opening a new tab (ctrl + t), `control` won't be pressed when comming back.
-        function blurHandler(){
-            isWindowFocused = false;
-            controlPressed = false;
-        }
-
-        //Scrolls to the section when clicking the navigation bullet
-        function sectionBulletHandler(e){
-            e.preventDefault();
-            var index = $(this).parent().index();
-            scrollPage($(SECTION_SEL).eq(index));
-        }
-
-        //Scrolls the slider to the given slide destination for the given section
-        function slideBulletHandler(e){
-            e.preventDefault();
-            var slides = $(this).closest(SECTION_SEL).find(SLIDES_WRAPPER_SEL);
-            var destiny = slides.find(SLIDE_SEL).eq($(this).closest('li').index());
-
-            landscapeScroll(slides, destiny);
-        }
-
-        /**
-        * Keydown event
-        */
-        function onkeydown(e){
-            var shiftPressed = e.shiftKey;
-
-            switch (e.which) {
-                //up
-                case 38:
-                case 33:
-                    if(isScrollAllowed.k.up){
-                        FP.moveSectionUp();
-                    }
-                    break;
-
-                //down
-                case 32: //spacebar
-                    if(shiftPressed && isScrollAllowed.k.up){
-                        FP.moveSectionUp();
-                        break;
-                    }
-                case 40:
-                case 34:
-                    if(isScrollAllowed.k.down){
-                        FP.moveSectionDown();
-                    }
-                    break;
-
-                //Home
-                case 36:
-                    if(isScrollAllowed.k.up){
-                        FP.moveTo(1);
-                    }
-                    break;
-
-                //End
-                case 35:
-                     if(isScrollAllowed.k.down){
-                        FP.moveTo( $(SECTION_SEL).length );
-                    }
-                    break;
-
-                //left
-                case 37:
-                    if(isScrollAllowed.k.left){
-                        FP.moveSlideLeft();
-                    }
-                    break;
-
-                //right
-                case 39:
-                    if(isScrollAllowed.k.right){
-                        FP.moveSlideRight();
-                    }
-                    break;
-
-                default:
-                    return; // exit this handler for other keys
-            }
-        }
-
-        /**
-        * Detecting the direction of the mouse movement.
-        * Used only for the middle button of the mouse.
-        */
-        var oldPageY = 0;
-        function mouseMoveHandler(e){
-            if(canScroll){
-                // moving up
-                if (e.pageY < oldPageY && isScrollAllowed.m.up){
-                    FP.moveSectionUp();
-                }
-
-                // moving down
-                else if(e.pageY > oldPageY && isScrollAllowed.m.down){
-                    FP.moveSectionDown();
-                }
-            }
-            oldPageY = e.pageY;
-        }
-
-        /**
-        * Scrolls horizontal sliders.
-        */
-        function landscapeScroll(slides, destiny){
-            var destinyPos = destiny.position();
-            var slideIndex = destiny.index();
-            var section = slides.closest(SECTION_SEL);
-            var sectionIndex = section.index(SECTION_SEL);
-            var anchorLink = section.data('anchor');
-            var slidesNav = section.find(SLIDES_NAV_SEL);
-            var slideAnchor = getAnchor(destiny);
-            var prevSlide = section.find(SLIDE_ACTIVE_SEL);
-
-            //caching the value of isResizing at the momment the function is called
-            //because it will be checked later inside a setTimeout and the value might change
-            var localIsResizing = isResizing;
-
-            if(options.onSlideLeave){
-                var prevSlideIndex = prevSlide.index();
-                var xMovement = getXmovement(prevSlideIndex, slideIndex);
-
-                //if the site is not just resizing and readjusting the slides
-                if(!localIsResizing && xMovement!=='none'){
-                    if($.isFunction( options.onSlideLeave )){
-                        if(options.onSlideLeave.call( prevSlide, anchorLink, (sectionIndex + 1), prevSlideIndex, xMovement, slideIndex ) === false){
-                            slideMoving = false;
-                            return;
-                        }
-                    }
-                }
-            }
-            stopMedia(prevSlide);
-
-            destiny.addClass(ACTIVE).siblings().removeClass(ACTIVE);
-            if(!localIsResizing){
-                lazyLoad(destiny);
-            }
-
-            if(!options.loopHorizontal && options.controlArrows){
-                //hidding it for the fist slide, showing for the rest
-                section.find(SLIDES_ARROW_PREV_SEL).toggle(slideIndex!==0);
-
-                //hidding it for the last slide, showing for the rest
-                section.find(SLIDES_ARROW_NEXT_SEL).toggle(!destiny.is(':last-child'));
-            }
-
-            //only changing the URL if the slides are in the current section (not for resize re-adjusting)
-            if(section.hasClass(ACTIVE)){
-                setState(slideIndex, slideAnchor, anchorLink, sectionIndex);
-            }
-
-            var afterSlideLoads = function(){
-                //if the site is not just resizing and readjusting the slides
-                if(!localIsResizing){
-                    $.isFunction( options.afterSlideLoad ) && options.afterSlideLoad.call( destiny, anchorLink, (sectionIndex + 1), slideAnchor, slideIndex);
-                }
-                playMedia(destiny);
-
-                //letting them slide again
-                slideMoving = false;
-            };
-
-            if(options.css3){
-                var translate3d = 'translate3d(-' + Math.round(destinyPos.left) + 'px, 0px, 0px)';
-
-                addAnimation(slides.find(SLIDES_CONTAINER_SEL), options.scrollingSpeed>0).css(getTransforms(translate3d));
-
-                afterSlideLoadsId = setTimeout(function(){
-                    afterSlideLoads();
-                }, options.scrollingSpeed, options.easing);
-            }else{
-                slides.animate({
-                    scrollLeft : Math.round(destinyPos.left)
-                }, options.scrollingSpeed, options.easing, function() {
-
-                    afterSlideLoads();
-                });
-            }
-
-            slidesNav.find(ACTIVE_SEL).removeClass(ACTIVE);
-            slidesNav.find('li').eq(slideIndex).find('a').addClass(ACTIVE);
-        }
-
-        var previousHeight = windowsHeight;
-
-        //when resizing the site, we adjust the heights of the sections, slimScroll...
-        function resizeHandler(){
-            //checking if it needs to get responsive
-            responsive();
-
-            // rebuild immediately on touch devices
-            if (isTouchDevice) {
-                var activeElement = $(document.activeElement);
-
-                //if the keyboard is NOT visible
-                if (!activeElement.is('textarea') && !activeElement.is('input') && !activeElement.is('select')) {
-                    var currentHeight = $window.height();
-
-                    //making sure the change in the viewport size is enough to force a rebuild. (20 % of the window to avoid problems when hidding scroll bars)
-                    if( Math.abs(currentHeight - previousHeight) > (20 * Math.max(previousHeight, currentHeight) / 100) ){
-                        FP.reBuild(true);
-                        previousHeight = currentHeight;
-                    }
-                }
-            }else{
-                //in order to call the functions only when the resize is finished
-                //http://stackoverflow.com/questions/4298612/jquery-how-to-call-resize-event-only-once-its-finished-resizing
-                clearTimeout(resizeId);
-
-                resizeId = setTimeout(function(){
-                    FP.reBuild(true);
-                }, 350);
-            }
-        }
-
-        /**
-        * Checks if the site needs to get responsive and disables autoScrolling if so.
-        * A class `fp-responsive` is added to the plugin's container in case the user wants to use it for his own responsive CSS.
-        */
-        function responsive(){
-            var widthLimit = options.responsive || options.responsiveWidth; //backwards compatiblity
-            var heightLimit = options.responsiveHeight;
-
-            //only calculating what we need. Remember its called on the resize event.
-            var isBreakingPointWidth = widthLimit && $window.outerWidth() < widthLimit;
-            var isBreakingPointHeight = heightLimit && $window.height() < heightLimit;
-
-            if(widthLimit && heightLimit){
-                FP.setResponsive(isBreakingPointWidth || isBreakingPointHeight);
-            }
-            else if(widthLimit){
-                FP.setResponsive(isBreakingPointWidth);
-            }
-            else if(heightLimit){
-                FP.setResponsive(isBreakingPointHeight);
-            }
-        }
-
-        /**
-        * Adds transition animations for the given element
-        */
-        function addAnimation(element){
-            var transition = 'all ' + options.scrollingSpeed + 'ms ' + options.easingcss3;
-
-            element.removeClass(NO_TRANSITION);
-            return element.css({
-                '-webkit-transition': transition,
-                'transition': transition
-            });
-        }
-
-        /**
-        * Remove transition animations for the given element
-        */
-        function removeAnimation(element){
-            return element.addClass(NO_TRANSITION);
-        }
-
-        /**
-         * Resizing of the font size depending on the window size as well as some of the images on the site.
-         */
-        function resizeMe(displayHeight, displayWidth) {
-            //Standard dimensions, for which the body font size is correct
-            var preferredHeight = 825;
-            var preferredWidth = 900;
-
-            if (displayHeight < preferredHeight || displayWidth < preferredWidth) {
-                var heightPercentage = (displayHeight * 100) / preferredHeight;
-                var widthPercentage = (displayWidth * 100) / preferredWidth;
-                var percentage = Math.min(heightPercentage, widthPercentage);
-                var newFontSize = percentage.toFixed(2);
-
-                $body.css('font-size', newFontSize + '%');
-            } else {
-                $body.css('font-size', '100%');
-            }
-        }
-
-        /**
-         * Activating the website navigation dots according to the given slide name.
-         */
-        function activateNavDots(name, sectionIndex){
-            if(options.navigation){
-                $(SECTION_NAV_SEL).find(ACTIVE_SEL).removeClass(ACTIVE);
-                if(name){
-                    $(SECTION_NAV_SEL).find('a[href="#' + name + '"]').addClass(ACTIVE);
-                }else{
-                    $(SECTION_NAV_SEL).find('li').eq(sectionIndex).find('a').addClass(ACTIVE);
-                }
-            }
-        }
-
-        /**
-         * Activating the website main menu elements according to the given slide name.
-         */
-        function activateMenuElement(name){
-            if(options.menu){
-                $(options.menu).find(ACTIVE_SEL).removeClass(ACTIVE);
-                $(options.menu).find('[data-menuanchor="'+name+'"]').addClass(ACTIVE);
-            }
-        }
-
-        /**
-        * Sets to active the current menu and vertical nav items.
-        */
-        function activateMenuAndNav(anchor, index){
-            activateMenuElement(anchor);
-            activateNavDots(anchor, index);
-        }
-
-        /**
-        * Retuns `up` or `down` depending on the scrolling movement to reach its destination
-        * from the current section.
-        */
-        function getYmovement(destiny){
-            var fromIndex = $(SECTION_ACTIVE_SEL).index(SECTION_SEL);
-            var toIndex = destiny.index(SECTION_SEL);
-            if( fromIndex == toIndex){
-                return 'none';
-            }
-            if(fromIndex > toIndex){
-                return 'up';
-            }
-            return 'down';
-        }
-
-        /**
-        * Retuns `right` or `left` depending on the scrolling movement to reach its destination
-        * from the current slide.
-        */
-        function getXmovement(fromIndex, toIndex){
-            if( fromIndex == toIndex){
-                return 'none';
-            }
-            if(fromIndex > toIndex){
-                return 'left';
-            }
-            return 'right';
-        }
-
-
-        function createSlimScrolling(element){
-            //needed to make `scrollHeight` work under Opera 12
-            element.css('overflow', 'hidden');
-
-            var scrollOverflowHandler = options.scrollOverflowHandler;
-            var wrap = scrollOverflowHandler.wrapContent();
-            //in case element is a slide
-            var section = element.closest(SECTION_SEL);
-            var scrollable = scrollOverflowHandler.scrollable(element);
-            var contentHeight;
-
-            //if there was scroll, the contentHeight will be the one in the scrollable section
-            if(scrollable.length){
-                contentHeight = scrollOverflowHandler.scrollHeight(element);
-            }else{
-                contentHeight = element.get(0).scrollHeight;
-                if(options.verticalCentered){
-                    contentHeight = element.find(TABLE_CELL_SEL).get(0).scrollHeight;
-                }
-            }
-
-            var scrollHeight = windowsHeight - parseInt(section.css('padding-bottom')) - parseInt(section.css('padding-top'));
-
-            //needs scroll?
-            if ( contentHeight > scrollHeight) {
-                //was there already an scroll ? Updating it
-                if(scrollable.length){
-                    scrollOverflowHandler.update(element, scrollHeight);
-                }
-                //creating the scrolling
-                else{
-                    if(options.verticalCentered){
-                        element.find(TABLE_CELL_SEL).wrapInner(wrap);
-                    }else{
-                        element.wrapInner(wrap);
-                    }
-                    scrollOverflowHandler.create(element, scrollHeight);
-                }
-            }
-            //removing the scrolling when it is not necessary anymore
-            else{
-                scrollOverflowHandler.remove(element);
-            }
-
-            //undo
-            element.css('overflow', '');
-        }
-
-        function addTableClass(element){
-            element.addClass(TABLE).wrapInner('<div class="' + TABLE_CELL + '" style="height:' + getTableHeight(element) + 'px;" />');
-        }
-
-        function getTableHeight(element){
-            var sectionHeight = windowsHeight;
-
-            if(options.paddingTop || options.paddingBottom){
-                var section = element;
-                if(!section.hasClass(SECTION)){
-                    section = element.closest(SECTION_SEL);
-                }
-
-                var paddings = parseInt(section.css('padding-top')) + parseInt(section.css('padding-bottom'));
-                sectionHeight = (windowsHeight - paddings);
-            }
-
-            return sectionHeight;
-        }
-
-        /**
-        * Adds a css3 transform property to the container class with or without animation depending on the animated param.
-        */
-        function transformContainer(translate3d, animated){
-            if(animated){
-                addAnimation(container);
-            }else{
-                removeAnimation(container);
-            }
-
-            container.css(getTransforms(translate3d));
-
-            //syncronously removing the class after the animation has been applied.
-            setTimeout(function(){
-                container.removeClass(NO_TRANSITION);
-            },10);
-        }
-
-        /**
-        * Gets a section by its anchor / index
-        */
-        function getSectionByAnchor(sectionAnchor){
-            //section
-            var section = container.find(SECTION_SEL + '[data-anchor="'+sectionAnchor+'"]');
-            if(!section.length){
-                section = $(SECTION_SEL).eq( (sectionAnchor -1) );
-            }
-
-            return section;
-        }
-
-        /**
-        * Gets a slide inside a given section by its anchor / index
-        */
-        function getSlideByAnchor(slideAnchor, section){
-            var slides = section.find(SLIDES_WRAPPER_SEL);
-            var slide =  slides.find(SLIDE_SEL + '[data-anchor="'+slideAnchor+'"]');
-
-            if(!slide.length){
-                slide = slides.find(SLIDE_SEL).eq(slideAnchor);
-            }
-
-            return slide;
-        }
-
-        /**
-        * Scrolls to the given section and slide anchors
-        */
-        function scrollPageAndSlide(destiny, slide){
-            var section = getSectionByAnchor(destiny);
-
-            //default slide
-            if (typeof slide === 'undefined') {
-                slide = 0;
-            }
-
-            //we need to scroll to the section and then to the slide
-            if (destiny !== lastScrolledDestiny && !section.hasClass(ACTIVE)){
-                scrollPage(section, function(){
-                    scrollSlider(section, slide);
-                });
-            }
-            //if we were already in the section
-            else{
-                scrollSlider(section, slide);
-            }
-        }
-
-        /**
-        * Scrolls the slider to the given slide destination for the given section
-        */
-        function scrollSlider(section, slideAnchor){
-            if(typeof slideAnchor !== 'undefined'){
-                var slides = section.find(SLIDES_WRAPPER_SEL);
-                var destiny =  getSlideByAnchor(slideAnchor, section);
-
-                if(destiny.length){
-                    landscapeScroll(slides, destiny);
-                }
-            }
-        }
-
-        /**
-        * Creates a landscape navigation bar with dots for horizontal sliders.
-        */
-        function addSlidesNavigation(section, numSlides){
-            section.append('<div class="' + SLIDES_NAV + '"><ul></ul></div>');
-            var nav = section.find(SLIDES_NAV_SEL);
-
-            //top or bottom
-            nav.addClass(options.slidesNavPosition);
-
-            for(var i=0; i< numSlides; i++){
-                nav.find('ul').append('<li><a href="#"><span></span></a></li>');
-            }
-
-            //centering it
-            nav.css('margin-left', '-' + (nav.width()/2) + 'px');
-
-            nav.find('li').first().find('a').addClass(ACTIVE);
-        }
-
-
-        /**
-        * Sets the state of the website depending on the active section/slide.
-        * It changes the URL hash when needed and updates the body class.
-        */
-        function setState(slideIndex, slideAnchor, anchorLink, sectionIndex){
-            var sectionHash = '';
-
-            if(options.anchors.length && !options.lockAnchors){
-
-                //isn't it the first slide?
-                if(slideIndex){
-                    if(typeof anchorLink !== 'undefined'){
-                        sectionHash = anchorLink;
-                    }
-
-                    //slide without anchor link? We take the index instead.
-                    if(typeof slideAnchor === 'undefined'){
-                        slideAnchor = slideIndex;
-                    }
-
-                    lastScrolledSlide = slideAnchor;
-                    setUrlHash(sectionHash + '/' + slideAnchor);
-
-                //first slide won't have slide anchor, just the section one
-                }else if(typeof slideIndex !== 'undefined'){
-                    lastScrolledSlide = slideAnchor;
-                    setUrlHash(anchorLink);
-                }
-
-                //section without slides
-                else{
-                    setUrlHash(anchorLink);
-                }
-            }
-
-            setBodyClass();
-        }
-
-        /**
-        * Sets the URL hash.
-        */
-        function setUrlHash(url){
-            if(options.recordHistory){
-                location.hash = url;
-            }else{
-                //Mobile Chrome doesn't work the normal way, so... lets use HTML5 for phones :)
-                if(isTouchDevice || isTouch){
-                    window.history.replaceState(undefined, undefined, '#' + url);
-                }else{
-                    var baseUrl = window.location.href.split('#')[0];
-                    window.location.replace( baseUrl + '#' + url );
-                }
-            }
-        }
-
-        /**
-        * Gets the anchor for the given slide / section. Its index will be used if there's none.
-        */
-        function getAnchor(element){
-            var anchor = element.data('anchor');
-            var index = element.index();
-
-            //Slide without anchor link? We take the index instead.
-            if(typeof anchor === 'undefined'){
-                anchor = index;
-            }
-
-            return anchor;
-        }
-
-        /**
-        * Sets a class for the body of the page depending on the active section / slide
-        */
-        function setBodyClass(){
-            var section = $(SECTION_ACTIVE_SEL);
-            var slide = section.find(SLIDE_ACTIVE_SEL);
-
-            var sectionAnchor = getAnchor(section);
-            var slideAnchor = getAnchor(slide);
-
-            var sectionIndex = section.index(SECTION_SEL);
-
-            var text = String(sectionAnchor);
-
-            if(slide.length){
-                text = text + '-' + slideAnchor;
-            }
-
-            //changing slash for dash to make it a valid CSS style
-            text = text.replace('/', '-').replace('#','');
-
-            //removing previous anchor classes
-            var classRe = new RegExp('\\b\\s?' + VIEWING_PREFIX + '-[^\\s]+\\b', "g");
-            $body[0].className = $body[0].className.replace(classRe, '');
-
-            //adding the current anchor
-            $body.addClass(VIEWING_PREFIX + '-' + text);
-        }
-
-        /**
-        * Checks for translate3d support
-        * @return boolean
-        * http://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
-        */
-        function support3d() {
-            var el = document.createElement('p'),
-                has3d,
-                transforms = {
-                    'webkitTransform':'-webkit-transform',
-                    'OTransform':'-o-transform',
-                    'msTransform':'-ms-transform',
-                    'MozTransform':'-moz-transform',
-                    'transform':'transform'
-                };
-
-            // Add it to the body to get the computed style.
-            document.body.insertBefore(el, null);
-
-            for (var t in transforms) {
-                if (el.style[t] !== undefined) {
-                    el.style[t] = 'translate3d(1px,1px,1px)';
-                    has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
-                }
-            }
-
-            document.body.removeChild(el);
-
-            return (has3d !== undefined && has3d.length > 0 && has3d !== 'none');
-        }
-
-        /**
-        * Removes the auto scrolling action fired by the mouse wheel and trackpad.
-        * After this function is called, the mousewheel and trackpad movements won't scroll through sections.
-        */
-        function removeMouseWheelHandler(){
-            if (document.addEventListener) {
-                document.removeEventListener('mousewheel', MouseWheelHandler, false); //IE9, Chrome, Safari, Oper
-                document.removeEventListener('wheel', MouseWheelHandler, false); //Firefox
-                document.removeEventListener('MozMousePixelScroll', MouseWheelHandler, false); //old Firefox
-            } else {
-                document.detachEvent('onmousewheel', MouseWheelHandler); //IE 6/7/8
-            }
-        }
-
-        /**
-        * Adds the auto scrolling action for the mouse wheel and trackpad.
-        * After this function is called, the mousewheel and trackpad movements will scroll through sections
-        * https://developer.mozilla.org/en-US/docs/Web/Events/wheel
-        */
-        function addMouseWheelHandler(){
-            var prefix = '';
-            var _addEventListener;
-
-            if (window.addEventListener){
-                _addEventListener = "addEventListener";
-            }else{
-                _addEventListener = "attachEvent";
-                prefix = 'on';
-            }
-
-             // detect available wheel event
-            var support = 'onwheel' in document.createElement('div') ? 'wheel' : // Modern browsers support "wheel"
-                      document.onmousewheel !== undefined ? 'mousewheel' : // Webkit and IE support at least "mousewheel"
-                      'DOMMouseScroll'; // let's assume that remaining browsers are older Firefox
-
-
-            if(support == 'DOMMouseScroll'){
-                document[ _addEventListener ](prefix + 'MozMousePixelScroll', MouseWheelHandler, false);
-            }
-
-            //handle MozMousePixelScroll in older Firefox
-            else{
-                document[ _addEventListener ](prefix + support, MouseWheelHandler, false);
-            }
-        }
-
-        /**
-        * Binding the mousemove when the mouse's middle button is pressed
-        */
-        function addMiddleWheelHandler(){
-            container
-                .on('mousedown', mouseDownHandler)
-                .on('mouseup', mouseUpHandler);
-        }
-
-        /**
-        * Unbinding the mousemove when the mouse's middle button is released
-        */
-        function removeMiddleWheelHandler(){
-            container
-                .off('mousedown', mouseDownHandler)
-                .off('mouseup', mouseUpHandler);
-        }
-
-        /**
-        * Adds the possibility to auto scroll through sections on touch devices.
-        */
-        function addTouchHandler(){
-            if(isTouchDevice || isTouch){
-                //Microsoft pointers
-                var MSPointer = getMSPointer();
-
-                $(WRAPPER_SEL).off('touchstart ' +  MSPointer.down).on('touchstart ' + MSPointer.down, touchStartHandler);
-                $(WRAPPER_SEL).off('touchmove ' + MSPointer.move).on('touchmove ' + MSPointer.move, touchMoveHandler);
-            }
-        }
-
-        /**
-        * Removes the auto scrolling for touch devices.
-        */
-        function removeTouchHandler(){
-            if(isTouchDevice || isTouch){
-                //Microsoft pointers
-                var MSPointer = getMSPointer();
-
-                $(WRAPPER_SEL).off('touchstart ' + MSPointer.down);
-                $(WRAPPER_SEL).off('touchmove ' + MSPointer.move);
-            }
-        }
-
-        /*
-        * Returns and object with Microsoft pointers (for IE<11 and for IE >= 11)
-        * http://msdn.microsoft.com/en-us/library/ie/dn304886(v=vs.85).aspx
-        */
-        function getMSPointer(){
-            var pointer;
-
-            //IE >= 11 & rest of browsers
-            if(window.PointerEvent){
-                pointer = { down: 'pointerdown', move: 'pointermove'};
-            }
-
-            //IE < 11
-            else{
-                pointer = { down: 'MSPointerDown', move: 'MSPointerMove'};
-            }
-
-            return pointer;
-        }
-
-        /**
-        * Gets the pageX and pageY properties depending on the browser.
-        * https://github.com/alvarotrigo/fullPage.js/issues/194#issuecomment-34069854
-        */
-        function getEventsPage(e){
-            var events = [];
-
-            events.y = (typeof e.pageY !== 'undefined' && (e.pageY || e.pageX) ? e.pageY : e.touches[0].pageY);
-            events.x = (typeof e.pageX !== 'undefined' && (e.pageY || e.pageX) ? e.pageX : e.touches[0].pageX);
-
-            //in touch devices with scrollBar:true, e.pageY is detected, but we have to deal with touch events. #1008
-            if(isTouch && isReallyTouch(e) && options.scrollBar){
-                events.y = e.touches[0].pageY;
-                events.x = e.touches[0].pageX;
-            }
-
-            return events;
-        }
-
-        /**
-        * Slides silently (with no animation) the active slider to the given slide.
-        */
-        function silentLandscapeScroll(activeSlide, noCallbacks){
-            FP.setScrollingSpeed (0, 'internal');
-
-            if(typeof noCallbacks !== 'undefined'){
-                //preventing firing callbacks afterSlideLoad etc.
-                isResizing = true;
-            }
-
-            landscapeScroll(activeSlide.closest(SLIDES_WRAPPER_SEL), activeSlide);
-
-            if(typeof noCallbacks !== 'undefined'){
-                isResizing = false;
-            }
-
-            FP.setScrollingSpeed(originals.scrollingSpeed, 'internal');
-        }
-
-        /**
-        * Scrolls silently (with no animation) the page to the given Y position.
-        */
-        function silentScroll(top){
-            if(options.scrollBar){
-                container.scrollTop(top);
-            }
-            else if (options.css3) {
-                var translate3d = 'translate3d(0px, -' + top + 'px, 0px)';
-                transformContainer(translate3d, false);
-            }
-            else {
-                container.css('top', -top);
-            }
-        }
-
-        /**
-        * Returns the cross-browser transform string.
-        */
-        function getTransforms(translate3d){
-            return {
-                '-webkit-transform': translate3d,
-                '-moz-transform': translate3d,
-                '-ms-transform':translate3d,
-                'transform': translate3d
-            };
-        }
-
-        /**
-        * Allowing or disallowing the mouse/swipe scroll in a given direction. (not for keyboard)
-        * @type  m (mouse) or k (keyboard)
-        */
-        function setIsScrollAllowed(value, direction, type){
-            switch (direction){
-                case 'up': isScrollAllowed[type].up = value; break;
-                case 'down': isScrollAllowed[type].down = value; break;
-                case 'left': isScrollAllowed[type].left = value; break;
-                case 'right': isScrollAllowed[type].right = value; break;
-                case 'all':
-                    if(type == 'm'){
-                        FP.setAllowScrolling(value);
-                    }else{
-                        FP.setKeyboardScrolling(value);
-                    }
-            }
-        }
-
-        /*
-        * Destroys fullpage.js plugin events and optinally its html markup and styles
-        */
-        FP.destroy = function(all){
-            FP.setAutoScrolling(false, 'internal');
-            FP.setAllowScrolling(false);
-            FP.setKeyboardScrolling(false);
-            container.addClass(DESTROYED);
-
-            clearTimeout(afterSlideLoadsId);
-            clearTimeout(afterSectionLoadsId);
-            clearTimeout(resizeId);
-            clearTimeout(scrollId);
-            clearTimeout(scrollId2);
-
-            $window
-                .off('scroll', scrollHandler)
-                .off('hashchange', hashChangeHandler)
-                .off('resize', resizeHandler);
-
-            $document
-                .off('click', SECTION_NAV_SEL + ' a')
-                .off('mouseenter', SECTION_NAV_SEL + ' li')
-                .off('mouseleave', SECTION_NAV_SEL + ' li')
-                .off('click', SLIDES_NAV_LINK_SEL)
-                .off('mouseover', options.normalScrollElements)
-                .off('mouseout', options.normalScrollElements);
-
-            $(SECTION_SEL)
-                .off('click', SLIDES_ARROW_SEL);
-
-            clearTimeout(afterSlideLoadsId);
-            clearTimeout(afterSectionLoadsId);
-
-            //lets make a mess!
-            if(all){
-                destroyStructure();
-            }
-        };
-
-        /*
-        * Removes inline styles added by fullpage.js
-        */
-        function destroyStructure(){
-            //reseting the `top` or `translate` properties to 0
-            silentScroll(0);
-
-            $(SECTION_NAV_SEL + ', ' + SLIDES_NAV_SEL +  ', ' + SLIDES_ARROW_SEL).remove();
-
-            //removing inline styles
-            $(SECTION_SEL).css( {
-                'height': '',
-                'background-color' : '',
-                'padding': ''
-            });
-
-            $(SLIDE_SEL).css( {
-                'width': ''
-            });
-
-            container.css({
-                'height': '',
-                'position': '',
-                '-ms-touch-action': '',
-                'touch-action': ''
-            });
-
-            $htmlBody.css({
-                'overflow': '',
-                'height': ''
-            });
-
-            // remove .fp-enabled class
-            $('html').removeClass(ENABLED);
-
-            // remove all of the .fp-viewing- classes
-            $.each($body.get(0).className.split(/\s+/), function (index, className) {
-                if (className.indexOf(VIEWING_PREFIX) === 0) {
-                    $body.removeClass(className);
-                }
-            });
-
-            //removing added classes
-            $(SECTION_SEL + ', ' + SLIDE_SEL).each(function(){
-                options.scrollOverflowHandler.remove($(this));
-                $(this).removeClass(TABLE + ' ' + ACTIVE);
-            });
-
-            removeAnimation(container);
-
-            //Unwrapping content
-            container.find(TABLE_CELL_SEL + ', ' + SLIDES_CONTAINER_SEL + ', ' + SLIDES_WRAPPER_SEL).each(function(){
-                //unwrap not being use in case there's no child element inside and its just text
-                $(this).replaceWith(this.childNodes);
-            });
-
-            //scrolling the page to the top with no animation
-            $htmlBody.scrollTop(0);
-
-            //removing selectors
-            var usedSelectors = [SECTION, SLIDE, SLIDES_CONTAINER];
-            $.each(usedSelectors, function(index, value){
-                $('.' + value).removeClass(value);
-            });
-        }
-
-        /*
-        * Sets the state for a variable with multiple states (original, and temporal)
-        * Some variables such as `autoScrolling` or `recordHistory` might change automatically its state when using `responsive` or `autoScrolling:false`.
-        * This function is used to keep track of both states, the original and the temporal one.
-        * If type is not 'internal', then we assume the user is globally changing the variable.
-        */
-        function setVariableState(variable, value, type){
-            options[variable] = value;
-            if(type !== 'internal'){
-                originals[variable] = value;
-            }
-        }
-
-        /**
-        * Displays warnings
-        */
-        function displayWarnings(){
-            if($('html').hasClass(ENABLED)){
-                showError('error', 'Fullpage.js can only be initialized once and you are doing it multiple times!');
-                return;
-            }
-
-            // Disable mutually exclusive settings
-            if (options.continuousVertical &&
-                (options.loopTop || options.loopBottom)) {
-                options.continuousVertical = false;
-                showError('warn', 'Option `loopTop/loopBottom` is mutually exclusive with `continuousVertical`; `continuousVertical` disabled');
-            }
-
-            if(options.scrollBar && options.scrollOverflow){
-                showError('warn', 'Option `scrollBar` is mutually exclusive with `scrollOverflow`. Sections with scrollOverflow might not work well in Firefox');
-            }
-
-            if(options.continuousVertical && options.scrollBar){
-                options.continuousVertical = false;
-                showError('warn', 'Option `scrollBar` is mutually exclusive with `continuousVertical`; `continuousVertical` disabled');
-            }
-
-            //anchors can not have the same value as any element ID or NAME
-            $.each(options.anchors, function(index, name){
-
-                //case insensitive selectors (http://stackoverflow.com/a/19465187/1081396)
-                var nameAttr = $document.find('[name]').filter(function() {
-                    return $(this).attr('name') && $(this).attr('name').toLowerCase() == name.toLowerCase();
-                });
-
-                var idAttr = $document.find('[id]').filter(function() {
-                    return $(this).attr('id') && $(this).attr('id').toLowerCase() == name.toLowerCase();
-                });
-
-                if(idAttr.length || nameAttr.length ){
-                    showError('error', 'data-anchor tags can not have the same value as any `id` element on the site (or `name` element for IE).');
-                    idAttr.length && showError('error', '"' + name + '" is is being used by another element `id` property');
-                    nameAttr.length && showError('error', '"' + name + '" is is being used by another element `name` property');
-                }
-            });
-        }
-
-        /**
-        * Shows a message in the console of the given type.
-        */
-        function showError(type, text){
-            console && console[type] && console[type]('fullPage: ' + text);
-        }
-    };
-
-    /**
-     * An object to handle overflow scrolling.
-     * This uses jquery.slimScroll to accomplish overflow scrolling.
-     * It is possible to pass in an alternate scrollOverflowHandler
-     * to the fullpage.js option that implements the same functions
-     * as this handler.
-     *
-     * @type {Object}
-     */
-    var slimScrollHandler = {
-        /**
-         * Optional function called after each render.
-         *
-         * Solves a bug with slimScroll vendor library #1037, #553
-         *
-         * @param  {object} section jQuery object containing rendered section
-         */
-        afterRender: function(section){
-            var slides = section.find(SLIDES_WRAPPER);
-            var scrollableWrap = section.find(SCROLLABLE_SEL);
-
-            if(slides.length){
-                scrollableWrap = slides.find(SLIDE_ACTIVE_SEL);
-            }
-
-            scrollableWrap.mouseover();
-        },
-
-        /**
-         * Called when overflow scrolling is needed for a section.
-         *
-         * @param  {Object} element      jQuery object containing current section
-         * @param  {Number} scrollHeight Current window height in pixels
-         */
-        create: function(element, scrollHeight){
-            element.find(SCROLLABLE_SEL).slimScroll({
-                allowPageScroll: true,
-                height: scrollHeight + 'px',
-                size: '10px',
-                alwaysVisible: true
-            });
-        },
-
-        /**
-         * Return a boolean depending on whether the scrollable element is a
-         * the end or at the start of the scrolling depending on the given type.
-         *
-         * @param  {String}  type       Either 'top' or 'bottom'
-         * @param  {Object}  scrollable jQuery object for the scrollable element
-         * @return {Boolean}
-         */
-        isScrolled: function(type, scrollable){
-            if(type === 'top'){
-                return !scrollable.scrollTop();
-            }else if(type === 'bottom'){
-                return scrollable.scrollTop() + 1 + scrollable.innerHeight() >= scrollable[0].scrollHeight;
-            }
-        },
-
-        /**
-         * Returns the scrollable element for the given section.
-         * If there are landscape slides, will only return a scrollable element
-         * if it is in the active slide.
-         *
-         * @param  {Object}  activeSection jQuery object containing current section
-         * @return {Boolean}
-         */
-        scrollable: function(activeSection){
-            // if there are landscape slides, we check if the scrolling bar is in the current one or not
-            if(activeSection.find(SLIDES_WRAPPER_SEL).length){
-                return activeSection.find(SLIDE_ACTIVE_SEL).find(SCROLLABLE_SEL);
-            }
-            return activeSection.find(SCROLLABLE_SEL);
-        },
-
-        /**
-         * Returns the scroll height of the wrapped content.
-         * If this is larger than the window height minus section padding,
-         * overflow scrolling is needed.
-         *
-         * @param  {Object} element jQuery object containing current section
-         * @return {Number}
-         */
-        scrollHeight: function(element){
-            return element.find(SCROLLABLE_SEL).get(0).scrollHeight;
-        },
-
-        /**
-         * Called when overflow scrolling is no longer needed for a section.
-         *
-         * @param  {Object} element      jQuery object containing current section
-         */
-        remove: function(element){
-            element.find(SCROLLABLE_SEL).children().first().unwrap().unwrap();
-            element.find(SLIMSCROLL_BAR_SEL).remove();
-            element.find(SLIMSCROLL_RAIL_SEL).remove();
-        },
-
-        /**
-         * Called when overflow scrolling has already been setup but the
-         * window height has potentially changed.
-         *
-         * @param  {Object} element      jQuery object containing current section
-         * @param  {Number} scrollHeight Current window height in pixels
-         */
-        update: function(element, scrollHeight){
-            element.find(SCROLLABLE_SEL).css('height', scrollHeight + 'px').parent().css('height', scrollHeight + 'px');
-        },
-
-        /**
-         * Called to get any additional elements needed to wrap the section
-         * content in order to facilitate overflow scrolling.
-         *
-         * @return {String|Object} Can be a string containing HTML,
-         *                         a DOM element, or jQuery object.
-         */
-        wrapContent: function(){
-            return '<div class="' + SCROLLABLE + '"></div>';
-        }
-    };
-
-    defaultScrollHandler = slimScrollHandler;
-
-});
-
-/*! Copyright (c) 2011 Piotr Rochala (http://rocha.la)
- * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
- * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
- *
- * Version: 1.3.2 (modified for fullpage.js)
- *
- */
-(function($) {
-
-  jQuery.fn.extend({
-    slimScroll: function(options) {
-
-      var defaults = {
-
-        // width in pixels of the visible scroll area
-        width : 'auto',
-
-        // height in pixels of the visible scroll area
-        height : '250px',
-
-        // width in pixels of the scrollbar and rail
-        size : '7px',
-
-        // scrollbar color, accepts any hex/color value
-        color: '#000',
-
-        // scrollbar position - left/right
-        position : 'right',
-
-        // distance in pixels between the side edge and the scrollbar
-        distance : '1px',
-
-        // default scroll position on load - top / bottom / $('selector')
-        start : 'top',
-
-        // sets scrollbar opacity
-        opacity : .4,
-
-        // enables always-on mode for the scrollbar
-        alwaysVisible : false,
-
-        // check if we should hide the scrollbar when user is hovering over
-        disableFadeOut : false,
-
-        // sets visibility of the rail
-        railVisible : false,
-
-        // sets rail color
-        railColor : '#333',
-
-        // sets rail opacity
-        railOpacity : .2,
-
-        // whether  we should use jQuery UI Draggable to enable bar dragging
-        railDraggable : true,
-
-        // defautlt CSS class of the slimscroll rail
-        railClass : 'slimScrollRail',
-
-        // defautlt CSS class of the slimscroll bar
-        barClass : 'slimScrollBar',
-
-        // defautlt CSS class of the slimscroll wrapper
-        wrapperClass : 'slimScrollDiv',
-
-        // check if mousewheel should scroll the window if we reach top/bottom
-        allowPageScroll : false,
-
-        // scroll amount applied to each mouse wheel step
-        wheelStep : 20,
-
-        // scroll amount applied when user is using gestures
-        touchScrollStep : 200,
-
-        // sets border radius
-        borderRadius: '7px',
-
-        // sets border radius of the rail
-        railBorderRadius : '7px'
-      };
-
-      var o = $.extend(defaults, options);
-
-      // do it for every element that matches selector
-      this.each(function(){
-
-      var isOverPanel, isOverBar, isDragg, queueHide, touchDif,
-        barHeight, percentScroll, lastScroll,
-        divS = '<div></div>',
-        minBarHeight = 30,
-        releaseScroll = false;
-
-        // used in event handlers and for better minification
-        var me = $(this);
-
-        // ensure we are not binding it again
-        if (me.parent().hasClass(o.wrapperClass))
-        {
-            // start from last bar position
-            var offset = me.scrollTop();
-
-            // find bar and rail
-            bar = me.parent().find('.' + o.barClass);
-            rail = me.parent().find('.' + o.railClass);
-
-            getBarHeight();
-
-            // check if we should scroll existing instance
-            if ($.isPlainObject(options))
-            {
-              // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
-              if ( 'height' in options && options.height == 'auto' ) {
-                me.parent().css('height', 'auto');
-                me.css('height', 'auto');
-                var height = me.parent().parent().height();
-                me.parent().css('height', height);
-                me.css('height', height);
-              }
-
-              if ('scrollTo' in options)
-              {
-                // jump to a static point
-                offset = parseInt(o.scrollTo);
-              }
-              else if ('scrollBy' in options)
-              {
-                // jump by value pixels
-                offset += parseInt(o.scrollBy);
-              }
-              else if ('destroy' in options)
-              {
-                // clear slimscroll mouse event listeners
-                detachWheel();
-
-                // remove slimscroll elements
-                bar.remove();
-                rail.remove();
-                me.unwrap();
-                return;
-              }
-
-              // scroll content by the given offset
-              scrollContent(offset, false, true);
-            }
-
-            return;
-        }
-
-        // optionally set height to the parent's height
-        o.height = (options.height == 'auto') ? me.parent().height() : options.height;
-
-        // wrap content
-        var wrapper = $(divS)
-          .addClass(o.wrapperClass)
-          .css({
-            position: 'relative',
-            overflow: 'hidden',
-            width: o.width,
-            height: o.height
-          });
-
-        // update style for the div
-        me.css({
-          overflow: 'hidden',
-          width: o.width,
-          height: o.height
-        });
-
-        // create scrollbar rail
-        var rail = $(divS)
-          .addClass(o.railClass)
-          .css({
-            width: o.size,
-            height: '100%',
-            position: 'absolute',
-            top: 0,
-            display: (o.alwaysVisible && o.railVisible) ? 'block' : 'none',
-            'border-radius': o.railBorderRadius,
-            background: o.railColor,
-            opacity: o.railOpacity,
-            zIndex: 90
-          });
-
-        // create scrollbar
-        var bar = $(divS)
-          .addClass(o.barClass)
-          .css({
-            background: o.color,
-            width: o.size,
-            position: 'absolute',
-            top: 0,
-            opacity: o.opacity,
-            display: o.alwaysVisible ? 'block' : 'none',
-            'border-radius' : o.borderRadius,
-            BorderRadius: o.borderRadius,
-            MozBorderRadius: o.borderRadius,
-            WebkitBorderRadius: o.borderRadius,
-            zIndex: 99
-          });
-
-        // set position
-        var posCss = (o.position == 'right') ? { right: o.distance } : { left: o.distance };
-        rail.css(posCss);
-        bar.css(posCss);
-
-        // wrap it
-        me.wrap(wrapper);
-
-        // append to parent div
-        me.parent().append(bar);
-        me.parent().append(rail);
-
-        // make it draggable and no longer dependent on the jqueryUI
-        if (o.railDraggable){
-          bar.bind("mousedown", function(e) {
-            var $doc = $(document);
-            isDragg = true;
-            t = parseFloat(bar.css('top'));
-            pageY = e.pageY;
-
-            $doc.bind("mousemove.slimscroll", function(e){
-              currTop = t + e.pageY - pageY;
-              bar.css('top', currTop);
-              scrollContent(0, bar.position().top, false);// scroll content
-            });
-
-            $doc.bind("mouseup.slimscroll", function(e) {
-              isDragg = false;hideBar();
-              $doc.unbind('.slimscroll');
-            });
-            return false;
-          }).bind("selectstart.slimscroll", function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            return false;
-          });
-        }
-
-        // on rail over
-        rail.hover(function(){
-          showBar();
-        }, function(){
-          hideBar();
-        });
-
-        // on bar over
-        bar.hover(function(){
-          isOverBar = true;
-        }, function(){
-          isOverBar = false;
-        });
-
-        // show on parent mouseover
-        me.hover(function(){
-          isOverPanel = true;
-          showBar();
-          hideBar();
-        }, function(){
-          isOverPanel = false;
-          hideBar();
-        });
-
-        // support for mobile
-        me.bind('touchstart', function(e,b){
-          if (e.originalEvent.touches.length)
-          {
-            // record where touch started
-            touchDif = e.originalEvent.touches[0].pageY;
-          }
-        });
-
-        me.bind('touchmove', function(e){
-          // prevent scrolling the page if necessary
-          if(!releaseScroll)
-          {
-  		      e.originalEvent.preventDefault();
-		      }
-          if (e.originalEvent.touches.length)
-          {
-            // see how far user swiped
-            var diff = (touchDif - e.originalEvent.touches[0].pageY) / o.touchScrollStep;
-            // scroll content
-            scrollContent(diff, true);
-            touchDif = e.originalEvent.touches[0].pageY;
-          }
-        });
-
-        // set up initial height
-        getBarHeight();
-
-        // check start position
-        if (o.start === 'bottom')
-        {
-          // scroll content to bottom
-          bar.css({ top: me.outerHeight() - bar.outerHeight() });
-          scrollContent(0, true);
-        }
-        else if (o.start !== 'top')
-        {
-          // assume jQuery selector
-          scrollContent($(o.start).position().top, null, true);
-
-          // make sure bar stays hidden
-          if (!o.alwaysVisible) { bar.hide(); }
-        }
-
-        // attach scroll events
-        attachWheel();
-
-        function _onWheel(e)
-        {
-          // use mouse wheel only when mouse is over
-          if (!isOverPanel) { return; }
-
-          var e = e || window.event;
-
-          var delta = 0;
-          if (e.wheelDelta) { delta = -e.wheelDelta/120; }
-          if (e.detail) { delta = e.detail / 3; }
-
-          var target = e.target || e.srcTarget || e.srcElement;
-          if ($(target).closest('.' + o.wrapperClass).is(me.parent())) {
-            // scroll content
-            scrollContent(delta, true);
-          }
-
-          // stop window scroll
-          if (e.preventDefault && !releaseScroll) { e.preventDefault(); }
-          if (!releaseScroll) { e.returnValue = false; }
-        }
-
-        function scrollContent(y, isWheel, isJump)
-        {
-          releaseScroll = false;
-          var delta = y;
-          var maxTop = me.outerHeight() - bar.outerHeight();
-
-          if (isWheel)
-          {
-            // move bar with mouse wheel
-            delta = parseInt(bar.css('top')) + y * parseInt(o.wheelStep) / 100 * bar.outerHeight();
-
-            // move bar, make sure it doesn't go out
-            delta = Math.min(Math.max(delta, 0), maxTop);
-
-            // if scrolling down, make sure a fractional change to the
-            // scroll position isn't rounded away when the scrollbar's CSS is set
-            // this flooring of delta would happened automatically when
-            // bar.css is set below, but we floor here for clarity
-            delta = (y > 0) ? Math.ceil(delta) : Math.floor(delta);
-
-            // scroll the scrollbar
-            bar.css({ top: delta + 'px' });
-          }
-
-          // calculate actual scroll amount
-          percentScroll = parseInt(bar.css('top')) / (me.outerHeight() - bar.outerHeight());
-          delta = percentScroll * (me[0].scrollHeight - me.outerHeight());
-
-          if (isJump)
-          {
-            delta = y;
-            var offsetTop = delta / me[0].scrollHeight * me.outerHeight();
-            offsetTop = Math.min(Math.max(offsetTop, 0), maxTop);
-            bar.css({ top: offsetTop + 'px' });
-          }
-
-          // scroll content
-          me.scrollTop(delta);
-
-          // fire scrolling event
-          me.trigger('slimscrolling', ~~delta);
-
-          // ensure bar is visible
-          showBar();
-
-          // trigger hide when scroll is stopped
-          hideBar();
-        }
-
-        function attachWheel()
-        {
-          if (window.addEventListener)
-          {
-            this.addEventListener('DOMMouseScroll', _onWheel, false );
-            this.addEventListener('mousewheel', _onWheel, false );
-          }
-          else
-          {
-            document.attachEvent("onmousewheel", _onWheel)
-          }
-        }
-
-        function detachWheel()
-        {
-          if (window.removeEventListener)
-          {
-            this.removeEventListener('DOMMouseScroll', _onWheel);
-            this.removeEventListener('mousewheel', _onWheel);
-          }
-          else
-          {
-            document.detachEvent('onmousewheel', _onWheel);
-          }
-        }
-
-        function getBarHeight()
-        {
-          // calculate scrollbar height and make sure it is not too small
-          barHeight = Math.max((me.outerHeight() / me[0].scrollHeight) * me.outerHeight(), minBarHeight);
-          bar.css({ height: barHeight + 'px' });
-
-          // hide scrollbar if content is not long enough
-          var display = barHeight == me.outerHeight() ? 'none' : 'block';
-          bar.css({ display: display });
-        }
-
-        function showBar()
-        {
-          // recalculate bar height
-          getBarHeight();
-          clearTimeout(queueHide);
-
-          // when bar reached top or bottom
-          if (percentScroll == ~~percentScroll)
-          {
-            //release wheel
-            releaseScroll = o.allowPageScroll;
-
-            // publish approporiate event
-            if (lastScroll != percentScroll)
-            {
-                var msg = (~~percentScroll == 0) ? 'top' : 'bottom';
-                me.trigger('slimscroll', msg);
-            }
-          }
-          else
-          {
-            releaseScroll = false;
-          }
-          lastScroll = percentScroll;
-
-          // show only when required
-          if(barHeight >= me.outerHeight()) {
-            //allow window scroll
-            releaseScroll = true;
-            return;
-          }
-          bar.stop(true,true).fadeIn('fast');
-          if (o.railVisible) { rail.stop(true,true).fadeIn('fast'); }
-        }
-
-        function hideBar()
-        {
-          // only hide when options allow it
-          if (!o.alwaysVisible)
-          {
-            queueHide = setTimeout(function(){
-              if (!(o.disableFadeOut && isOverPanel) && !isOverBar && !isDragg)
-              {
-                bar.fadeOut('slow');
-                rail.fadeOut('slow');
-              }
-            }, 1000);
-          }
-        }
-
-      });
-
-      // maintain chainability
-      return this;
-    }
-  });
-
-  jQuery.fn.extend({
-    slimscroll: jQuery.fn.slimScroll
-  });
-
-})(jQuery);
+!function(e,n){"use strict";"function"==typeof define&&define.amd?define(["jquery"],function(t){return n(t,e,e.document,e.Math)}):"object"==typeof exports&&exports?module.exports=n(require("jquery"),e,e.document,e.Math):n(jQuery,e,e.document,e.Math)}("undefined"!=typeof window?window:this,function(e,n,t,o,i){"use strict";var r="fullpage-wrapper",a="."+r,l="fp-scrollable",s="."+l,c="fp-responsive",d="fp-notransition",f="fp-destroyed",u="fp-enabled",h="fp-viewing",p="active",v="."+p,g="fp-completely",m="."+g,S=".section",w="fp-section",y="."+w,b=y+v,x=y+":first",C=y+":last",A="fp-tableCell",T="."+A,I="fp-auto-height",k="fp-normal-scroll",L="fp-nav",M="#"+L,O="fp-tooltip",E="."+O,R="fp-show-active",H=".slide",z="fp-slide",B="."+z,D=B+v,P="fp-slides",F="."+P,V="fp-slidesContainer",W="."+V,j="fp-table",Z="fp-slidesNav",Y="."+Z,N=Y+" a",q="fp-controlArrow",U="."+q,G="fp-prev",X="."+G,Q=q+" "+G,_=U+X,K="fp-next",J="."+K,$=q+" "+K,ee=U+J,ne=e(n),te=e(t),oe={scrollbars:!0,mouseWheel:!0,hideScrollbars:!1,fadeScrollbars:!1,disableMouse:!0,interactiveScrollbars:!0};e.fn.fullpage=function(l){function s(n,t){n||ct(0),wt("autoScrolling",n,t);var o=e(b);l.autoScrolling&&!l.scrollBar?(xt.css({overflow:"hidden",height:"100%"}),q(Gt.recordHistory,"internal"),Rt.css({"-ms-touch-action":"none","touch-action":"none"}),o.length&&ct(o.position().top)):(xt.css({overflow:"visible",height:"initial"}),q(!1,"internal"),Rt.css({"-ms-touch-action":"","touch-action":""}),pt(Rt),o.length&&xt.scrollTop(o.position().top)),Rt.trigger("setAutoScrolling",[n])}function q(e,n){wt("recordHistory",e,n)}function X(e,n){"internal"!==n&&l.fadingEffect&&At.fadingEffect&&At.fadingEffect.update(e),wt("scrollingSpeed",e,n)}function K(e,n){wt("fitToSection",e,n)}function J(e){l.lockAnchors=e}function re(e){e?(nt(),tt()):(et(),ot())}function ae(n,t){"undefined"!=typeof t?(t=t.replace(/ /g,"").split(","),e.each(t,function(e,t){ft(n,t,"m")})):n?(re(!0),it()):(re(!1),rt())}function le(n,t){"undefined"!=typeof t?(t=t.replace(/ /g,"").split(","),e.each(t,function(e,t){ft(n,t,"k")})):l.keyboardScrolling=n}function se(){var n=e(b).prev(y);n.length||!l.loopTop&&!l.continuousVertical||(n=e(y).last()),n.length&&_e(n,null,!0)}function ce(){var n=e(b).next(y);n.length||!l.loopBottom&&!l.continuousVertical||(n=e(y).first()),n.length&&_e(n,null,!1)}function de(e,n){X(0,"internal"),fe(e,n),X(Gt.scrollingSpeed,"internal")}function fe(e,n){var t=Nn(e);"undefined"!=typeof n?Un(e,n):t.length>0&&_e(t)}function ue(e){Ge("right",e)}function he(e){Ge("left",e)}function pe(n){if(!Rt.hasClass(f)){zt=!0,Ht=ne.height(),e(y).each(function(){var n=e(this).find(F),t=e(this).find(B);l.verticalCentered&&e(this).find(T).css("height",Zn(e(this))+"px"),e(this).css("height",Ce(e(this))+"px"),l.scrollOverflow&&(t.length?t.each(function(){Wn(e(this))}):Wn(e(this))),t.length>1&&In(n,n.find(D))});var t=e(b),o=t.index(y);o&&de(o+1),zt=!1,e.isFunction(l.afterResize)&&n&&l.afterResize.call(Rt),e.isFunction(l.afterReBuild)&&!n&&l.afterReBuild.call(Rt)}}function ve(n){var t=Ct.hasClass(c);n?t||(s(!1,"internal"),K(!1,"internal"),e(M).hide(),Ct.addClass(c),e.isFunction(l.afterResponsive)&&l.afterResponsive.call(Rt,n),l.responsiveSlides&&At.responsiveSlides&&At.responsiveSlides.toSections(),Rt.trigger("afterResponsive",[n])):t&&(s(Gt.autoScrolling,"internal"),K(Gt.autoScrolling,"internal"),e(M).show(),Ct.removeClass(c),e.isFunction(l.afterResponsive)&&l.afterResponsive.call(Rt,n),l.responsiveSlides&&At.responsiveSlides&&At.responsiveSlides.toSlides(),Rt.trigger("afterResponsive",[n]))}function ge(){return{options:l,internals:{canScroll:Dt,isScrollAllowed:Ft,getDestinationPosition:Qe,isTouch:Et,c:un,getXmovement:Vn,removeAnimation:zn,getTransforms:dt,lazyLoad:on,addAnimation:Hn,performHorizontalMove:Mn,landscapeScroll:In,silentLandscapeScroll:st,keepSlidesPosition:Xe,silentScroll:ct,styleSlides:xe,scrollHandler:Be,getEventsPage:lt,getMSPointer:at,isReallyTouch:Ye,checkParentForNormalScrollElement:Ze,usingExtension:vt,toggleControlArrows:kn}}}function me(){l.css3&&(l.css3=$n()),l.scrollBar=l.scrollBar||l.hybrid,ye(),be(),ae(!0),s(l.autoScrolling,"internal"),Rn(),Jn(),"complete"===t.readyState&&hn(),ne.on("load",hn)}function Se(){ne.on("scroll",Be).on("hashchange",pn).blur(bn).resize(En),te.keydown(vn).keyup(mn).on("click touchstart",M+" a",xn).on("click touchstart",N,Cn).on("click",E,gn),e(y).on("click touchstart",U,yn),l.normalScrollElements&&(te.on("mouseenter",l.normalScrollElements,function(){re(!1)}),te.on("mouseleave",l.normalScrollElements,function(){re(!0)}))}function we(e){var t="fp_"+e+"Extension";Xt[e]=l[e+"Key"],At[e]="undefined"!=typeof n[t]?new n[t]:null,At[e]&&At[e].c(e)}function ye(){var n=Rt.find(l.sectionSelector);l.anchors.length||(l.anchors=n.filter("[data-anchor]").map(function(){return e(this).data("anchor").toString()}).get()),l.navigationTooltips.length||(l.navigationTooltips=n.filter("[data-tooltip]").map(function(){return e(this).data("tooltip").toString()}).get())}function be(){Rt.css({height:"100%",position:"relative"}),Rt.addClass(r),e("html").addClass(u),Ht=ne.height(),Rt.removeClass(f),Ie(),gt("parallax","init"),e(y).each(function(n){var t=e(this),o=t.find(B),i=o.length;Ae(t,n),Te(t,n),i>0?xe(t,o,i):l.verticalCentered&&jn(t)}),l.fixedElements&&l.css3&&e(l.fixedElements).appendTo(Ct),l.navigation&&Le(),Oe(),l.fadingEffect&&At.fadingEffect&&At.fadingEffect.apply(),l.scrollOverflow?("complete"===t.readyState&&Me(),ne.on("load",Me)):He()}function xe(n,t,o){var i=100*o,r=100/o;t.wrapAll('<div class="'+V+'" />'),t.parent().wrap('<div class="'+P+'" />'),n.find(W).css("width",i+"%"),o>1&&(l.controlArrows&&ke(n),l.slidesNavigation&&Xn(n,o)),t.each(function(n){e(this).css("width",r+"%"),l.verticalCentered&&jn(e(this))});var a=n.find(D);a.length&&(0!==e(b).index(y)||0===e(b).index(y)&&0!==a.index())?st(a,"internal"):t.eq(0).addClass(p)}function Ce(e){return l.offsetSections&&At.offsetSections?At.offsetSections.getWindowHeight(e):Ht}function Ae(n,t){t||0!==e(b).length||n.addClass(p),Lt=e(b),n.css("height",Ce(n)+"px"),l.paddingTop&&n.css("padding-top",l.paddingTop),l.paddingBottom&&n.css("padding-bottom",l.paddingBottom),"undefined"!=typeof l.sectionsColor[t]&&n.css("background-color",l.sectionsColor[t]),"undefined"!=typeof l.anchors[t]&&n.attr("data-anchor",l.anchors[t])}function Te(n,t){"undefined"!=typeof l.anchors[t]&&n.hasClass(p)&&Pn(l.anchors[t],t),l.menu&&l.css3&&e(l.menu).closest(a).length&&e(l.menu).appendTo(Ct)}function Ie(){Rt.find(l.sectionSelector).addClass(w),Rt.find(l.slideSelector).addClass(z)}function ke(e){e.find(F).after('<div class="'+Q+'"></div><div class="'+$+'"></div>'),"#fff"!=l.controlArrowColor&&(e.find(ee).css("border-color","transparent transparent transparent "+l.controlArrowColor),e.find(_).css("border-color","transparent "+l.controlArrowColor+" transparent transparent")),l.loopHorizontal||e.find(_).hide()}function Le(){Ct.append('<div id="'+L+'"><ul></ul></div>');var n=e(M);n.addClass(function(){return l.showActiveTooltip?R+" "+l.navigationPosition:l.navigationPosition});for(var t=0;t<e(y).length;t++){var o="";l.anchors.length&&(o=l.anchors[t]);var i='<li><a href="#'+o+'"><span></span></a>',r=l.navigationTooltips[t];"undefined"!=typeof r&&""!==r&&(i+='<div class="'+O+" "+l.navigationPosition+'">'+r+"</div>"),i+="</li>",n.find("ul").append(i)}e(M).css("margin-top","-"+e(M).height()/2+"px"),e(M).find("li").eq(e(b).index(y)).find("a").addClass(p)}function Me(){e(y).each(function(){var n=e(this).find(B);n.length?n.each(function(){Wn(e(this))}):Wn(e(this))}),He()}function Oe(){Rt.find('iframe[src*="youtube.com/embed/"]').each(function(){Ee(e(this),"enablejsapi=1")})}function Ee(e,n){var t=e.attr("src");e.attr("src",t+Re(t)+n)}function Re(e){return/\?/.test(e)?"&":"?"}function He(){var n=e(b);n.addClass(g),l.scrollOverflowHandler.afterRender&&l.scrollOverflowHandler.afterRender(n),on(n),rn(n),l.scrollOverflowHandler.afterLoad(),ze()&&e.isFunction(l.afterLoad)&&l.afterLoad.call(n,n.data("anchor"),n.index(y)+1),e.isFunction(l.afterRender)&&l.afterRender.call(Rt)}function ze(){var e=n.location.hash.replace("#","").split("/"),t=Nn(decodeURIComponent(e[0]));return!t.length||t.length&&t.index()===Lt.index()}function Be(){to||(requestAnimationFrame(De),to=!0)}function De(){Rt.trigger("onScroll");var n;if((!l.autoScrolling||l.scrollBar||vt("dragAndMove"))&&!St()){var i=vt("dragAndMove")?o.abs(At.dragAndMove.getCurrentScroll()):ne.scrollTop(),r=(Fe(i),0),a=i+ne.height()/2,s=vt("dragAndMove")?At.dragAndMove.getDocumentHeight():Ct.height()-ne.height(),c=s===i,d=t.querySelectorAll(y);if(c)r=d.length-1;else if(i)for(var f=0;f<d.length;++f){var u=d[f];u.offsetTop<=a&&(r=f)}else r=0;if(n=e(d).eq(r),!n.hasClass(p)){Qt=!0;var h,v,g=e(b),m=g.index(y)+1,S=Fn(n),w=n.data("anchor"),x=n.index(y)+1,C=n.find(D);C.length&&(v=C.data("anchor"),h=C.index()),Dt&&(n.addClass(p).siblings().removeClass(p),gt("parallax","afterLoad"),e.isFunction(l.onLeave)&&l.onLeave.call(g,m,x,S),e.isFunction(l.afterLoad)&&l.afterLoad.call(n,w,x),l.resetSliders&&At.resetSliders&&At.resetSliders.apply({localIsResizing:zt,leavingSection:m}),ln(g),on(n),rn(n),Pn(w,x-1),l.anchors.length&&(Tt=w),Qn(h,v,w,x)),clearTimeout(Zt),Zt=setTimeout(function(){Qt=!1},100)}l.fitToSection&&(clearTimeout(Yt),Yt=setTimeout(function(){l.fitToSection&&Pe()},l.fitToSectionDelay))}to=!1}function Pe(){Dt&&(zt=!0,_e(e(b)),zt=!1)}function Fe(e){var n=e>_t?"down":"up";return _t=e,oo=e,n}function Ve(e,n){if(Ft.m[e]){var t="down"===e?"bottom":"top",o="down"===e?ce:se;if(At.scrollHorizontally&&(o=At.scrollHorizontally.getScrollSection(e,o)),n.length>0){if(!l.scrollOverflowHandler.isScrolled(t,n))return!0;o()}else o()}}function We(e){var n=e.originalEvent;!Ze(e.target)&&l.autoScrolling&&Ye(n)&&e.preventDefault()}function je(n){var t=n.originalEvent,i=e(t.target).closest(y);if(!Ze(n.target)&&Ye(t)){l.autoScrolling&&n.preventDefault();var r=l.scrollOverflowHandler.scrollable(i),a=lt(t);$t=a.y,eo=a.x,i.find(F).length&&o.abs(Jt-eo)>o.abs(Kt-$t)?!Mt&&o.abs(Jt-eo)>ne.outerWidth()/100*l.touchSensitivity&&(Jt>eo?Ft.m.right&&ue(i):Ft.m.left&&he(i)):l.autoScrolling&&Dt&&o.abs(Kt-$t)>ne.height()/100*l.touchSensitivity&&(Kt>$t?Ve("down",r):$t>Kt&&Ve("up",r))}}function Ze(n,t){t=t||0;var o=e(n).parent();return!!(t<l.normalScrollElementTouchThreshold&&o.is(l.normalScrollElements))||t!=l.normalScrollElementTouchThreshold&&Ze(o,++t)}function Ye(e){return"undefined"==typeof e.pointerType||"mouse"!=e.pointerType}function Ne(e){var n=e.originalEvent;if(l.fitToSection&&xt.stop(),Ye(n)){var t=lt(n);Kt=t.y,Jt=t.x}}function qe(e,n){for(var t=0,i=e.slice(o.max(e.length-n,1)),r=0;r<i.length;r++)t+=i[r];return o.ceil(t/n)}function Ue(t){var i=(new Date).getTime(),r=e(m).hasClass(k);if(l.autoScrolling&&!kt&&!r){t=t||n.event;var a=t.wheelDelta||-t.deltaY||-t.detail,s=o.max(-1,o.min(1,a)),c="undefined"!=typeof t.wheelDeltaX||"undefined"!=typeof t.deltaX,d=o.abs(t.wheelDeltaX)<o.abs(t.wheelDelta)||o.abs(t.deltaX)<o.abs(t.deltaY)||!c;Pt.length>149&&Pt.shift(),Pt.push(o.abs(a)),l.scrollBar&&(t.preventDefault?t.preventDefault():t.returnValue=!1);var f=e(b),u=l.scrollOverflowHandler.scrollable(f),h=i-no;if(no=i,h>200&&(Pt=[]),Dt&&!mt()){var p=qe(Pt,10),v=qe(Pt,70),g=p>=v;g&&d&&(s<0?Ve("down",u):Ve("up",u))}return!1}l.fitToSection&&xt.stop()}function Ge(n,t){var o="undefined"==typeof t?e(b):t,i=o.find(F);if(!(!i.length||mt()||Mt||i.find(B).length<2)){var r=i.find(D),a=null;if(a="left"===n?r.prev(B):r.next(B),!a.length){if(!l.loopHorizontal)return;a="left"===n?r.siblings(":last"):r.siblings(":first")}Mt=!0,In(i,a,n)}}function Xe(){e(D).each(function(){st(e(this),"internal")})}function Qe(e){var n=e.position(),t=n.top,o=vt("dragAndMove")&&At.dragAndMove.isGrabbing?At.dragAndMove.isScrollingDown():n.top>oo,i=t-Ht+e.outerHeight(),r=l.bigSectionsDestination;return e.outerHeight()>Ht?(o||r)&&"bottom"!==r||(t=i):(o||zt&&e.is(":last-child"))&&(t=i),l.offsetSections&&At.offsetSections&&(t=At.offsetSections.getSectionPosition(o,t,e)),oo=t,t}function _e(n,t,o){if("undefined"!=typeof n&&n.length){var i,r,a=Qe(n),s={element:n,callback:t,isMovementUp:o,dtop:a,yMovement:Fn(n),anchorLink:n.data("anchor"),sectionIndex:n.index(y),activeSlide:n.find(D),activeSection:e(b),leavingSection:e(b).index(y)+1,localIsResizing:zt};s.activeSection.is(n)&&!zt||l.scrollBar&&ne.scrollTop()===s.dtop&&!n.hasClass(I)||(s.activeSlide.length&&(i=s.activeSlide.data("anchor"),r=s.activeSlide.index()),gt("parallax","apply",s),l.autoScrolling&&l.continuousVertical&&"undefined"!=typeof s.isMovementUp&&(!s.isMovementUp&&"up"==s.yMovement||s.isMovementUp&&"down"==s.yMovement)&&(s=$e(s)),e.isFunction(l.onLeave)&&!s.localIsResizing&&l.onLeave.call(s.activeSection,s.leavingSection,s.sectionIndex+1,s.yMovement)===!1||(vt("scrollOverflowReset")&&At.scrollOverflowReset.setPrevious(s.activeSection),s.localIsResizing||ln(s.activeSection),l.scrollOverflowHandler.beforeLeave(),n.addClass(p).siblings().removeClass(p),on(n),l.scrollOverflowHandler.onLeave(),Dt=!1,Qn(r,i,s.anchorLink,s.sectionIndex),Ke(s),Tt=s.anchorLink,Pn(s.anchorLink,s.sectionIndex)))}}function Ke(n){if(l.css3&&l.autoScrolling&&!l.scrollBar){var t="translate3d(0px, -"+o.round(n.dtop)+"px, 0px)";Yn(t,!0),l.scrollingSpeed?(clearTimeout(Wt),Wt=setTimeout(function(){nn(n)},l.scrollingSpeed)):nn(n)}else{var i=Je(n);e(i.element).animate(i.options,l.scrollingSpeed,l.easing).promise().done(function(){l.scrollBar?setTimeout(function(){nn(n)},30):nn(n)})}}function Je(e){var n={};return l.autoScrolling&&!l.scrollBar?(n.options={top:-e.dtop},n.element=a):(n.options={scrollTop:e.dtop},n.element="html, body"),n}function $e(n){return n.isMovementUp?n.activeSection.before(n.activeSection.nextAll(y)):n.activeSection.after(n.activeSection.prevAll(y).get().reverse()),ct(e(b).position().top),Xe(),n.wrapAroundElements=n.activeSection,n.dtop=n.element.position().top,n.yMovement=Fn(n.element),n.leavingSection=n.activeSection.index(y)+1,n.sectionIndex=n.element.index(y),e(a).trigger("onContinuousVertical",[n]),n}function en(n){n.wrapAroundElements&&n.wrapAroundElements.length&&(n.isMovementUp?e(x).before(n.wrapAroundElements):e(C).after(n.wrapAroundElements),ct(e(b).position().top),Xe(),n.sectionIndex=n.element.index(y),n.leavingSection=n.activeSection.index(y)+1)}function nn(n){en(n),e.isFunction(l.afterLoad)&&!n.localIsResizing&&l.afterLoad.call(n.element,n.anchorLink,n.sectionIndex+1),l.scrollOverflowHandler.afterLoad(),gt("parallax","afterLoad"),vt("scrollOverflowReset")&&At.scrollOverflowReset.reset(),l.resetSliders&&At.resetSliders&&At.resetSliders.apply(n),n.localIsResizing||rn(n.element),n.element.addClass(g).siblings().removeClass(g),Dt=!0,e.isFunction(n.callback)&&n.callback.call(this)}function tn(e,n){e.attr(n,e.data(n)).removeAttr("data-"+n)}function on(n){if(l.lazyLoading){var t,o=sn(n);o.find("img[data-src], img[data-srcset], source[data-src], audio[data-src], iframe[data-src]").each(function(){t=e(this),e.each(["src","srcset"],function(e,n){var o=t.attr("data-"+n);"undefined"!=typeof o&&o&&tn(t,n)}),t.is("source")&&t.closest("video").get(0).load()})}}function rn(n){var t=sn(n);t.find("video, audio").each(function(){var n=e(this).get(0);n.hasAttribute("data-autoplay")&&"function"==typeof n.play&&n.play()}),t.find('iframe[src*="youtube.com/embed/"]').each(function(){var n=e(this).get(0);n.hasAttribute("data-autoplay")&&an(n),n.onload=function(){n.hasAttribute("data-autoplay")&&an(n)}})}function an(e){e.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*")}function ln(n){var t=sn(n);t.find("video, audio").each(function(){var n=e(this).get(0);n.hasAttribute("data-keepplaying")||"function"!=typeof n.pause||n.pause()}),t.find('iframe[src*="youtube.com/embed/"]').each(function(){var n=e(this).get(0);/youtube\.com\/embed\//.test(e(this).attr("src"))&&!n.hasAttribute("data-keepplaying")&&e(this).get(0).contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}',"*")})}function sn(n){var t=n.find(D);return t.length&&(n=e(t)),n}function cn(e){function n(e){var n,o,i,r,l,s,c,d="",f=0;for(e=e.replace(/[^A-Za-z0-9+\/=]/g,"");f<e.length;)r=a.indexOf(e.charAt(f++)),l=a.indexOf(e.charAt(f++)),s=a.indexOf(e.charAt(f++)),c=a.indexOf(e.charAt(f++)),n=r<<2|l>>4,o=(15&l)<<4|s>>2,i=(3&s)<<6|c,d+=String.fromCharCode(n),64!=s&&(d+=String.fromCharCode(o)),64!=c&&(d+=String.fromCharCode(i));return d=t(d)}function t(e){for(var n,t="",o=0,i=0,r=0;o<e.length;)i=e.charCodeAt(o),i<128?(t+=String.fromCharCode(i),o++):i>191&&i<224?(r=e.charCodeAt(o+1),t+=String.fromCharCode((31&i)<<6|63&r),o+=2):(r=e.charCodeAt(o+1),n=e.charCodeAt(o+2),t+=String.fromCharCode((15&i)<<12|(63&r)<<6|63&n),o+=3);return t}function o(e){return e}function i(e){return e.slice(3).slice(0,-3)}function r(e){var t=e.split("_");if(t.length>1){var o=t[1],r=e.replace(i(t[1]),"").split("_")[0],a=r;return a+"_"+n(o.slice(3).slice(0,-3))}return i(e)}var a="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";return o(r(n(e)))}function dn(){if(t.domain.length){for(var e=t.domain.replace(/^(www\.)/,"").split(".");e.length>2;){e.shift()}var n=e.join(".");return n.replace(/(^\.*)|(\.*$)/g,"")}return""}function fn(e){var n=dn(),t=["localhost","127.0.0.1","jshell.net","UDdDQU5ZNlNN"],o=t[0],i=t[1],r=t[2],a=cn(t[3]),l=[o,i,r].indexOf(n)<0&&0!==n.length,s="undefined"!=typeof Xt[e]&&Xt[e].length;if(!s&&l)return!1;var c=s?cn(Xt[e]):"";c=c.split("_");var d=c.length>1&&c[1].indexOf(e,c[1].length-e.length)>-1,f=c[0].indexOf(n,c[0].length-n.length)<0;return!(f&&l&&a!=c[0])&&d||!l}function un(e){if(vt(e)&&At[e]){var n=cn("MTIzPGRpdiBzdHlsZT0iei1pbmRleDo5OTk5OTk5O3Bvc2l0aW9uOmZpeGVkOyB0b3A6IDIwcHg7IGxlZnQ6MjBweDsgYmFja2dyb3VuZDpyZWQ7IHBhZGRpbmc6IDdweCAxNXB4OyBmb250LXNpemU6IDE0cHg7IGZvbnQtZmFtaWx5OiBhcmlhbDsgY29sb3I6ICNmZmY7IGRpc3BsYXk6IGlubGluZS1ibG9jazsiPjxhIGhyZWY9Imh0dHA6Ly9hbHZhcm90cmlnby5jb20vZnVsbFBhZ2UvZXh0ZW5zaW9ucy8iIHN0eWxlPSJjb2xvcjogI2ZmZjsgdGV4dC1kZWNvcmF0aW9uOm5vbmU7Ij5VbmxpY2Vuc2VkIGZ1bGxQYWdlLmpzIEV4dGVuc2lvbjwvYT48L2Rpdj4xMjM="),t=o.random()<.5;if(!fn(e)){var i,r="9999999",a="z-index",l=function(){i=t?Ct.find("div").first():Ct.find("div").last(),i.css(a)!==r&&(t?Ct.prepend(n):Ct.append(n))};l(),setInterval(l,2e3)}}}function hn(){var e=n.location.hash.replace("#","").split("/"),t=decodeURIComponent(e[0]),o=decodeURIComponent(e[1]);t&&(l.animateAnchor?Un(t,o):de(t,o))}function pn(){if(!Qt&&!l.lockAnchors){var e=n.location.hash.replace("#","").split("/"),t=decodeURIComponent(e[0]),o=decodeURIComponent(e[1]),i="undefined"==typeof Tt,r="undefined"==typeof Tt&&"undefined"==typeof o&&!Mt;t.length&&(t&&t!==Tt&&!i||r||!Mt&&It!=o)&&Un(t,o)}}function vn(n){clearTimeout(Nt);var t=e(":focus");if(!t.is("textarea")&&!t.is("input")&&!t.is("select")&&"true"!==t.attr("contentEditable")&&""!==t.attr("contentEditable")&&l.keyboardScrolling&&l.autoScrolling){var o=n.which,i=[40,38,32,33,34];e.inArray(o,i)>-1&&n.preventDefault(),kt=n.ctrlKey,Nt=setTimeout(function(){An(n)},150)}}function gn(){e(this).prev().trigger("click")}function mn(e){Bt&&(kt=e.ctrlKey)}function Sn(e){2==e.which&&(io=e.pageY,Rt.on("mousemove",Tn))}function wn(e){2==e.which&&Rt.off("mousemove")}function yn(){var n=e(this).closest(y);e(this).hasClass(G)?Ft.m.left&&he(n):Ft.m.right&&ue(n)}function bn(){Bt=!1,kt=!1}function xn(n){n.preventDefault();var t=e(this).parent().index();_e(e(y).eq(t))}function Cn(n){n.preventDefault();var t=e(this).closest(y).find(F),o=t.find(B).eq(e(this).closest("li").index());In(t,o)}function An(n){var t=n.shiftKey;if(Dt||!([37,39].indexOf(n.which)<0))switch(n.which){case 38:case 33:Ft.k.up&&se();break;case 32:if(t&&Ft.k.up){se();break}case 40:case 34:Ft.k.down&&ce();break;case 36:Ft.k.up&&fe(1);break;case 35:Ft.k.down&&fe(e(y).length);break;case 37:Ft.k.left&&he();break;case 39:Ft.k.right&&ue();break;default:return}}function Tn(e){Dt&&(e.pageY<io&&Ft.m.up?se():e.pageY>io&&Ft.m.down&&ce()),io=e.pageY}function In(n,t,o){var i=n.closest(y),r={slides:n,destiny:t,direction:o,destinyPos:t.position(),slideIndex:t.index(),section:i,sectionIndex:i.index(y),anchorLink:i.data("anchor"),slidesNav:i.find(Y),slideAnchor:Kn(t),prevSlide:i.find(D),prevSlideIndex:i.find(D).index(),localIsResizing:zt};return r.xMovement=Vn(r.prevSlideIndex,r.slideIndex),r.localIsResizing||(Dt=!1),gt("parallax","applyHorizontal",r),l.onSlideLeave&&!r.localIsResizing&&"none"!==r.xMovement&&e.isFunction(l.onSlideLeave)&&l.onSlideLeave.call(r.prevSlide,r.anchorLink,r.sectionIndex+1,r.prevSlideIndex,r.xMovement,r.slideIndex)===!1?void(Mt=!1):(t.addClass(p).siblings().removeClass(p),r.localIsResizing||(ln(r.prevSlide),on(t)),kn(r),i.hasClass(p)&&!r.localIsResizing&&Qn(r.slideIndex,r.slideAnchor,r.anchorLink,r.sectionIndex),At.continuousHorizontal&&At.continuousHorizontal.apply(r),St()?Ln(r):Mn(n,r,!0),void(l.interlockedSlides&&At.interlockedSlides&&At.interlockedSlides.apply(r)))}function kn(e){!l.loopHorizontal&&l.controlArrows&&(e.section.find(_).toggle(0!==e.slideIndex),e.section.find(ee).toggle(!e.destiny.is(":last-child")))}function Ln(n){At.continuousHorizontal&&At.continuousHorizontal.afterSlideLoads(n),On(n.slidesNav,n.slideIndex),n.localIsResizing||(gt("parallax","afterSlideLoads"),e.isFunction(l.afterSlideLoad)&&l.afterSlideLoad.call(n.destiny,n.anchorLink,n.sectionIndex+1,n.slideAnchor,n.slideIndex),Dt=!0,rn(n.destiny)),Mt=!1,At.interlockedSlides&&At.interlockedSlides.apply(n)}function Mn(e,n,t){var i=n.destinyPos;if(l.css3){var r="translate3d(-"+o.round(i.left)+"px, 0px, 0px)";Hn(e.find(W)).css(dt(r)),jt=setTimeout(function(){t&&Ln(n)},l.scrollingSpeed,l.easing)}else e.animate({scrollLeft:o.round(i.left)},l.scrollingSpeed,l.easing,function(){t&&Ln(n)})}function On(e,n){e.find(v).removeClass(p),e.find("li").eq(n).find("a").addClass(p)}function En(){if(Rt.trigger("onResize"),Rn(),Ot){var n=e(t.activeElement);if(!n.is("textarea")&&!n.is("input")&&!n.is("select")){var i=ne.height();o.abs(i-ro)>20*o.max(ro,i)/100&&(pe(!0),ro=i)}}else clearTimeout(Vt),Vt=setTimeout(function(){pe(!0)},350)}function Rn(){var e=l.responsive||l.responsiveWidth,n=l.responsiveHeight,t=e&&ne.outerWidth()<e,o=n&&ne.height()<n;e&&n?ve(t||o):e?ve(t):n&&ve(o)}function Hn(e){var n="all "+l.scrollingSpeed+"ms "+l.easingcss3;return e.removeClass(d),e.css({"-webkit-transition":n,transition:n})}function zn(e){return e.addClass(d)}function Bn(n,t){l.navigation&&(e(M).find(v).removeClass(p),n?e(M).find('a[href="#'+n+'"]').addClass(p):e(M).find("li").eq(t).find("a").addClass(p))}function Dn(n){l.menu&&(e(l.menu).find(v).removeClass(p),e(l.menu).find('[data-menuanchor="'+n+'"]').addClass(p))}function Pn(e,n){Dn(e),Bn(e,n)}function Fn(n){var t=e(b).index(y),o=n.index(y);return t==o?"none":t>o?"up":"down"}function Vn(e,n){return e==n?"none":e>n?"left":"right"}function Wn(e){if(!e.hasClass("fp-noscroll")){e.css("overflow","hidden");var n,t=l.scrollOverflowHandler,o=t.wrapContent(),i=e.closest(y),r=t.scrollable(e);r.length?n=t.scrollHeight(e):(n=e.get(0).scrollHeight,l.verticalCentered&&(n=e.find(T).get(0).scrollHeight));var a=Zn(i);n>a?r.length?t.update(e,a):(l.verticalCentered?e.find(T).wrapInner(o):e.wrapInner(o),t.create(e,a,l.scrollOverflowOptions)):t.remove(e),e.css("overflow","")}}function jn(e){e.hasClass(j)||e.addClass(j).wrapInner('<div class="'+A+'" style="height:'+Zn(e)+'px;" />')}function Zn(e){var n=Ce(e);if(l.paddingTop||l.paddingBottom){var t=e;t.hasClass(w)||(t=e.closest(y));var o=parseInt(t.css("padding-top"))+parseInt(t.css("padding-bottom"));n=Ht-o}return n}function Yn(e,n){n?Hn(Rt):zn(Rt),Rt.css(dt(e)),setTimeout(function(){Rt.removeClass(d)},10)}function Nn(n){if(!n)return[];var t=Rt.find(y+'[data-anchor="'+n+'"]');return t.length||(t=e(y).eq(n-1)),t}function qn(e,n){var t=n.find(F),o=t.find(B+'[data-anchor="'+e+'"]');return o.length||(o=t.find(B).eq(e)),o}function Un(e,n){var t=Nn(e);t.length&&("undefined"==typeof n&&(n=0),e===Tt||t.hasClass(p)?Gn(t,n):_e(t,function(){Gn(t,n)}))}function Gn(e,n){if("undefined"!=typeof n){var t=e.find(F),o=qn(n,e);o.length&&In(t,o)}}function Xn(e,n){e.append('<div class="'+Z+'"><ul></ul></div>');var t=e.find(Y);t.addClass(l.slidesNavPosition);for(var o=0;o<n;o++)t.find("ul").append('<li><a href="#"><span></span></a></li>');t.css("margin-left","-"+t.width()/2+"px"),t.find("li").first().find("a").addClass(p)}function Qn(e,n,t,o){var i="";l.anchors.length&&!l.lockAnchors&&(e?("undefined"!=typeof t&&(i=t),"undefined"==typeof n&&(n=e),It=n,_n(i+"/"+n)):"undefined"!=typeof e?(It=n,_n(t)):_n(t)),Jn()}function _n(e){if(l.recordHistory)location.hash=e;else if(Ot||Et)n.history.replaceState(i,i,"#"+e);else{var t=n.location.href.split("#")[0];n.location.replace(t+"#"+e)}}function Kn(e){var n=e.data("anchor"),t=e.index();return"undefined"==typeof n&&(n=t),n}function Jn(){var n=e(b),t=n.find(D),o=Kn(n),i=Kn(t),r=String(o);t.length&&(r=r+"-"+i),r=r.replace("/","-").replace("#","");var a=new RegExp("\\b\\s?"+h+"-[^\\s]+\\b","g");Ct[0].className=Ct[0].className.replace(a,""),Ct.addClass(h+"-"+r)}function $n(){var e,o=t.createElement("p"),r={webkitTransform:"-webkit-transform",OTransform:"-o-transform",msTransform:"-ms-transform",MozTransform:"-moz-transform",transform:"transform"};t.body.insertBefore(o,null);for(var a in r)o.style[a]!==i&&(o.style[a]="translate3d(1px,1px,1px)",e=n.getComputedStyle(o).getPropertyValue(r[a]));return t.body.removeChild(o),e!==i&&e.length>0&&"none"!==e}function et(){t.addEventListener?(t.removeEventListener("mousewheel",Ue,!1),t.removeEventListener("wheel",Ue,!1),t.removeEventListener("MozMousePixelScroll",Ue,!1)):t.detachEvent("onmousewheel",Ue)}function nt(){var e,o="";n.addEventListener?e="addEventListener":(e="attachEvent",o="on");var r="onwheel"in t.createElement("div")?"wheel":t.onmousewheel!==i?"mousewheel":"DOMMouseScroll";"DOMMouseScroll"==r?t[e](o+"MozMousePixelScroll",Ue,!1):t[e](o+r,Ue,!1)}function tt(){Rt.on("mousedown",Sn).on("mouseup",wn)}function ot(){Rt.off("mousedown",Sn).off("mouseup",wn)}function it(){(Ot||Et)&&(l.autoScrolling&&Ct.off(Ut.touchmove).on(Ut.touchmove,We),e(a).off(Ut.touchstart).on(Ut.touchstart,Ne).off(Ut.touchmove).on(Ut.touchmove,je))}function rt(){(Ot||Et)&&e(a).off(Ut.touchstart).off(Ut.touchmove)}function at(){var e;return e=n.PointerEvent?{down:"pointerdown",move:"pointermove"}:{down:"MSPointerDown",move:"MSPointerMove"}}function lt(e){var n=[];return n.y="undefined"!=typeof e.pageY&&(e.pageY||e.pageX)?e.pageY:e.touches[0].pageY,n.x="undefined"!=typeof e.pageX&&(e.pageY||e.pageX)?e.pageX:e.touches[0].pageX,Et&&Ye(e)&&l.scrollBar&&(n.y=e.touches[0].pageY,n.x=e.touches[0].pageX),n}function st(e,n){X(0,"internal"),"undefined"!=typeof n&&(zt=!0),In(e.closest(F),e),"undefined"!=typeof n&&(zt=!1),X(Gt.scrollingSpeed,"internal")}function ct(e){var n=o.round(e);if(l.css3&&l.autoScrolling&&!l.scrollBar){var t="translate3d(0px, -"+n+"px, 0px)";Yn(t,!1)}else l.autoScrolling&&!l.scrollBar?Rt.css("top",-n):xt.scrollTop(n)}function dt(e){return{"-webkit-transform":e,"-moz-transform":e,"-ms-transform":e,transform:e}}function ft(e,n,t){switch(n){case"up":Ft[t].up=e;break;case"down":Ft[t].down=e;break;case"left":Ft[t].left=e;break;case"right":Ft[t].right=e;break;case"all":"m"==t?ae(e):le(e)}}function ut(n){Rt.trigger("destroy",[n]),s(!1,"internal"),ae(!1),le(!1),Rt.addClass(f),clearTimeout(jt),clearTimeout(Wt),clearTimeout(Vt),clearTimeout(Zt),clearTimeout(Yt),ne.off("scroll",Be).off("hashchange",pn).off("resize",En),te.off("click touchstart",M+" a").off("mouseenter",M+" li").off("mouseleave",M+" li").off("click touchstart",N).off("mouseover",l.normalScrollElements).off("mouseout",l.normalScrollElements),e(y).off("click touchstart",U),vt("dragAndMove")&&At.dragAndMove.destroy(),clearTimeout(jt),clearTimeout(Wt),n&&ht()}function ht(){ct(0),Rt.find("img[data-src], source[data-src], audio[data-src], iframe[data-src]").each(function(){tn(e(this),"src")}),Rt.find("img[data-srcset]").each(function(){tn(e(this),"srcset")}),e(M+", "+Y+", "+U).remove(),e(y).css({height:"","background-color":"",padding:""}),e(B).css({width:""}),Rt.css({height:"",position:"","-ms-touch-action":"","touch-action":""}),xt.css({overflow:"",height:""}),e("html").removeClass(u),Ct.removeClass(c),e.each(Ct.get(0).className.split(/\s+/),function(e,n){0===n.indexOf(h)&&Ct.removeClass(n)}),e(y+", "+B).each(function(){l.scrollOverflowHandler.remove(e(this)),e(this).removeClass(j+" "+p)}),pt(Rt),Rt.find(T+", "+W+", "+F).each(function(){e(this).replaceWith(this.childNodes)}),xt.scrollTop(0);var n=[w,z,V];e.each(n,function(n,t){e("."+t).removeClass(t)})}function pt(e){return e.css({"-webkit-transition":"none",transition:"none"})}function vt(e){return null!==l[e]&&"object"==typeof l[e]?l[e].enabled&&At[e]:l[e]&&At[e]}function gt(e,n,t){var o=Array.isArray(t)?t.join(", "):t;vt(e)&&At[e][n](o)}function mt(){return vt("dragAndMove")&&At.dragAndMove.isAnimating}function St(){return vt("dragAndMove")&&At.dragAndMove.isGrabbing}function wt(e,n,t){l[e]=n,"internal"!==t&&(Gt[e]=n)}function yt(){return e("html").hasClass(u)?void bt("error","Fullpage.js can only be initialized once and you are doing it multiple times!"):(l.continuousVertical&&(l.loopTop||l.loopBottom)&&(l.continuousVertical=!1,bt("warn","Option `loopTop/loopBottom` is mutually exclusive with `continuousVertical`; `continuousVertical` disabled")),l.scrollBar&&l.scrollOverflow&&bt("warn","Option `scrollBar` is mutually exclusive with `scrollOverflow`. Sections with scrollOverflow might not work well in Firefox"),!l.continuousVertical||!l.scrollBar&&l.autoScrolling||(l.continuousVertical=!1,bt("warn","Scroll bars (`scrollBar:true` or `autoScrolling:false`) are mutually exclusive with `continuousVertical`; `continuousVertical` disabled")),void e.each(l.anchors,function(n,t){var o=te.find("[name]").filter(function(){return e(this).attr("name")&&e(this).attr("name").toLowerCase()==t.toLowerCase()}),i=te.find("[id]").filter(function(){return e(this).attr("id")&&e(this).attr("id").toLowerCase()==t.toLowerCase()});(i.length||o.length)&&(bt("error","data-anchor tags can not have the same value as any `id` element on the site (or `name` element for IE)."),i.length&&bt("error",'"'+t+'" is is being used by another element `id` property'),o.length&&bt("error",'"'+t+'" is is being used by another element `name` property'))}))}function bt(e,n){console&&console[e]&&console[e]("fullPage: "+n)}if(e("html").hasClass(u))return void yt();var xt=e("html, body"),Ct=e("body"),At=e.fn.fullpage;l=e.extend(!0,{menu:!1,anchors:[],lockAnchors:!1,navigation:!1,navigationPosition:"right",navigationTooltips:[],showActiveTooltip:!1,slidesNavigation:!1,slidesNavPosition:"bottom",scrollBar:!1,hybrid:!1,css3:!0,scrollingSpeed:700,autoScrolling:!0,fitToSection:!0,fitToSectionDelay:1e3,easing:"easeInOutCubic",easingcss3:"ease",loopBottom:!1,loopTop:!1,loopHorizontal:!0,continuousVertical:!1,continuousHorizontal:!1,scrollHorizontally:!1,interlockedSlides:!1,dragAndMove:!1,offsetSections:!1,resetSliders:!1,fadingEffect:!1,normalScrollElements:null,scrollOverflow:!1,scrollOverflowReset:!1,scrollOverflowHandler:ie,scrollOverflowOptions:null,touchSensitivity:5,normalScrollElementTouchThreshold:5,bigSectionsDestination:null,keyboardScrolling:!0,animateAnchor:!0,recordHistory:!0,controlArrows:!0,controlArrowColor:"#fff",verticalCentered:!0,sectionsColor:[],paddingTop:0,paddingBottom:0,fixedElements:null,responsive:0,responsiveWidth:0,responsiveHeight:0,responsiveSlides:!1,parallax:!1,parallaxOptions:{type:"reveal",percentage:62,property:"translate"},sectionSelector:S,slideSelector:H,afterLoad:null,onLeave:null,afterRender:null,afterResize:null,afterReBuild:null,afterSlideLoad:null,onSlideLeave:null,afterResponsive:null,lazyLoading:!0},l);var Tt,It,kt,Lt,Mt=!1,Ot=navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/),Et="ontouchstart"in n||navigator.msMaxTouchPoints>0||navigator.maxTouchPoints,Rt=e(this),Ht=ne.height(),zt=!1,Bt=!0,Dt=!0,Pt=[],Ft={};Ft.m={up:!0,down:!0,left:!0,right:!0},Ft.k=e.extend(!0,{},Ft.m);var Vt,Wt,jt,Zt,Yt,Nt,qt=at(),Ut={
+touchmove:"ontouchmove"in n?"touchmove":qt.move,touchstart:"ontouchstart"in n?"touchstart":qt.down},Gt=e.extend(!0,{},l),Xt={};yt(),oe.click=Et,l.scrollOverflowOptions=e.extend(oe,l.scrollOverflowOptions),e.extend(e.easing,{easeInOutCubic:function(e,n,t,o,i){return(n/=i/2)<1?o/2*n*n*n+t:o/2*((n-=2)*n*n+2)+t}}),e(this).length&&(At.setAutoScrolling=s,At.setRecordHistory=q,At.setScrollingSpeed=X,At.setFitToSection=K,At.setLockAnchors=J,At.setMouseWheelScrolling=re,At.setAllowScrolling=ae,At.setKeyboardScrolling=le,At.moveSectionUp=se,At.moveSectionDown=ce,At.silentMoveTo=de,At.moveTo=fe,At.moveSlideRight=ue,At.moveSlideLeft=he,At.fitToSection=Pe,At.reBuild=pe,At.setResponsive=ve,At.getFullpageData=ge,At.destroy=ut,At.landscapeScroll=In,we("continuousHorizontal"),we("scrollHorizontally"),we("resetSliders"),we("interlockedSlides"),we("responsiveSlides"),we("fadingEffect"),we("dragAndMove"),we("offsetSections"),we("scrollOverflowReset"),we("parallax"),vt("dragAndMove")&&At.dragAndMove.init(),me(),Se(),vt("dragAndMove")&&At.dragAndMove.turnOffTouch());var Qt=!1,_t=0,Kt=0,Jt=0,$t=0,eo=0;!function(){var e=n.requestAnimationFrame||n.mozRequestAnimationFrame||n.webkitRequestAnimationFrame||n.msRequestAnimationFrame;n.requestAnimationFrame=e}();var no=(new Date).getTime(),to=!1,oo=0,io=0,ro=Ht},"undefined"!=typeof IScroll&&(IScroll.prototype.wheelOn=function(){this.wrapper.addEventListener("wheel",this),this.wrapper.addEventListener("mousewheel",this),this.wrapper.addEventListener("DOMMouseScroll",this)},IScroll.prototype.wheelOff=function(){this.wrapper.removeEventListener("wheel",this),this.wrapper.removeEventListener("mousewheel",this),this.wrapper.removeEventListener("DOMMouseScroll",this)});var ie={refreshId:null,iScrollInstances:[],toggleWheel:function(n){var t=e(b).find(s);t.each(function(){var t=e(this).data("iscrollInstance");"undefined"!=typeof t&&t&&(n?t.wheelOn():t.wheelOff())})},onLeave:function(){ie.toggleWheel(!1)},beforeLeave:function(){ie.onLeave()},afterLoad:function(){ie.toggleWheel(!0)},create:function(n,t,o){var i=n.find(s);i.height(t),i.each(function(){var n=e(this),t=n.data("iscrollInstance");t&&e.each(ie.iScrollInstances,function(){e(this).destroy()}),t=new IScroll(n.get(0),o),t.on("scrollEnd",function(){this.fp_isAtTop=this.y>-30,this.fp_isAtEnd=this.y-this.maxScrollY<30}),ie.iScrollInstances.push(t),t.wheelOff(),n.data("iscrollInstance",t)})},isScrolled:function(e,n){var t=n.data("iscrollInstance");return!t||("top"===e?t.y>=0&&!n.scrollTop():"bottom"===e?0-t.y+n.scrollTop()+1+n.innerHeight()>=n[0].scrollHeight:void 0)},scrollable:function(e){return e.find(F).length?e.find(D).find(s):e.find(s)},scrollHeight:function(e){return e.find(s).children().first().get(0).scrollHeight},remove:function(e){var n=e.find(s);if(n.length){var t=n.data("iscrollInstance");t&&t.destroy(),n.data("iscrollInstance",null)}e.find(s).children().first().children().first().unwrap().unwrap()},update:function(n,t){clearTimeout(ie.refreshId),ie.refreshId=setTimeout(function(){e.each(ie.iScrollInstances,function(){e(this).get(0).refresh()})},150),n.find(s).css("height",t+"px").parent().css("height",t+"px")},wrapContent:function(){return'<div class="'+l+'"><div class="fp-scroller"></div></div>'}}});
 /*
  * Lightcase - jQuery Plugin
  * The smart and flexible Lightbox Plugin.
@@ -14962,180 +11755,313 @@ return jQuery;
 !function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.Vue=t()}(this,function(){"use strict";function e(e){return null==e?"":"object"==typeof e?JSON.stringify(e,null,2):String(e)}function t(e){var t=parseFloat(e,10);return t||0===t?t:e}function n(e,t){for(var n=Object.create(null),r=e.split(","),i=0;i<r.length;i++)n[r[i]]=!0;return t?function(e){return n[e.toLowerCase()]}:function(e){return n[e]}}function r(e,t){if(e.length){var n=e.indexOf(t);if(n>-1)return e.splice(n,1)}}function i(e,t){return Er.call(e,t)}function o(e){return"string"==typeof e||"number"==typeof e}function a(e){var t=Object.create(null);return function(n){var r=t[n];return r||(t[n]=e(n))}}function s(e,t){function n(n){var r=arguments.length;return r?r>1?e.apply(t,arguments):e.call(t,n):e.call(t)}return n._length=e.length,n}function c(e,t){t=t||0;for(var n=e.length-t,r=new Array(n);n--;)r[n]=e[n+t];return r}function u(e,t){for(var n in t)e[n]=t[n];return e}function l(e){return null!==e&&"object"==typeof e}function f(e){return Pr.call(e)===Rr}function d(e){for(var t={},n=0;n<e.length;n++)e[n]&&u(t,e[n]);return t}function p(){}function v(e){return e.reduce(function(e,t){return e.concat(t.staticKeys||[])},[]).join(",")}function h(e,t){return e==t||!(!l(e)||!l(t))&&JSON.stringify(e)===JSON.stringify(t)}function m(e,t){for(var n=0;n<e.length;n++)if(h(e[n],t))return n;return-1}function g(e){var t=(e+"").charCodeAt(0);return 36===t||95===t}function y(e,t,n,r){Object.defineProperty(e,t,{value:n,enumerable:!!r,writable:!0,configurable:!0})}function _(e){if(!Fr.test(e)){var t=e.split(".");return function(e){for(var n=0;n<t.length;n++){if(!e)return;e=e[t[n]]}return e}}}function b(e){return/native code/.test(e.toString())}function $(e){Qr.target&&Xr.push(Qr.target),Qr.target=e}function w(){Qr.target=Xr.pop()}function C(){ei.length=0,ti={},ni=ri=!1}function x(){for(ri=!0,ei.sort(function(e,t){return e.id-t.id}),ii=0;ii<ei.length;ii++){var e=ei[ii],t=e.id;ti[t]=null,e.run()}Zr&&Br.devtools&&Zr.emit("flush"),C()}function k(e){var t=e.id;if(null==ti[t]){if(ti[t]=!0,ri){for(var n=ei.length-1;n>=0&&ei[n].id>e.id;)n--;ei.splice(Math.max(n,ii)+1,0,e)}else ei.push(e);ni||(ni=!0,Gr(x))}}function A(e){si.clear(),O(e,si)}function O(e,t){var n,r,i=Array.isArray(e);if((i||l(e))&&Object.isExtensible(e)){if(e.__ob__){var o=e.__ob__.dep.id;if(t.has(o))return;t.add(o)}if(i)for(n=e.length;n--;)O(e[n],t);else for(r=Object.keys(e),n=r.length;n--;)O(e[r[n]],t)}}function T(e,t){e.__proto__=t}function S(e,t,n){for(var r=0,i=n.length;r<i;r++){var o=n[r];y(e,o,t[o])}}function E(e){if(l(e)){var t;return i(e,"__ob__")&&e.__ob__ instanceof di?t=e.__ob__:fi.shouldConvert&&!Br._isServer&&(Array.isArray(e)||f(e))&&Object.isExtensible(e)&&!e._isVue&&(t=new di(e)),t}}function j(e,t,n,r){var i=new Qr,o=Object.getOwnPropertyDescriptor(e,t);if(!o||o.configurable!==!1){var a=o&&o.get,s=o&&o.set,c=E(n);Object.defineProperty(e,t,{enumerable:!0,configurable:!0,get:function(){var t=a?a.call(e):n;return Qr.target&&(i.depend(),c&&c.dep.depend(),Array.isArray(t)&&D(t)),t},set:function(t){var r=a?a.call(e):n;t!==r&&(s?s.call(e,t):n=t,c=E(t),i.notify())}})}}function L(e,t,n){if(Array.isArray(e))return e.length=Math.max(e.length,t),e.splice(t,1,n),n;if(i(e,t))return void(e[t]=n);var r=e.__ob__;if(!(e._isVue||r&&r.vmCount))return r?(j(r.value,t,n),r.dep.notify(),n):void(e[t]=n)}function N(e,t){var n=e.__ob__;e._isVue||n&&n.vmCount||i(e,t)&&(delete e[t],n&&n.dep.notify())}function D(e){for(var t=void 0,n=0,r=e.length;n<r;n++)t=e[n],t&&t.__ob__&&t.__ob__.dep.depend(),Array.isArray(t)&&D(t)}function M(e){e._watchers=[],P(e),R(e),I(e),F(e),H(e)}function P(e){var t=e.$options.props;if(t){var n=e.$options.propsData||{},r=e.$options._propKeys=Object.keys(t),i=!e.$parent;fi.shouldConvert=i;for(var o=function(i){var o=r[i];j(e,o,De(o,t,n,e))},a=0;a<r.length;a++)o(a);fi.shouldConvert=!0}}function R(e){var t=e.$options.data;t=e._data="function"==typeof t?t.call(e):t||{},f(t)||(t={});for(var n=Object.keys(t),r=e.$options.props,o=n.length;o--;)r&&i(r,n[o])||V(e,n[o]);E(t),t.__ob__&&t.__ob__.vmCount++}function I(e){var t=e.$options.computed;if(t)for(var n in t){var r=t[n];"function"==typeof r?(pi.get=B(r,e),pi.set=p):(pi.get=r.get?r.cache!==!1?B(r.get,e):s(r.get,e):p,pi.set=r.set?s(r.set,e):p),Object.defineProperty(e,n,pi)}}function B(e,t){var n=new ai(t,e,p,{lazy:!0});return function(){return n.dirty&&n.evaluate(),Qr.target&&n.depend(),n.value}}function F(e){var t=e.$options.methods;if(t)for(var n in t)e[n]=null==t[n]?p:s(t[n],e)}function H(e){var t=e.$options.watch;if(t)for(var n in t){var r=t[n];if(Array.isArray(r))for(var i=0;i<r.length;i++)U(e,n,r[i]);else U(e,n,r)}}function U(e,t,n){var r;f(n)&&(r=n,n=n.handler),"string"==typeof n&&(n=e[n]),e.$watch(t,n,r)}function z(e){var t={};t.get=function(){return this._data},Object.defineProperty(e.prototype,"$data",t),e.prototype.$set=L,e.prototype.$delete=N,e.prototype.$watch=function(e,t,n){var r=this;n=n||{},n.user=!0;var i=new ai(r,e,t,n);return n.immediate&&t.call(r,i.value),function(){i.teardown()}}}function V(e,t){g(t)||Object.defineProperty(e,t,{configurable:!0,enumerable:!0,get:function(){return e._data[t]},set:function(n){e._data[t]=n}})}function J(e){var t=new vi(e.tag,e.data,e.children,e.text,e.elm,e.ns,e.context,e.componentOptions);return t.isStatic=e.isStatic,t.key=e.key,t.isCloned=!0,t}function q(e){for(var t=new Array(e.length),n=0;n<e.length;n++)t[n]=J(e[n]);return t}function K(e,t,n,r){r+=t;var i=e.__injected||(e.__injected={});if(!i[r]){i[r]=!0;var o=e[t];o?e[t]=function(){o.apply(this,arguments),n.apply(this,arguments)}:e[t]=n}}function W(e,t,n,r,i){var o,a,s,c,u,l;for(o in e)if(a=e[o],s=t[o],a)if(s){if(a!==s)if(Array.isArray(s)){s.length=a.length;for(var f=0;f<s.length;f++)s[f]=a[f];e[o]=s}else s.fn=a,e[o]=s}else l="!"===o.charAt(0),u=l?o.slice(1):o,Array.isArray(a)?n(u,a.invoker=Z(a),l):(a.invoker||(c=a,a=e[o]={},a.fn=c,a.invoker=G(a)),n(u,a.invoker,l));else;for(o in t)e[o]||(u="!"===o.charAt(0)?o.slice(1):o,r(u,t[o].invoker))}function Z(e){return function(t){for(var n=arguments,r=1===arguments.length,i=0;i<e.length;i++)r?e[i](t):e[i].apply(null,n)}}function G(e){return function(t){var n=1===arguments.length;n?e.fn(t):e.fn.apply(null,arguments)}}function Y(e,t,n){if(o(e))return[Q(e)];if(Array.isArray(e)){for(var r=[],i=0,a=e.length;i<a;i++){var s=e[i],c=r[r.length-1];Array.isArray(s)?r.push.apply(r,Y(s,t,(n||"")+"_"+i)):o(s)?c&&c.text?c.text+=String(s):""!==s&&r.push(Q(s)):s instanceof vi&&(s.text&&c&&c.text?c.text+=s.text:(t&&X(s,t),s.tag&&null==s.key&&null!=n&&(s.key="__vlist"+n+"_"+i+"__"),r.push(s)))}return r}}function Q(e){return new vi(void 0,void 0,void 0,String(e))}function X(e,t){if(e.tag&&!e.ns&&(e.ns=t,e.children))for(var n=0,r=e.children.length;n<r;n++)X(e.children[n],t)}function ee(e){return e&&e.filter(function(e){return e&&e.componentOptions})[0]}function te(e){var t=e.$options,n=t.parent;if(n&&!t.abstract){for(;n.$options.abstract&&n.$parent;)n=n.$parent;n.$children.push(e)}e.$parent=n,e.$root=n?n.$root:e,e.$children=[],e.$refs={},e._watcher=null,e._inactive=!1,e._isMounted=!1,e._isDestroyed=!1,e._isBeingDestroyed=!1}function ne(e){e.prototype._mount=function(e,t){var n=this;return n.$el=e,n.$options.render||(n.$options.render=hi),re(n,"beforeMount"),n._watcher=new ai(n,function(){n._update(n._render(),t)},p),t=!1,null==n.$vnode&&(n._isMounted=!0,re(n,"mounted")),n},e.prototype._update=function(e,t){var n=this;n._isMounted&&re(n,"beforeUpdate");var r=n.$el,i=mi;mi=n;var o=n._vnode;n._vnode=e,o?n.$el=n.__patch__(o,e):n.$el=n.__patch__(n.$el,e,t),mi=i,r&&(r.__vue__=null),n.$el&&(n.$el.__vue__=n),n.$vnode&&n.$parent&&n.$vnode===n.$parent._vnode&&(n.$parent.$el=n.$el),n._isMounted&&re(n,"updated")},e.prototype._updateFromParent=function(e,t,n,r){var i=this,o=!(!i.$options._renderChildren&&!r);if(i.$options._parentVnode=n,i.$options._renderChildren=r,e&&i.$options.props){fi.shouldConvert=!1;for(var a=i.$options._propKeys||[],s=0;s<a.length;s++){var c=a[s];i[c]=De(c,i.$options.props,e,i)}fi.shouldConvert=!0,i.$options.propsData=e}if(t){var u=i.$options._parentListeners;i.$options._parentListeners=t,i._updateListeners(t,u)}o&&(i.$slots=be(r,i._renderContext),i.$forceUpdate())},e.prototype.$forceUpdate=function(){var e=this;e._watcher&&e._watcher.update()},e.prototype.$destroy=function(){var e=this;if(!e._isBeingDestroyed){re(e,"beforeDestroy"),e._isBeingDestroyed=!0;var t=e.$parent;!t||t._isBeingDestroyed||e.$options.abstract||r(t.$children,e),e._watcher&&e._watcher.teardown();for(var n=e._watchers.length;n--;)e._watchers[n].teardown();e._data.__ob__&&e._data.__ob__.vmCount--,e._isDestroyed=!0,re(e,"destroyed"),e.$off(),e.$el&&(e.$el.__vue__=null),e.__patch__(e._vnode,null)}}}function re(e,t){var n=e.$options[t];if(n)for(var r=0,i=n.length;r<i;r++)n[r].call(e);e.$emit("hook:"+t)}function ie(e,t,n,r,i){if(e&&(l(e)&&(e=Ae.extend(e)),"function"==typeof e)){if(ke(e),!e.cid)if(e.resolved)e=e.resolved;else if(e=fe(e,function(){n.$forceUpdate()}),!e)return;t=t||{};var o=de(t,e);if(e.options.functional)return oe(e,o,t,n,r);var a=t.on;t.on=t.nativeOn,e.options.abstract&&(t={}),ve(t);var s=e.options.name||i,c=new vi("vue-component-"+e.cid+(s?"-"+s:""),t,void 0,void 0,void 0,void 0,n,{Ctor:e,propsData:o,listeners:a,tag:i,children:r});return c}}function oe(e,t,n,r,i){var o={},a=e.options.props;if(a)for(var c in a)o[c]=De(c,a,t);var u=e.options.render.call(null,s(me,{_self:Object.create(r)}),{props:o,data:n,parent:r,children:Y(i),slots:function(){return be(i,r)}});return u instanceof vi&&(u.functionalContext=r,n.slot&&((u.data||(u.data={})).slot=n.slot)),u}function ae(e,t){var n=e.componentOptions,r={_isComponent:!0,parent:t,propsData:n.propsData,_componentTag:n.tag,_parentVnode:e,_parentListeners:n.listeners,_renderChildren:n.children},i=e.data.inlineTemplate;return i&&(r.render=i.render,r.staticRenderFns=i.staticRenderFns),new n.Ctor(r)}function se(e,t){if(!e.child||e.child._isDestroyed){var n=e.child=ae(e,mi);n.$mount(t?e.elm:void 0,t)}}function ce(e,t){var n=t.componentOptions,r=t.child=e.child;r._updateFromParent(n.propsData,n.listeners,t,n.children)}function ue(e){e.child._isMounted||(e.child._isMounted=!0,re(e.child,"mounted")),e.data.keepAlive&&(e.child._inactive=!1,re(e.child,"activated"))}function le(e){e.child._isDestroyed||(e.data.keepAlive?(e.child._inactive=!0,re(e.child,"deactivated")):e.child.$destroy())}function fe(e,t){if(!e.requested){e.requested=!0;var n=e.pendingCallbacks=[t],r=!0,i=function(t){if(l(t)&&(t=Ae.extend(t)),e.resolved=t,!r)for(var i=0,o=n.length;i<o;i++)n[i](t)},o=function(e){},a=e(i,o);return a&&"function"==typeof a.then&&!e.resolved&&a.then(i,o),r=!1,e.resolved}e.pendingCallbacks.push(t)}function de(e,t){var n=t.options.props;if(n){var r={},i=e.attrs,o=e.props,a=e.domProps;if(i||o||a)for(var s in n){var c=Mr(s);pe(r,o,s,c,!0)||pe(r,i,s,c)||pe(r,a,s,c)}return r}}function pe(e,t,n,r,o){if(t){if(i(t,n))return e[n]=t[n],o||delete t[n],!0;if(i(t,r))return e[n]=t[r],o||delete t[r],!0}return!1}function ve(e){e.hook||(e.hook={});for(var t=0;t<yi.length;t++){var n=yi[t],r=e.hook[n],i=gi[n];e.hook[n]=r?he(i,r):i}}function he(e,t){return function(n,r){e(n,r),t(n,r)}}function me(e,t,n){return t&&(Array.isArray(t)||"object"!=typeof t)&&(n=t,t=void 0),ge(this._self,e,t,n)}function ge(e,t,n,r){if(!n||!n.__ob__){if(!t)return hi();if("string"==typeof t){var i,o=Br.getTagNamespace(t);if(Br.isReservedTag(t))return new vi(t,n,Y(r,o),void 0,void 0,o,e);if(i=Ne(e.$options,"components",t))return ie(i,n,e,r,t);var a="foreignObject"===t?"xhtml":o;return new vi(t,n,Y(r,a),void 0,void 0,o,e)}return ie(t,n,e,r)}}function ye(e){e.$vnode=null,e._vnode=null,e._staticTrees=null,e._renderContext=e.$options._parentVnode&&e.$options._parentVnode.context,e.$slots=be(e.$options._renderChildren,e._renderContext),e.$createElement=s(me,e),e.$options.el&&e.$mount(e.$options.el)}function _e(n){function r(e,t,n){if(Array.isArray(e))for(var r=0;r<e.length;r++)e[r]&&"string"!=typeof e[r]&&i(e[r],t+"_"+r,n);else i(e,t,n)}function i(e,t,n){e.isStatic=!0,e.key=t,e.isOnce=n}n.prototype.$nextTick=function(e){Gr(e,this)},n.prototype._render=function(){var e=this,t=e.$options,n=t.render,r=t.staticRenderFns,i=t._parentVnode;if(e._isMounted)for(var o in e.$slots)e.$slots[o]=q(e.$slots[o]);r&&!e._staticTrees&&(e._staticTrees=[]),e.$vnode=i;var a;try{a=n.call(e._renderProxy,e.$createElement)}catch(t){if(Br.errorHandler)Br.errorHandler.call(null,t,e);else{if(Br._isServer)throw t;console.error(t)}a=e._vnode}return a instanceof vi||(a=hi()),a.parent=i,a},n.prototype._h=me,n.prototype._s=e,n.prototype._n=t,n.prototype._e=hi,n.prototype._q=h,n.prototype._i=m,n.prototype._m=function(e,t){var n=this._staticTrees[e];return n&&!t?Array.isArray(n)?q(n):J(n):(n=this._staticTrees[e]=this.$options.staticRenderFns[e].call(this._renderProxy),r(n,"__static__"+e,!1),n)},n.prototype._o=function(e,t,n){return r(e,"__once__"+t+(n?"_"+n:""),!0),e};var o=function(e){return e};n.prototype._f=function(e){return Ne(this.$options,"filters",e,!0)||o},n.prototype._l=function(e,t){var n,r,i,o,a;if(Array.isArray(e))for(n=new Array(e.length),r=0,i=e.length;r<i;r++)n[r]=t(e[r],r);else if("number"==typeof e)for(n=new Array(e),r=0;r<e;r++)n[r]=t(r+1,r);else if(l(e))for(o=Object.keys(e),n=new Array(o.length),r=0,i=o.length;r<i;r++)a=o[r],n[r]=t(e[a],a,r);return n},n.prototype._t=function(e,t){var n=this.$slots[e];return n||t},n.prototype._b=function(e,t,n){if(t)if(l(t)){Array.isArray(t)&&(t=d(t));for(var r in t)if("class"===r||"style"===r)e[r]=t[r];else{var i=n||Br.mustUseProp(r)?e.domProps||(e.domProps={}):e.attrs||(e.attrs={});i[r]=t[r]}}else;return e},n.prototype._k=function(e){return Br.keyCodes[e]}}function be(e,t){var n={};if(!e)return n;for(var r,i,o=Y(e)||[],a=[],s=0,c=o.length;s<c;s++)if(i=o[s],(i.context===t||i.functionalContext===t)&&i.data&&(r=i.data.slot)){var u=n[r]||(n[r]=[]);"template"===i.tag?u.push.apply(u,i.children):u.push(i)}else a.push(i);return a.length&&(1!==a.length||" "!==a[0].text&&!a[0].isComment)&&(n.default=a),n}function $e(e){e._events=Object.create(null);var t=e.$options._parentListeners,n=s(e.$on,e),r=s(e.$off,e);e._updateListeners=function(t,i){W(t,i||{},n,r,e)},t&&e._updateListeners(t)}function we(e){e.prototype.$on=function(e,t){var n=this;return(n._events[e]||(n._events[e]=[])).push(t),n},e.prototype.$once=function(e,t){function n(){r.$off(e,n),t.apply(r,arguments)}var r=this;return n.fn=t,r.$on(e,n),r},e.prototype.$off=function(e,t){var n=this;if(!arguments.length)return n._events=Object.create(null),n;var r=n._events[e];if(!r)return n;if(1===arguments.length)return n._events[e]=null,n;for(var i,o=r.length;o--;)if(i=r[o],i===t||i.fn===t){r.splice(o,1);break}return n},e.prototype.$emit=function(e){var t=this,n=t._events[e];if(n){n=n.length>1?c(n):n;for(var r=c(arguments,1),i=0,o=n.length;i<o;i++)n[i].apply(t,r)}return t}}function Ce(e){e.prototype._init=function(e){var t=this;t._uid=_i++,t._isVue=!0,e&&e._isComponent?xe(t,e):t.$options=Le(ke(t.constructor),e||{},t),t._renderProxy=t,t._self=t,te(t),$e(t),re(t,"beforeCreate"),M(t),re(t,"created"),ye(t)}}function xe(e,t){var n=e.$options=Object.create(e.constructor.options);n.parent=t.parent,n.propsData=t.propsData,n._parentVnode=t._parentVnode,n._parentListeners=t._parentListeners,n._renderChildren=t._renderChildren,n._componentTag=t._componentTag,t.render&&(n.render=t.render,n.staticRenderFns=t.staticRenderFns)}function ke(e){var t=e.options;if(e.super){var n=e.super.options,r=e.superOptions,i=e.extendOptions;n!==r&&(e.superOptions=n,i.render=t.render,i.staticRenderFns=t.staticRenderFns,t=e.options=Le(n,i),t.name&&(t.components[t.name]=e))}return t}function Ae(e){this._init(e)}function Oe(e,t){var n,r,o;for(n in t)r=e[n],o=t[n],i(e,n)?l(r)&&l(o)&&Oe(r,o):L(e,n,o);return e}function Te(e,t){return t?e?e.concat(t):Array.isArray(t)?t:[t]:e}function Se(e,t){var n=Object.create(e||null);return t?u(n,t):n}function Ee(e){var t=e.props;if(t){var n,r,i,o={};if(Array.isArray(t))for(n=t.length;n--;)r=t[n],"string"==typeof r&&(i=Lr(r),o[i]={type:null});else if(f(t))for(var a in t)r=t[a],i=Lr(a),o[i]=f(r)?r:{type:r};e.props=o}}function je(e){var t=e.directives;if(t)for(var n in t){var r=t[n];"function"==typeof r&&(t[n]={bind:r,update:r})}}function Le(e,t,n){function r(r){var i=wi[r]||Ci;l[r]=i(e[r],t[r],n,r)}Ee(t),je(t);var o=t.extends;if(o&&(e="function"==typeof o?Le(e,o.options,n):Le(e,o,n)),t.mixins)for(var a=0,s=t.mixins.length;a<s;a++){var c=t.mixins[a];c.prototype instanceof Ae&&(c=c.options),e=Le(e,c,n)}var u,l={};for(u in e)r(u);for(u in t)i(e,u)||r(u);return l}function Ne(e,t,n,r){if("string"==typeof n){var i=e[t],o=i[n]||i[Lr(n)]||i[Nr(Lr(n))];return o}}function De(e,t,n,r){var o=t[e],a=!i(n,e),s=n[e];if(Re(o.type)&&(a&&!i(o,"default")?s=!1:""!==s&&s!==Mr(e)||(s=!0)),void 0===s){s=Me(r,o,e);var c=fi.shouldConvert;fi.shouldConvert=!0,E(s),fi.shouldConvert=c}return s}function Me(e,t,n){if(i(t,"default")){var r=t.default;return l(r),e&&e.$options.propsData&&void 0===e.$options.propsData[n]&&void 0!==e[n]?e[n]:"function"==typeof r&&t.type!==Function?r.call(e):r}}function Pe(e){var t=e&&e.toString().match(/^\s*function (\w+)/);return t&&t[1]}function Re(e){if(!Array.isArray(e))return"Boolean"===Pe(e);for(var t=0,n=e.length;t<n;t++)if("Boolean"===Pe(e[t]))return!0;return!1}function Ie(e){e.use=function(e){if(!e.installed){var t=c(arguments,1);return t.unshift(this),"function"==typeof e.install?e.install.apply(e,t):e.apply(null,t),e.installed=!0,this}}}function Be(e){e.mixin=function(t){e.options=Le(e.options,t)}}function Fe(e){e.cid=0;var t=1;e.extend=function(e){e=e||{};var n=this,r=0===n.cid;if(r&&e._Ctor)return e._Ctor;var i=e.name||n.options.name,o=function(e){this._init(e)};return o.prototype=Object.create(n.prototype),o.prototype.constructor=o,o.cid=t++,o.options=Le(n.options,e),o.super=n,o.extend=n.extend,Br._assetTypes.forEach(function(e){o[e]=n[e]}),i&&(o.options.components[i]=o),o.superOptions=n.options,o.extendOptions=e,r&&(e._Ctor=o),o}}function He(e){Br._assetTypes.forEach(function(t){e[t]=function(n,r){return r?("component"===t&&f(r)&&(r.name=r.name||n,r=e.extend(r)),"directive"===t&&"function"==typeof r&&(r={bind:r,update:r}),this.options[t+"s"][n]=r,r):this.options[t+"s"][n]}})}function Ue(e){var t={};t.get=function(){return Br},Object.defineProperty(e,"config",t),e.util=xi,e.set=L,e.delete=N,e.nextTick=Gr,e.options=Object.create(null),Br._assetTypes.forEach(function(t){e.options[t+"s"]=Object.create(null)}),u(e.options.components,Ai),Ie(e),Be(e),Fe(e),He(e)}function ze(e){for(var t=e.data,n=e,r=e;r.child;)r=r.child._vnode,r.data&&(t=Ve(r.data,t));for(;n=n.parent;)n.data&&(t=Ve(t,n.data));return Je(t)}function Ve(e,t){return{staticClass:qe(e.staticClass,t.staticClass),class:e.class?[e.class,t.class]:t.class}}function Je(e){var t=e.class,n=e.staticClass;return n||t?qe(n,Ke(t)):""}function qe(e,t){return e?t?e+" "+t:e:t||""}function Ke(e){var t="";if(!e)return t;if("string"==typeof e)return e;if(Array.isArray(e)){for(var n,r=0,i=e.length;r<i;r++)e[r]&&(n=Ke(e[r]))&&(t+=n+" ");return t.slice(0,-1)}if(l(e)){for(var o in e)e[o]&&(t+=o+" ");return t.slice(0,-1)}return t}function We(e){return Fi(e)?"svg":"math"===e?"math":void 0}function Ze(e){if(!Ur)return!0;if(Ui(e))return!1;if(e=e.toLowerCase(),null!=zi[e])return zi[e];var t=document.createElement(e);return e.indexOf("-")>-1?zi[e]=t.constructor===window.HTMLUnknownElement||t.constructor===window.HTMLElement:zi[e]=/HTMLUnknownElement/.test(t.toString())}function Ge(e){if("string"==typeof e){if(e=document.querySelector(e),!e)return document.createElement("div")}return e}function Ye(e,t){var n=document.createElement(e);return"select"!==e?n:(t.data&&t.data.attrs&&"multiple"in t.data.attrs&&n.setAttribute("multiple","multiple"),n)}function Qe(e,t){return document.createElementNS(Mi[e],t)}function Xe(e){return document.createTextNode(e)}function et(e){return document.createComment(e)}function tt(e,t,n){e.insertBefore(t,n)}function nt(e,t){e.removeChild(t)}function rt(e,t){e.appendChild(t)}function it(e){return e.parentNode}function ot(e){return e.nextSibling}function at(e){return e.tagName}function st(e,t){e.textContent=t}function ct(e){return e.childNodes}function ut(e,t,n){e.setAttribute(t,n)}function lt(e,t){var n=e.data.ref;if(n){var i=e.context,o=e.child||e.elm,a=i.$refs;t?Array.isArray(a[n])?r(a[n],o):a[n]===o&&(a[n]=void 0):e.data.refInFor?Array.isArray(a[n])?a[n].push(o):a[n]=[o]:a[n]=o}}function ft(e){return null==e}function dt(e){return null!=e}function pt(e,t){return e.key===t.key&&e.tag===t.tag&&e.isComment===t.isComment&&!e.data==!t.data}function vt(e,t,n){var r,i,o={};for(r=t;r<=n;++r)i=e[r].key,dt(i)&&(o[i]=r);return o}function ht(e){function t(e){return new vi(C.tagName(e).toLowerCase(),{},[],void 0,e)}function n(e,t){function n(){0===--n.listeners&&r(e)}return n.listeners=t,n}function r(e){var t=C.parentNode(e);t&&C.removeChild(t,e)}function i(e,t,n){var r,i=e.data;if(e.isRootInsert=!n,dt(i)&&(dt(r=i.hook)&&dt(r=r.init)&&r(e),dt(r=e.child)))return u(e,t),e.elm;var o=e.children,s=e.tag;return dt(s)?(e.elm=e.ns?C.createElementNS(e.ns,s):C.createElement(s,e),l(e),a(e,o,t),dt(i)&&c(e,t)):e.isComment?e.elm=C.createComment(e.text):e.elm=C.createTextNode(e.text),e.elm}function a(e,t,n){if(Array.isArray(t))for(var r=0;r<t.length;++r)C.appendChild(e.elm,i(t[r],n,!0));else o(e.text)&&C.appendChild(e.elm,C.createTextNode(e.text))}function s(e){for(;e.child;)e=e.child._vnode;return dt(e.tag)}function c(e,t){for(var n=0;n<$.create.length;++n)$.create[n](qi,e);_=e.data.hook,dt(_)&&(_.create&&_.create(qi,e),_.insert&&t.push(e))}function u(e,t){e.data.pendingInsert&&t.push.apply(t,e.data.pendingInsert),e.elm=e.child.$el,s(e)?(c(e,t),l(e)):(lt(e),t.push(e))}function l(e){var t;dt(t=e.context)&&dt(t=t.$options._scopeId)&&C.setAttribute(e.elm,t,""),dt(t=mi)&&t!==e.context&&dt(t=t.$options._scopeId)&&C.setAttribute(e.elm,t,"")}function f(e,t,n,r,o,a){for(;r<=o;++r)C.insertBefore(e,i(n[r],a),t)}function d(e){var t,n,r=e.data;if(dt(r))for(dt(t=r.hook)&&dt(t=t.destroy)&&t(e),t=0;t<$.destroy.length;++t)$.destroy[t](e);if(dt(t=e.children))for(n=0;n<e.children.length;++n)d(e.children[n])}function p(e,t,n,r){for(;n<=r;++n){var i=t[n];dt(i)&&(dt(i.tag)?(v(i),d(i)):C.removeChild(e,i.elm))}}function v(e,t){if(t||dt(e.data)){var i=$.remove.length+1;for(t?t.listeners+=i:t=n(e.elm,i),dt(_=e.child)&&dt(_=_._vnode)&&dt(_.data)&&v(_,t),_=0;_<$.remove.length;++_)$.remove[_](e,t);dt(_=e.data.hook)&&dt(_=_.remove)?_(e,t):t()}else r(e.elm)}function h(e,t,n,r,o){for(var a,s,c,u,l=0,d=0,v=t.length-1,h=t[0],g=t[v],y=n.length-1,_=n[0],b=n[y],$=!o;l<=v&&d<=y;)ft(h)?h=t[++l]:ft(g)?g=t[--v]:pt(h,_)?(m(h,_,r),h=t[++l],_=n[++d]):pt(g,b)?(m(g,b,r),g=t[--v],b=n[--y]):pt(h,b)?(m(h,b,r),$&&C.insertBefore(e,h.elm,C.nextSibling(g.elm)),h=t[++l],b=n[--y]):pt(g,_)?(m(g,_,r),$&&C.insertBefore(e,g.elm,h.elm),g=t[--v],_=n[++d]):(ft(a)&&(a=vt(t,l,v)),s=dt(_.key)?a[_.key]:null,ft(s)?(C.insertBefore(e,i(_,r),h.elm),_=n[++d]):(c=t[s],c.tag!==_.tag?(C.insertBefore(e,i(_,r),h.elm),_=n[++d]):(m(c,_,r),t[s]=void 0,$&&C.insertBefore(e,_.elm,h.elm),_=n[++d])));l>v?(u=ft(n[y+1])?null:n[y+1].elm,f(e,u,n,d,y,r)):d>y&&p(e,t,l,v)}function m(e,t,n,r){if(e!==t){if(t.isStatic&&e.isStatic&&t.key===e.key&&(t.isCloned||t.isOnce))return void(t.elm=e.elm);var i,o=t.data,a=dt(o);a&&dt(i=o.hook)&&dt(i=i.prepatch)&&i(e,t);var c=t.elm=e.elm,u=e.children,l=t.children;if(a&&s(t)){for(i=0;i<$.update.length;++i)$.update[i](e,t);dt(i=o.hook)&&dt(i=i.update)&&i(e,t)}ft(t.text)?dt(u)&&dt(l)?u!==l&&h(c,u,l,n,r):dt(l)?(dt(e.text)&&C.setTextContent(c,""),f(c,null,l,0,l.length-1,n)):dt(u)?p(c,u,0,u.length-1):dt(e.text)&&C.setTextContent(c,""):e.text!==t.text&&C.setTextContent(c,t.text),a&&dt(i=o.hook)&&dt(i=i.postpatch)&&i(e,t)}}function g(e,t,n){if(n&&e.parent)e.parent.data.pendingInsert=t;else for(var r=0;r<t.length;++r)t[r].data.hook.insert(t[r])}function y(e,t,n){t.elm=e;var r=t.tag,i=t.data,o=t.children;if(dt(i)&&(dt(_=i.hook)&&dt(_=_.init)&&_(t,!0),dt(_=t.child)))return u(t,n),!0;if(dt(r)){if(dt(o)){var s=C.childNodes(e);if(s.length){var l=!0;if(s.length!==o.length)l=!1;else for(var f=0;f<o.length;f++)if(!y(s[f],o[f],n)){l=!1;break}if(!l)return!1}else a(t,o,n)}dt(i)&&c(t,n)}return!0}var _,b,$={},w=e.modules,C=e.nodeOps;for(_=0;_<Ki.length;++_)for($[Ki[_]]=[],b=0;b<w.length;++b)void 0!==w[b][Ki[_]]&&$[Ki[_]].push(w[b][Ki[_]]);return function(e,n,r,o){if(!n)return void(e&&d(e));var a,c,u=!1,l=[];if(e){var f=dt(e.nodeType);if(!f&&pt(e,n))m(e,n,l,o);else{if(f){if(1===e.nodeType&&e.hasAttribute("server-rendered")&&(e.removeAttribute("server-rendered"),r=!0),r&&y(e,n,l))return g(n,l,!0),e;e=t(e)}if(a=e.elm,c=C.parentNode(a),i(n,l),n.parent&&(n.parent.elm=n.elm,s(n)))for(var v=0;v<$.create.length;++v)$.create[v](qi,n.parent);null!==c?(C.insertBefore(c,n.elm,C.nextSibling(a)),p(c,[e],0,0)):dt(e.tag)&&d(e)}}else u=!0,i(n,l);return g(n,l,u),n.elm}}function mt(e,t){if(e.data.directives||t.data.directives){var n,r,i,o=e===qi,a=gt(e.data.directives,e.context),s=gt(t.data.directives,t.context),c=[],u=[];for(n in s)r=a[n],i=s[n],r?(i.oldValue=r.value,_t(i,"update",t,e),i.def&&i.def.componentUpdated&&u.push(i)):(_t(i,"bind",t,e),i.def&&i.def.inserted&&c.push(i));if(c.length){var l=function(){c.forEach(function(n){_t(n,"inserted",t,e)})};o?K(t.data.hook||(t.data.hook={}),"insert",l,"dir-insert"):l()}if(u.length&&K(t.data.hook||(t.data.hook={}),"postpatch",function(){u.forEach(function(n){_t(n,"componentUpdated",t,e)})},"dir-postpatch"),!o)for(n in a)s[n]||_t(a[n],"unbind",e)}}function gt(e,t){var n=Object.create(null);if(!e)return n;var r,i;for(r=0;r<e.length;r++)i=e[r],i.modifiers||(i.modifiers=Zi),n[yt(i)]=i,i.def=Ne(t.$options,"directives",i.name,!0);return n}function yt(e){return e.rawName||e.name+"."+Object.keys(e.modifiers||{}).join(".")}function _t(e,t,n,r){var i=e.def&&e.def[t];i&&i(n.elm,e,n,r)}function bt(e,t){if(e.data.attrs||t.data.attrs){var n,r,i,o=t.elm,a=e.data.attrs||{},s=t.data.attrs||{};s.__ob__&&(s=t.data.attrs=u({},s));for(n in s)r=s[n],i=a[n],i!==r&&$t(o,n,r);for(n in a)null==s[n]&&(Li(n)?o.removeAttributeNS(ji,Ni(n)):Si(n)||o.removeAttribute(n))}}function $t(e,t,n){Ei(t)?Di(n)?e.removeAttribute(t):e.setAttribute(t,t):Si(t)?e.setAttribute(t,Di(n)||"false"===n?"false":"true"):Li(t)?Di(n)?e.removeAttributeNS(ji,Ni(t)):e.setAttributeNS(ji,t,n):Di(n)?e.removeAttribute(t):e.setAttribute(t,n)}function wt(e,t){var n=t.elm,r=t.data,i=e.data;if(r.staticClass||r.class||i&&(i.staticClass||i.class)){var o=ze(t),a=n._transitionClasses;a&&(o=qe(o,Ke(a))),o!==n._prevClass&&(n.setAttribute("class",o),n._prevClass=o)}}function Ct(e,t){if(e.data.on||t.data.on){var n=t.data.on||{},r=e.data.on||{},i=t.elm._v_add||(t.elm._v_add=function(e,n,r){t.elm.addEventListener(e,n,r)}),o=t.elm._v_remove||(t.elm._v_remove=function(e,n){t.elm.removeEventListener(e,n)});W(n,r,i,o,t.context)}}function xt(e,t){if(e.data.domProps||t.data.domProps){var n,r,i=t.elm,o=e.data.domProps||{},a=t.data.domProps||{};a.__ob__&&(a=t.data.domProps=u({},a));for(n in o)null==a[n]&&(i[n]="");for(n in a)if("textContent"!==n&&"innerHTML"!==n||!t.children||(t.children.length=0),r=a[n],"value"===n){i._value=r;var s=null==r?"":String(r);i.value===s||i.composing||(i.value=s)}else i[n]=r}}function kt(e,t){if(e.data&&e.data.style||t.data.style){var n,r,i=t.elm,o=e.data.style||{},a=t.data.style||{};if("string"==typeof a)return void(i.style.cssText=a);var s=a.__ob__;Array.isArray(a)&&(a=t.data.style=d(a)),s&&(a=t.data.style=u({},a));for(r in o)null==a[r]&&no(i,r,"");for(r in a)n=a[r],n!==o[r]&&no(i,r,null==n?"":n)}}function At(e,t){if(t&&t.trim())if(e.classList)t.indexOf(" ")>-1?t.split(/\s+/).forEach(function(t){return e.classList.add(t)}):e.classList.add(t);else{var n=" "+e.getAttribute("class")+" ";n.indexOf(" "+t+" ")<0&&e.setAttribute("class",(n+t).trim())}}function Ot(e,t){if(t&&t.trim())if(e.classList)t.indexOf(" ")>-1?t.split(/\s+/).forEach(function(t){return e.classList.remove(t)}):e.classList.remove(t);else{for(var n=" "+e.getAttribute("class")+" ",r=" "+t+" ";n.indexOf(r)>=0;)n=n.replace(r," ");e.setAttribute("class",n.trim())}}function Tt(e){vo(function(){vo(e)})}function St(e,t){(e._transitionClasses||(e._transitionClasses=[])).push(t),At(e,t)}function Et(e,t){e._transitionClasses&&r(e._transitionClasses,t),Ot(e,t)}function jt(e,t,n){var r=Lt(e,t),i=r.type,o=r.timeout,a=r.propCount;if(!i)return n();var s=i===so?lo:po,c=0,u=function(){e.removeEventListener(s,l),n()},l=function(t){t.target===e&&++c>=a&&u()};setTimeout(function(){c<a&&u()},o+1),e.addEventListener(s,l)}function Lt(e,t){var n,r=window.getComputedStyle(e),i=r[uo+"Delay"].split(", "),o=r[uo+"Duration"].split(", "),a=Nt(i,o),s=r[fo+"Delay"].split(", "),c=r[fo+"Duration"].split(", "),u=Nt(s,c),l=0,f=0;t===so?a>0&&(n=so,l=a,f=o.length):t===co?u>0&&(n=co,l=u,f=c.length):(l=Math.max(a,u),n=l>0?a>u?so:co:null,f=n?n===so?o.length:c.length:0);var d=n===so&&ho.test(r[uo+"Property"]);return{type:n,timeout:l,propCount:f,hasTransform:d}}function Nt(e,t){for(;e.length<t.length;)e=e.concat(e);return Math.max.apply(null,t.map(function(t,n){return Dt(t)+Dt(e[n])}))}function Dt(e){return 1e3*Number(e.slice(0,-1))}function Mt(e){var t=e.elm;t._leaveCb&&(t._leaveCb.cancelled=!0,t._leaveCb());var n=Rt(e.data.transition);if(n&&!t._enterCb&&1===t.nodeType){var r=n.css,i=n.type,o=n.enterClass,a=n.enterActiveClass,s=n.appearClass,c=n.appearActiveClass,u=n.beforeEnter,l=n.enter,f=n.afterEnter,d=n.enterCancelled,p=n.beforeAppear,v=n.appear,h=n.afterAppear,m=n.appearCancelled,g=mi.$vnode,y=g&&g.parent?g.parent.context:mi,_=!y._isMounted||!e.isRootInsert;if(!_||v||""===v){var b=_?s:o,$=_?c:a,w=_?p||u:u,C=_&&"function"==typeof v?v:l,x=_?h||f:f,k=_?m||d:d,A=r!==!1&&!Jr,O=C&&(C._length||C.length)>1,T=t._enterCb=It(function(){A&&Et(t,$),T.cancelled?(A&&Et(t,b),k&&k(t)):x&&x(t),t._enterCb=null});e.data.show||K(e.data.hook||(e.data.hook={}),"insert",function(){var n=t.parentNode,r=n&&n._pending&&n._pending[e.key];r&&r.tag===e.tag&&r.elm._leaveCb&&r.elm._leaveCb(),C&&C(t,T)},"transition-insert"),w&&w(t),A&&(St(t,b),St(t,$),Tt(function(){Et(t,b),T.cancelled||O||jt(t,i,T)})),e.data.show&&C&&C(t,T),A||O||T()}}}function Pt(e,t){function n(){m.cancelled||(e.data.show||((r.parentNode._pending||(r.parentNode._pending={}))[e.key]=e),u&&u(r),v&&(St(r,s),St(r,c),Tt(function(){Et(r,s),m.cancelled||h||jt(r,a,m)})),l&&l(r,m),v||h||m())}var r=e.elm;r._enterCb&&(r._enterCb.cancelled=!0,r._enterCb());var i=Rt(e.data.transition);if(!i)return t();if(!r._leaveCb&&1===r.nodeType){var o=i.css,a=i.type,s=i.leaveClass,c=i.leaveActiveClass,u=i.beforeLeave,l=i.leave,f=i.afterLeave,d=i.leaveCancelled,p=i.delayLeave,v=o!==!1&&!Jr,h=l&&(l._length||l.length)>1,m=r._leaveCb=It(function(){r.parentNode&&r.parentNode._pending&&(r.parentNode._pending[e.key]=null),v&&Et(r,c),m.cancelled?(v&&Et(r,s),d&&d(r)):(t(),f&&f(r)),r._leaveCb=null});p?p(n):n()}}function Rt(e){if(e){if("object"==typeof e){var t={};return e.css!==!1&&u(t,mo(e.name||"v")),u(t,e),t}return"string"==typeof e?mo(e):void 0}}function It(e){var t=!1;return function(){t||(t=!0,e())}}function Bt(e,t,n){var r=t.value,i=e.multiple;if(!i||Array.isArray(r)){for(var o,a,s=0,c=e.options.length;s<c;s++)if(a=e.options[s],i)o=m(r,Ht(a))>-1,a.selected!==o&&(a.selected=o);else if(h(Ht(a),r))return void(e.selectedIndex!==s&&(e.selectedIndex=s));i||(e.selectedIndex=-1)}}function Ft(e,t){for(var n=0,r=t.length;n<r;n++)if(h(Ht(t[n]),e))return!1;return!0}function Ht(e){return"_value"in e?e._value:e.value}function Ut(e){e.target.composing=!0}function zt(e){e.target.composing=!1,Vt(e.target,"input")}function Vt(e,t){var n=document.createEvent("HTMLEvents");n.initEvent(t,!0,!0),e.dispatchEvent(n)}function Jt(e){return!e.child||e.data&&e.data.transition?e:Jt(e.child._vnode)}function qt(e){var t=e&&e.componentOptions;return t&&t.Ctor.options.abstract?qt(ee(t.children)):e}function Kt(e){var t={},n=e.$options;for(var r in n.propsData)t[r]=e[r];var i=n._parentListeners;
 for(var o in i)t[Lr(o)]=i[o].fn;return t}function Wt(e,t){return/\d-keep-alive$/.test(t.tag)?e("keep-alive"):null}function Zt(e){for(;e=e.parent;)if(e.data.transition)return!0}function Gt(e){e.elm._moveCb&&e.elm._moveCb(),e.elm._enterCb&&e.elm._enterCb()}function Yt(e){e.data.newPos=e.elm.getBoundingClientRect()}function Qt(e){var t=e.data.pos,n=e.data.newPos,r=t.left-n.left,i=t.top-n.top;if(r||i){e.data.moved=!0;var o=e.elm.style;o.transform=o.WebkitTransform="translate("+r+"px,"+i+"px)",o.transitionDuration="0s"}}function Xt(e,t){var n=document.createElement("div");return n.innerHTML='<div a="'+e+'">',n.innerHTML.indexOf(t)>0}function en(e){return Eo.innerHTML=e,Eo.textContent}function tn(e,t){return t&&(e=e.replace(ba,"\n")),e.replace(ya,"<").replace(_a,">").replace($a,"&").replace(wa,'"')}function nn(e,t){function n(t){f+=t,e=e.substring(t)}function r(){var t=e.match(Ro);if(t){var r={tagName:t[1],attrs:[],start:f};n(t[0].length);for(var i,o;!(i=e.match(Io))&&(o=e.match(Do));)n(o[0].length),r.attrs.push(o);if(i)return r.unarySlash=i[1],n(i[0].length),r.end=f,r}}function i(e){var n=e.tagName,r=e.unarySlash;u&&("p"===s&&Bi(n)&&o("",s),Ii(n)&&s===n&&o("",n));for(var i=l(n)||"html"===n&&"head"===s||!!r,a=e.attrs.length,f=new Array(a),d=0;d<a;d++){var p=e.attrs[d];zo&&p[0].indexOf('""')===-1&&(""===p[3]&&delete p[3],""===p[4]&&delete p[4],""===p[5]&&delete p[5]);var v=p[3]||p[4]||p[5]||"";f[d]={name:p[1],value:tn(v,t.shouldDecodeNewlines)}}i||(c.push({tag:n,attrs:f}),s=n,r=""),t.start&&t.start(n,f,i,e.start,e.end)}function o(e,n,r,i){var o;if(null==r&&(r=f),null==i&&(i=f),n){var a=n.toLowerCase();for(o=c.length-1;o>=0&&c[o].tag.toLowerCase()!==a;o--);}else o=0;if(o>=0){for(var u=c.length-1;u>=o;u--)t.end&&t.end(c[u].tag,r,i);c.length=o,s=o&&c[o-1].tag}else"br"===n.toLowerCase()?t.start&&t.start(n,[],!0,r,i):"p"===n.toLowerCase()&&(t.start&&t.start(n,[],!1,r,i),t.end&&t.end(n,r,i))}for(var a,s,c=[],u=t.expectHTML,l=t.isUnaryTag||Ir,f=0;e;){if(a=e,s&&ma(s,t.sfc,c)){var d=s.toLowerCase(),p=ga[d]||(ga[d]=new RegExp("([\\s\\S]*?)(</"+d+"[^>]*>)","i")),v=0,h=e.replace(p,function(e,n,r){return v=r.length,"script"!==d&&"style"!==d&&"noscript"!==d&&(n=n.replace(/<!--([\s\S]*?)-->/g,"$1").replace(/<!\[CDATA\[([\s\S]*?)]]>/g,"$1")),t.chars&&t.chars(n),""});f+=e.length-h.length,e=h,o("</"+d+">",d,f-v,f)}else{var m=e.indexOf("<");if(0===m){if(Ho.test(e)){var g=e.indexOf("-->");if(g>=0){n(g+3);continue}}if(Uo.test(e)){var y=e.indexOf("]>");if(y>=0){n(y+2);continue}}var _=e.match(Fo);if(_){n(_[0].length);continue}var b=e.match(Bo);if(b){var $=f;n(b[0].length),o(b[0],b[1],$,f);continue}var w=r();if(w){i(w);continue}}var C=void 0,x=void 0,k=void 0;if(m>0){for(x=e.slice(m);!(Bo.test(x)||Ro.test(x)||Ho.test(x)||Uo.test(x)||(k=x.indexOf("<",1),k<0));)m+=k,x=e.slice(m);C=e.substring(0,m),n(m)}m<0&&(C=e,e=""),t.chars&&C&&t.chars(C)}if(e===a&&t.chars){t.chars(e);break}}o()}function rn(e){function t(){(a||(a=[])).push(e.slice(d,i).trim()),d=i+1}var n,r,i,o,a,s=!1,c=!1,u=0,l=0,f=0,d=0;for(i=0;i<e.length;i++)if(r=n,n=e.charCodeAt(i),s)39===n&&92!==r&&(s=!s);else if(c)34===n&&92!==r&&(c=!c);else if(124!==n||124===e.charCodeAt(i+1)||124===e.charCodeAt(i-1)||u||l||f)switch(n){case 34:c=!0;break;case 39:s=!0;break;case 40:f++;break;case 41:f--;break;case 91:l++;break;case 93:l--;break;case 123:u++;break;case 125:u--}else void 0===o?(d=i+1,o=e.slice(0,i).trim()):t();if(void 0===o?o=e.slice(0,i).trim():0!==d&&t(),a)for(i=0;i<a.length;i++)o=on(o,a[i]);return o}function on(e,t){var n=t.indexOf("(");if(n<0)return'_f("'+t+'")('+e+")";var r=t.slice(0,n),i=t.slice(n+1);return'_f("'+r+'")('+e+","+i}function an(e,t){var n=t?ka(t):Ca;if(n.test(e)){for(var r,i,o=[],a=n.lastIndex=0;r=n.exec(e);){i=r.index,i>a&&o.push(JSON.stringify(e.slice(a,i)));var s=rn(r[1].trim());o.push("_s("+s+")"),a=i+r[0].length}return a<e.length&&o.push(JSON.stringify(e.slice(a))),o.join("+")}}function sn(e){console.error("[Vue parser]: "+e)}function cn(e,t){return e?e.map(function(e){return e[t]}).filter(function(e){return e}):[]}function un(e,t,n){(e.props||(e.props=[])).push({name:t,value:n})}function ln(e,t,n){(e.attrs||(e.attrs=[])).push({name:t,value:n})}function fn(e,t,n,r,i,o){(e.directives||(e.directives=[])).push({name:t,rawName:n,value:r,arg:i,modifiers:o})}function dn(e,t,n,r,i){r&&r.capture&&(delete r.capture,t="!"+t);var o;r&&r.native?(delete r.native,o=e.nativeEvents||(e.nativeEvents={})):o=e.events||(e.events={});var a={value:n,modifiers:r},s=o[t];Array.isArray(s)?i?s.unshift(a):s.push(a):s?o[t]=i?[a,s]:[s,a]:o[t]=a}function pn(e,t,n){var r=vn(e,":"+t)||vn(e,"v-bind:"+t);if(null!=r)return r;if(n!==!1){var i=vn(e,t);if(null!=i)return JSON.stringify(i)}}function vn(e,t){var n;if(null!=(n=e.attrsMap[t]))for(var r=e.attrsList,i=0,o=r.length;i<o;i++)if(r[i].name===t){r.splice(i,1);break}return n}function hn(e,t){Vo=t.warn||sn,Jo=t.getTagNamespace||Ir,qo=t.mustUseProp||Ir,Ko=t.isPreTag||Ir,Wo=cn(t.modules,"preTransformNode"),Zo=cn(t.modules,"transformNode"),Go=cn(t.modules,"postTransformNode"),Yo=t.delimiters;var n,r,i=[],o=t.preserveWhitespace!==!1,a=!1,s=!1;return nn(e,{expectHTML:t.expectHTML,isUnaryTag:t.isUnaryTag,shouldDecodeNewlines:t.shouldDecodeNewlines,start:function(e,o,c){function u(e){}var l=r&&r.ns||Jo(e);t.isIE&&"svg"===l&&(o=Ln(o));var f={type:1,tag:e,attrsList:o,attrsMap:Sn(o,t.isIE),parent:r,children:[]};l&&(f.ns=l),jn(f)&&(f.forbidden=!0);for(var d=0;d<Wo.length;d++)Wo[d](f,t);if(a||(mn(f),f.pre&&(a=!0)),Ko(f.tag)&&(s=!0),a)gn(f);else{bn(f),$n(f),Cn(f),yn(f),f.plain=!f.key&&!o.length,_n(f),xn(f),kn(f);for(var p=0;p<Zo.length;p++)Zo[p](f,t);An(f)}n?i.length||n.if&&f.else&&(u(f),n.elseBlock=f):(n=f,u(n)),r&&!f.forbidden&&(f.else?wn(f,r):(r.children.push(f),f.parent=r)),c||(r=f,i.push(f));for(var v=0;v<Go.length;v++)Go[v](f,t)},end:function(){var e=i[i.length-1],t=e.children[e.children.length-1];t&&3===t.type&&" "===t.text&&e.children.pop(),i.length-=1,r=i[i.length-1],e.pre&&(a=!1),Ko(e.tag)&&(s=!1)},chars:function(e){if(r&&(e=s||e.trim()?Da(e):o&&r.children.length?" ":"")){var t;!a&&" "!==e&&(t=an(e,Yo))?r.children.push({type:2,expression:t,text:e}):(e=e.replace(Na,""),r.children.push({type:3,text:e}))}}}),n}function mn(e){null!=vn(e,"v-pre")&&(e.pre=!0)}function gn(e){var t=e.attrsList.length;if(t)for(var n=e.attrs=new Array(t),r=0;r<t;r++)n[r]={name:e.attrsList[r].name,value:JSON.stringify(e.attrsList[r].value)};else e.pre||(e.plain=!0)}function yn(e){var t=pn(e,"key");t&&(e.key=t)}function _n(e){var t=pn(e,"ref");t&&(e.ref=t,e.refInFor=On(e))}function bn(e){var t;if(t=vn(e,"v-for")){var n=t.match(Oa);if(!n)return;e.for=n[2].trim();var r=n[1].trim(),i=r.match(Ta);i?(e.alias=i[1].trim(),e.iterator1=i[2].trim(),i[3]&&(e.iterator2=i[3].trim())):e.alias=r}}function $n(e){var t=vn(e,"v-if");t&&(e.if=t),null!=vn(e,"v-else")&&(e.else=!0)}function wn(e,t){var n=En(t.children);n&&n.if&&(n.elseBlock=e)}function Cn(e){var t=vn(e,"v-once");null!=t&&(e.once=!0)}function xn(e){if("slot"===e.tag)e.slotName=pn(e,"name");else{var t=pn(e,"slot");t&&(e.slotTarget=t)}}function kn(e){var t;(t=pn(e,"is"))&&(e.component=t),null!=vn(e,"inline-template")&&(e.inlineTemplate=!0)}function An(e){var t,n,r,i,o,a,s,c,u=e.attrsList;for(t=0,n=u.length;t<n;t++)if(r=i=u[t].name,o=u[t].value,Aa.test(r))if(e.hasBindings=!0,s=Tn(r),s&&(r=r.replace(La,"")),Sa.test(r))r=r.replace(Sa,""),s&&s.prop&&(c=!0,r=Lr(r),"innerHtml"===r&&(r="innerHTML")),c||qo(r)?un(e,r,o):ln(e,r,o);else if(Ea.test(r))r=r.replace(Ea,""),dn(e,r,o,s);else{r=r.replace(Aa,"");var l=r.match(ja);l&&(a=l[1])&&(r=r.slice(0,-(a.length+1))),fn(e,r,i,o,a,s)}else ln(e,r,JSON.stringify(o))}function On(e){for(var t=e;t;){if(void 0!==t.for)return!0;t=t.parent}return!1}function Tn(e){var t=e.match(La);if(t){var n={};return t.forEach(function(e){n[e.slice(1)]=!0}),n}}function Sn(e,t){for(var n={},r=0,i=e.length;r<i;r++)n[e[r].name]=e[r].value;return n}function En(e){for(var t=e.length;t--;)if(e[t].tag)return e[t]}function jn(e){return"style"===e.tag||"script"===e.tag&&(!e.attrsMap.type||"text/javascript"===e.attrsMap.type)}function Ln(e){for(var t=[],n=0;n<e.length;n++){var r=e[n];Ma.test(r.name)||(r.name=r.name.replace(Pa,""),t.push(r))}return t}function Nn(e,t){e&&(Qo=Ra(t.staticKeys||""),Xo=t.isReservedTag||function(){return!1},Mn(e),Pn(e,!1))}function Dn(e){return n("type,tag,attrsList,attrsMap,plain,parent,children,attrs"+(e?","+e:""))}function Mn(e){if(e.static=Rn(e),1===e.type)for(var t=0,n=e.children.length;t<n;t++){var r=e.children[t];Mn(r),r.static||(e.static=!1)}}function Pn(e,t){if(1===e.type){if((e.static||e.once)&&(e.staticInFor=t),e.static)return void(e.staticRoot=!0);if(e.children)for(var n=0,r=e.children.length;n<r;n++)Pn(e.children[n],t||!!e.for)}}function Rn(e){return 2!==e.type&&(3===e.type||!(!e.pre&&(e.hasBindings||e.if||e.for||Sr(e.tag)||!Xo(e.tag)||In(e)||!Object.keys(e).every(Qo))))}function In(e){for(;e.parent;){if(e=e.parent,"template"!==e.tag)return!1;if(e.for)return!0}return!1}function Bn(e,t){var n=t?"nativeOn:{":"on:{";for(var r in e)n+='"'+r+'":'+Fn(e[r])+",";return n.slice(0,-1)+"}"}function Fn(e){if(e){if(Array.isArray(e))return"["+e.map(Fn).join(",")+"]";if(e.modifiers){var t="",n=[];for(var r in e.modifiers)Fa[r]?t+=Fa[r]:n.push(r);n.length&&(t=Hn(n)+t);var i=Ia.test(e.value)?e.value+"($event)":e.value;return"function($event){"+t+i+"}"}return Ia.test(e.value)?e.value:"function($event){"+e.value+"}"}return"function(){}"}function Hn(e){var t=1===e.length?Un(e[0]):Array.prototype.concat.apply([],e.map(Un));return Array.isArray(t)?"if("+t.map(function(e){return"$event.keyCode!=="+e}).join("&&")+")return;":"if($event.keyCode!=="+t+")return;"}function Un(e){return parseInt(e,10)||Ba[e]||"_k("+JSON.stringify(e)+")"}function zn(e,t){e.wrapData=function(e){return"_b("+e+","+t.value+(t.modifiers&&t.modifiers.prop?",true":"")+")"}}function Vn(e,t){var n=ia,r=ia=[],i=oa;oa=0,aa=t,ea=t.warn||sn,ta=cn(t.modules,"transformCode"),na=cn(t.modules,"genData"),ra=t.directives||{};var o=e?Jn(e):'_h("div")';return ia=n,oa=i,{render:"with(this){return "+o+"}",staticRenderFns:r}}function Jn(e){if(e.staticRoot&&!e.staticProcessed)return qn(e);if(e.once&&!e.onceProcessed)return Kn(e);if(e.for&&!e.forProcessed)return Gn(e);if(e.if&&!e.ifProcessed)return Wn(e);if("template"!==e.tag||e.slotTarget){if("slot"===e.tag)return nr(e);var t;if(e.component)t=rr(e.component,e);else{var n=e.plain?void 0:Yn(e),r=e.inlineTemplate?null:Xn(e);t="_h('"+e.tag+"'"+(n?","+n:"")+(r?","+r:"")+")"}for(var i=0;i<ta.length;i++)t=ta[i](e,t);return t}return Xn(e)||"void 0"}function qn(e){return e.staticProcessed=!0,ia.push("with(this){return "+Jn(e)+"}"),"_m("+(ia.length-1)+(e.staticInFor?",true":"")+")"}function Kn(e){if(e.onceProcessed=!0,e.staticInFor){for(var t="",n=e.parent;n;){if(n.for){t=n.key;break}n=n.parent}return t?"_o("+Jn(e)+","+oa++ +(t?","+t:"")+")":Jn(e)}return qn(e)}function Wn(e){var t=e.if;return e.ifProcessed=!0,"("+t+")?"+Jn(e)+":"+Zn(e)}function Zn(e){return e.elseBlock?Jn(e.elseBlock):"_e()"}function Gn(e){var t=e.for,n=e.alias,r=e.iterator1?","+e.iterator1:"",i=e.iterator2?","+e.iterator2:"";return e.forProcessed=!0,"_l(("+t+"),function("+n+r+i+"){return "+Jn(e)+"})"}function Yn(e){var t="{",n=Qn(e);n&&(t+=n+","),e.key&&(t+="key:"+e.key+","),e.ref&&(t+="ref:"+e.ref+","),e.refInFor&&(t+="refInFor:true,"),e.component&&(t+='tag:"'+e.tag+'",'),e.slotTarget&&(t+="slot:"+e.slotTarget+",");for(var r=0;r<na.length;r++)t+=na[r](e);if(e.attrs&&(t+="attrs:{"+ir(e.attrs)+"},"),e.props&&(t+="domProps:{"+ir(e.props)+"},"),e.events&&(t+=Bn(e.events)+","),e.nativeEvents&&(t+=Bn(e.nativeEvents,!0)+","),e.inlineTemplate){var i=e.children[0];if(1===i.type){var o=Vn(i,aa);t+="inlineTemplate:{render:function(){"+o.render+"},staticRenderFns:["+o.staticRenderFns.map(function(e){return"function(){"+e+"}"}).join(",")+"]}"}}return t=t.replace(/,$/,"")+"}",e.wrapData&&(t=e.wrapData(t)),t}function Qn(e){var t=e.directives;if(t){var n,r,i,o,a="directives:[",s=!1;for(n=0,r=t.length;n<r;n++){i=t[n],o=!0;var c=ra[i.name]||Ha[i.name];c&&(o=!!c(e,i,ea)),o&&(s=!0,a+='{name:"'+i.name+'",rawName:"'+i.rawName+'"'+(i.value?",value:("+i.value+"),expression:"+JSON.stringify(i.value):"")+(i.arg?',arg:"'+i.arg+'"':"")+(i.modifiers?",modifiers:"+JSON.stringify(i.modifiers):"")+"},")}return s?a.slice(0,-1)+"]":void 0}}function Xn(e){if(e.children.length)return"["+e.children.map(er).join(",")+"]"}function er(e){return 1===e.type?Jn(e):tr(e)}function tr(e){return 2===e.type?e.expression:JSON.stringify(e.text)}function nr(e){var t=e.slotName||'"default"',n=Xn(e);return"_t("+t+(n?","+n:"")+")"}function rr(e,t){var n=t.inlineTemplate?null:Xn(t);return"_h("+e+","+Yn(t)+(n?","+n:"")+")"}function ir(e){for(var t="",n=0;n<e.length;n++){var r=e[n];t+='"'+r.name+'":'+r.value+","}return t.slice(0,-1)}function or(e,t){var n=hn(e.trim(),t);Nn(n,t);var r=Vn(n,t);return{ast:n,render:r.render,staticRenderFns:r.staticRenderFns}}function ar(e,t){var n=(t.warn||sn,vn(e,"class"));n&&(e.staticClass=JSON.stringify(n));var r=pn(e,"class",!1);r&&(e.classBinding=r)}function sr(e){var t="";return e.staticClass&&(t+="staticClass:"+e.staticClass+","),e.classBinding&&(t+="class:"+e.classBinding+","),t}function cr(e){var t=pn(e,"style",!1);t&&(e.styleBinding=t)}function ur(e){return e.styleBinding?"style:("+e.styleBinding+"),":""}function lr(e){if(ca=e,sa=ca.length,la=fa=da=0,e.indexOf("[")<0)return{exp:e,idx:null};for(;!dr();)ua=fr(),pr(ua)?hr(ua):91===ua&&vr(ua);return{exp:e.substring(0,fa),idx:e.substring(fa+1,da)}}function fr(){return ca.charCodeAt(++la)}function dr(){return la>=sa}function pr(e){return 34===e||39===e}function vr(e){var t=1;for(fa=la;!dr();)if(e=fr(),pr(e))hr(e);else if(91===e&&t++,93===e&&t--,0===t){da=la;break}}function hr(e){for(var t=e;!dr()&&(e=fr(),e!==t););}function mr(e,t,n){pa=n;var r=t.value,i=t.modifiers,o=e.tag,a=e.attrsMap.type;return"select"===o?br(e,r,i):"input"===o&&"checkbox"===a?gr(e,r,i):"input"===o&&"radio"===a?yr(e,r,i):_r(e,r,i),!0}function gr(e,t,n){var r=n&&n.number,i=pn(e,"value")||"null",o=pn(e,"true-value")||"true",a=pn(e,"false-value")||"false";un(e,"checked","Array.isArray("+t+")?_i("+t+","+i+")>-1:_q("+t+","+o+")"),dn(e,"change","var $$a="+t+",$$el=$event.target,$$c=$$el.checked?("+o+"):("+a+");if(Array.isArray($$a)){var $$v="+(r?"_n("+i+")":i)+",$$i=_i($$a,$$v);if($$c){$$i<0&&("+t+"=$$a.concat($$v))}else{$$i>-1&&("+t+"=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{"+t+"=$$c}",null,!0)}function yr(e,t,n){var r=n&&n.number,i=pn(e,"value")||"null";i=r?"_n("+i+")":i,un(e,"checked","_q("+t+","+i+")"),dn(e,"change",$r(t,i),null,!0)}function _r(e,t,n){var r=e.attrsMap.type,i=n||{},o=i.lazy,a=i.number,s=i.trim,c=o||Vr&&"range"===r?"change":"input",u=!o&&"range"!==r,l="input"===e.tag||"textarea"===e.tag,f=l?"$event.target.value"+(s?".trim()":""):"$event";f=a||"number"===r?"_n("+f+")":f;var d=$r(t,f);l&&u&&(d="if($event.target.composing)return;"+d),un(e,"value",l?"_s("+t+")":"("+t+")"),dn(e,c,d,null,!0)}function br(e,t,n){var r=n&&n.number,i='Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return '+(r?"_n(val)":"val")+"})"+(null==e.attrsMap.multiple?"[0]":""),o=$r(t,i);dn(e,"change",o,null,!0)}function $r(e,t){var n=lr(e);return null===n.idx?e+"="+t:"var $$exp = "+n.exp+", $$idx = "+n.idx+";if (!Array.isArray($$exp)){"+e+"="+t+"}else{$$exp.splice($$idx, 1, "+t+")}"}function wr(e,t){t.value&&un(e,"textContent","_s("+t.value+")")}function Cr(e,t){t.value&&un(e,"innerHTML","_s("+t.value+")")}function xr(e,t){return t=t?u(u({},Ka),t):Ka,or(e,t)}function kr(e,t,n){var r=(t&&t.warn||$i,t&&t.delimiters?String(t.delimiters)+e:e);if(qa[r])return qa[r];var i={},o=xr(e,t);i.render=Ar(o.render);var a=o.staticRenderFns.length;i.staticRenderFns=new Array(a);for(var s=0;s<a;s++)i.staticRenderFns[s]=Ar(o.staticRenderFns[s]);return qa[r]=i}function Ar(e){try{return new Function(e)}catch(e){return p}}function Or(e){if(e.outerHTML)return e.outerHTML;var t=document.createElement("div");return t.appendChild(e.cloneNode(!0)),t.innerHTML}var Tr,Sr=n("slot,component",!0),Er=Object.prototype.hasOwnProperty,jr=/-(\w)/g,Lr=a(function(e){return e.replace(jr,function(e,t){return t?t.toUpperCase():""})}),Nr=a(function(e){return e.charAt(0).toUpperCase()+e.slice(1)}),Dr=/([^-])([A-Z])/g,Mr=a(function(e){return e.replace(Dr,"$1-$2").replace(Dr,"$1-$2").toLowerCase()}),Pr=Object.prototype.toString,Rr="[object Object]",Ir=function(){return!1},Br={optionMergeStrategies:Object.create(null),silent:!1,devtools:!1,errorHandler:null,ignoredElements:null,keyCodes:Object.create(null),isReservedTag:Ir,isUnknownElement:Ir,getTagNamespace:p,mustUseProp:Ir,_assetTypes:["component","directive","filter"],_lifecycleHooks:["beforeCreate","created","beforeMount","mounted","beforeUpdate","updated","beforeDestroy","destroyed","activated","deactivated"],_maxUpdateCount:100,_isServer:!1},Fr=/[^\w.$]/,Hr="__proto__"in{},Ur="undefined"!=typeof window&&"[object Object]"!==Object.prototype.toString.call(window),zr=Ur&&window.navigator.userAgent.toLowerCase(),Vr=zr&&/msie|trident/.test(zr),Jr=zr&&zr.indexOf("msie 9.0")>0,qr=zr&&zr.indexOf("edge/")>0,Kr=zr&&zr.indexOf("android")>0,Wr=zr&&/iphone|ipad|ipod|ios/.test(zr),Zr=Ur&&window.__VUE_DEVTOOLS_GLOBAL_HOOK__,Gr=function(){function e(){r=!1;var e=n.slice(0);n.length=0;for(var t=0;t<e.length;t++)e[t]()}var t,n=[],r=!1;if("undefined"!=typeof Promise&&b(Promise)){var i=Promise.resolve();t=function(){i.then(e),Wr&&setTimeout(p)}}else if("undefined"==typeof MutationObserver||!b(MutationObserver)&&"[object MutationObserverConstructor]"!==MutationObserver.toString())t=function(){setTimeout(e,0)};else{var o=1,a=new MutationObserver(e),s=document.createTextNode(String(o));a.observe(s,{characterData:!0}),t=function(){o=(o+1)%2,s.data=String(o)}}return function(e,i){var o=i?function(){e.call(i)}:e;n.push(o),r||(r=!0,t())}}();Tr="undefined"!=typeof Set&&b(Set)?Set:function(){function e(){this.set=Object.create(null)}return e.prototype.has=function(e){return void 0!==this.set[e]},e.prototype.add=function(e){this.set[e]=1},e.prototype.clear=function(){this.set=Object.create(null)},e}();var Yr=0,Qr=function(){this.id=Yr++,this.subs=[]};Qr.prototype.addSub=function(e){this.subs.push(e)},Qr.prototype.removeSub=function(e){r(this.subs,e)},Qr.prototype.depend=function(){Qr.target&&Qr.target.addDep(this)},Qr.prototype.notify=function(){for(var e=this.subs.slice(),t=0,n=e.length;t<n;t++)e[t].update()},Qr.target=null;var Xr=[],ei=[],ti={},ni=!1,ri=!1,ii=0,oi=0,ai=function(e,t,n,r){void 0===r&&(r={}),this.vm=e,e._watchers.push(this),this.deep=!!r.deep,this.user=!!r.user,this.lazy=!!r.lazy,this.sync=!!r.sync,this.expression=t.toString(),this.cb=n,this.id=++oi,this.active=!0,this.dirty=this.lazy,this.deps=[],this.newDeps=[],this.depIds=new Tr,this.newDepIds=new Tr,"function"==typeof t?this.getter=t:(this.getter=_(t),this.getter||(this.getter=function(){})),this.value=this.lazy?void 0:this.get()};ai.prototype.get=function(){$(this);var e=this.getter.call(this.vm,this.vm);return this.deep&&A(e),w(),this.cleanupDeps(),e},ai.prototype.addDep=function(e){var t=e.id;this.newDepIds.has(t)||(this.newDepIds.add(t),this.newDeps.push(e),this.depIds.has(t)||e.addSub(this))},ai.prototype.cleanupDeps=function(){for(var e=this,t=this.deps.length;t--;){var n=e.deps[t];e.newDepIds.has(n.id)||n.removeSub(e)}var r=this.depIds;this.depIds=this.newDepIds,this.newDepIds=r,this.newDepIds.clear(),r=this.deps,this.deps=this.newDeps,this.newDeps=r,this.newDeps.length=0},ai.prototype.update=function(){this.lazy?this.dirty=!0:this.sync?this.run():k(this)},ai.prototype.run=function(){if(this.active){var e=this.get();if(e!==this.value||l(e)||this.deep){var t=this.value;if(this.value=e,this.user)try{this.cb.call(this.vm,e,t)}catch(e){if(!Br.errorHandler)throw e;Br.errorHandler.call(null,e,this.vm)}else this.cb.call(this.vm,e,t)}}},ai.prototype.evaluate=function(){this.value=this.get(),this.dirty=!1},ai.prototype.depend=function(){for(var e=this,t=this.deps.length;t--;)e.deps[t].depend()},ai.prototype.teardown=function(){var e=this;if(this.active){this.vm._isBeingDestroyed||this.vm._vForRemoving||r(this.vm._watchers,this);for(var t=this.deps.length;t--;)e.deps[t].removeSub(e);this.active=!1}};var si=new Tr,ci=Array.prototype,ui=Object.create(ci);["push","pop","shift","unshift","splice","sort","reverse"].forEach(function(e){var t=ci[e];y(ui,e,function(){for(var n=arguments,r=arguments.length,i=new Array(r);r--;)i[r]=n[r];var o,a=t.apply(this,i),s=this.__ob__;switch(e){case"push":o=i;break;case"unshift":o=i;break;case"splice":o=i.slice(2)}return o&&s.observeArray(o),s.dep.notify(),a})});var li=Object.getOwnPropertyNames(ui),fi={shouldConvert:!0,isSettingProps:!1},di=function(e){if(this.value=e,this.dep=new Qr,this.vmCount=0,y(e,"__ob__",this),Array.isArray(e)){var t=Hr?T:S;t(e,ui,li),this.observeArray(e)}else this.walk(e)};di.prototype.walk=function(e){for(var t=Object.keys(e),n=0;n<t.length;n++)j(e,t[n],e[t[n]])},di.prototype.observeArray=function(e){for(var t=0,n=e.length;t<n;t++)E(e[t])};var pi={enumerable:!0,configurable:!0,get:p,set:p},vi=function(e,t,n,r,i,o,a,s){this.tag=e,this.data=t,this.children=n,this.text=r,this.elm=i,this.ns=o,this.context=a,this.functionalContext=void 0,this.key=t&&t.key,this.componentOptions=s,this.child=void 0,this.parent=void 0,this.raw=!1,this.isStatic=!1,this.isRootInsert=!0,this.isComment=!1,this.isCloned=!1,this.isOnce=!1},hi=function(){var e=new vi;return e.text="",e.isComment=!0,e},mi=null,gi={init:se,prepatch:ce,insert:ue,destroy:le},yi=Object.keys(gi),_i=0;Ce(Ae),z(Ae),we(Ae),ne(Ae),_e(Ae);var bi,$i=p,wi=Br.optionMergeStrategies;wi.data=function(e,t,n){return n?e||t?function(){var r="function"==typeof t?t.call(n):t,i="function"==typeof e?e.call(n):void 0;return r?Oe(r,i):i}:void 0:t?"function"!=typeof t?e:e?function(){return Oe(t.call(this),e.call(this))}:t:e},Br._lifecycleHooks.forEach(function(e){wi[e]=Te}),Br._assetTypes.forEach(function(e){wi[e+"s"]=Se}),wi.watch=function(e,t){if(!t)return e;if(!e)return t;var n={};u(n,e);for(var r in t){var i=n[r],o=t[r];i&&!Array.isArray(i)&&(i=[i]),n[r]=i?i.concat(o):[o]}return n},wi.props=wi.methods=wi.computed=function(e,t){if(!t)return e;if(!e)return t;var n=Object.create(null);return u(n,e),u(n,t),n};var Ci=function(e,t){return void 0===t?e:t},xi=Object.freeze({defineReactive:j,_toString:e,toNumber:t,makeMap:n,isBuiltInTag:Sr,remove:r,hasOwn:i,isPrimitive:o,cached:a,camelize:Lr,capitalize:Nr,hyphenate:Mr,bind:s,toArray:c,extend:u,isObject:l,isPlainObject:f,toObject:d,noop:p,no:Ir,genStaticKeys:v,looseEqual:h,looseIndexOf:m,isReserved:g,def:y,parsePath:_,hasProto:Hr,inBrowser:Ur,UA:zr,isIE:Vr,isIE9:Jr,isEdge:qr,isAndroid:Kr,isIOS:Wr,devtools:Zr,nextTick:Gr,get _Set(){return Tr},mergeOptions:Le,resolveAsset:Ne,warn:$i,formatComponentName:bi,validateProp:De}),ki={name:"keep-alive",abstract:!0,created:function(){this.cache=Object.create(null)},render:function(){var e=ee(this.$slots.default);if(e&&e.componentOptions){var t=e.componentOptions,n=null==e.key?t.Ctor.cid+"::"+t.tag:e.key;this.cache[n]?e.child=this.cache[n].child:this.cache[n]=e,e.data.keepAlive=!0}return e},destroyed:function(){var e=this;for(var t in this.cache){var n=e.cache[t];re(n.child,"deactivated"),n.child.$destroy()}}},Ai={KeepAlive:ki};Ue(Ae),Object.defineProperty(Ae.prototype,"$isServer",{get:function(){return Br._isServer}}),Ae.version="2.0.5";var Oi,Ti=n("value,selected,checked,muted"),Si=n("contenteditable,draggable,spellcheck"),Ei=n("allowfullscreen,async,autofocus,autoplay,checked,compact,controls,declare,default,defaultchecked,defaultmuted,defaultselected,defer,disabled,enabled,formnovalidate,hidden,indeterminate,inert,ismap,itemscope,loop,multiple,muted,nohref,noresize,noshade,novalidate,nowrap,open,pauseonexit,readonly,required,reversed,scoped,seamless,selected,sortable,translate,truespeed,typemustmatch,visible"),ji="http://www.w3.org/1999/xlink",Li=function(e){return":"===e.charAt(5)&&"xlink"===e.slice(0,5)},Ni=function(e){return Li(e)?e.slice(6,e.length):""},Di=function(e){return null==e||e===!1},Mi={svg:"http://www.w3.org/2000/svg",math:"http://www.w3.org/1998/Math/MathML",xhtml:"http://www.w3.org/1999/xhtm"},Pi=n("html,body,base,head,link,meta,style,title,address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,nav,section,div,dd,dl,dt,figcaption,figure,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,menuitem,summary,content,element,shadow,template"),Ri=n("area,base,br,col,embed,frame,hr,img,input,isindex,keygen,link,meta,param,source,track,wbr",!0),Ii=n("colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr,source",!0),Bi=n("address,article,aside,base,blockquote,body,caption,col,colgroup,dd,details,dialog,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,head,header,hgroup,hr,html,legend,li,menuitem,meta,optgroup,option,param,rp,rt,source,style,summary,tbody,td,tfoot,th,thead,title,tr,track",!0),Fi=n("svg,animate,circle,clippath,cursor,defs,desc,ellipse,filter,font,font-face,g,glyph,image,line,marker,mask,missing-glyph,path,pattern,polygon,polyline,rect,switch,symbol,text,textpath,tspan,use,view",!0),Hi=function(e){return"pre"===e},Ui=function(e){return Pi(e)||Fi(e)},zi=Object.create(null),Vi=Object.freeze({createElement:Ye,createElementNS:Qe,createTextNode:Xe,createComment:et,insertBefore:tt,removeChild:nt,appendChild:rt,parentNode:it,nextSibling:ot,tagName:at,setTextContent:st,childNodes:ct,setAttribute:ut}),Ji={create:function(e,t){lt(t)},update:function(e,t){e.data.ref!==t.data.ref&&(lt(e,!0),lt(t))},destroy:function(e){lt(e,!0)}},qi=new vi("",{},[]),Ki=["create","update","remove","destroy"],Wi={create:mt,update:mt,destroy:function(e){mt(e,qi)}},Zi=Object.create(null),Gi=[Ji,Wi],Yi={create:bt,update:bt},Qi={create:wt,update:wt},Xi={create:Ct,update:Ct},eo={create:xt,update:xt},to=/^--/,no=function(e,t,n){to.test(t)?e.style.setProperty(t,n):e.style[io(t)]=n},ro=["Webkit","Moz","ms"],io=a(function(e){if(Oi=Oi||document.createElement("div"),e=Lr(e),"filter"!==e&&e in Oi.style)return e;for(var t=e.charAt(0).toUpperCase()+e.slice(1),n=0;n<ro.length;n++){var r=ro[n]+t;if(r in Oi.style)return r}}),oo={create:kt,update:kt},ao=Ur&&!Jr,so="transition",co="animation",uo="transition",lo="transitionend",fo="animation",po="animationend";ao&&(void 0===window.ontransitionend&&void 0!==window.onwebkittransitionend&&(uo="WebkitTransition",lo="webkitTransitionEnd"),void 0===window.onanimationend&&void 0!==window.onwebkitanimationend&&(fo="WebkitAnimation",po="webkitAnimationEnd"));var vo=Ur&&window.requestAnimationFrame||setTimeout,ho=/\b(transform|all)(,|$)/,mo=a(function(e){return{enterClass:e+"-enter",leaveClass:e+"-leave",appearClass:e+"-enter",enterActiveClass:e+"-enter-active",leaveActiveClass:e+"-leave-active",appearActiveClass:e+"-enter-active"}}),go=Ur?{create:function(e,t){t.data.show||Mt(t)},remove:function(e,t){e.data.show?t():Pt(e,t)}}:{},yo=[Yi,Qi,Xi,eo,oo,go],_o=yo.concat(Gi),bo=ht({nodeOps:Vi,modules:_o});Jr&&document.addEventListener("selectionchange",function(){var e=document.activeElement;e&&e.vmodel&&Vt(e,"input")});var $o={inserted:function(e,t,n){if("select"===n.tag){var r=function(){Bt(e,t,n.context)};r(),(Vr||qr)&&setTimeout(r,0)}else"textarea"!==n.tag&&"text"!==e.type||t.modifiers.lazy||(Kr||(e.addEventListener("compositionstart",Ut),e.addEventListener("compositionend",zt)),Jr&&(e.vmodel=!0))},componentUpdated:function(e,t,n){if("select"===n.tag){Bt(e,t,n.context);var r=e.multiple?t.value.some(function(t){return Ft(t,e.options)}):t.value!==t.oldValue&&Ft(t.value,e.options);r&&Vt(e,"change")}}},wo={bind:function(e,t,n){var r=t.value;n=Jt(n);var i=n.data&&n.data.transition;r&&i&&!Jr&&Mt(n);var o="none"===e.style.display?"":e.style.display;e.style.display=r?o:"none",e.__vOriginalDisplay=o},update:function(e,t,n){var r=t.value,i=t.oldValue;if(r!==i){n=Jt(n);var o=n.data&&n.data.transition;o&&!Jr?r?(Mt(n),e.style.display=e.__vOriginalDisplay):Pt(n,function(){e.style.display="none"}):e.style.display=r?e.__vOriginalDisplay:"none"}}},Co={model:$o,show:wo},xo={name:String,appear:Boolean,css:Boolean,mode:String,type:String,enterClass:String,leaveClass:String,enterActiveClass:String,leaveActiveClass:String,appearClass:String,appearActiveClass:String},ko={name:"transition",props:xo,abstract:!0,render:function(e){var t=this,n=this.$slots.default;if(n&&(n=n.filter(function(e){return e.tag}),n.length)){var r=this.mode,i=n[0];if(Zt(this.$vnode))return i;var o=qt(i);if(!o)return i;if(this._leaving)return Wt(e,i);var a=o.key=null==o.key||o.isStatic?"__v"+(o.tag+this._uid)+"__":o.key,s=(o.data||(o.data={})).transition=Kt(this),c=this._vnode,l=qt(c);if(o.data.directives&&o.data.directives.some(function(e){return"show"===e.name})&&(o.data.show=!0),l&&l.data&&l.key!==a){var f=l.data.transition=u({},s);if("out-in"===r)return this._leaving=!0,K(f,"afterLeave",function(){t._leaving=!1,t.$forceUpdate()},a),Wt(e,i);if("in-out"===r){var d,p=function(){d()};K(s,"afterEnter",p,a),K(s,"enterCancelled",p,a),K(f,"delayLeave",function(e){d=e},a)}}return i}}},Ao=u({tag:String,moveClass:String},xo);delete Ao.mode;var Oo={props:Ao,render:function(e){for(var t=this.tag||this.$vnode.data.tag||"span",n=Object.create(null),r=this.prevChildren=this.children,i=this.$slots.default||[],o=this.children=[],a=Kt(this),s=0;s<i.length;s++){var c=i[s];c.tag&&null!=c.key&&0!==String(c.key).indexOf("__vlist")&&(o.push(c),n[c.key]=c,(c.data||(c.data={})).transition=a)}if(r){for(var u=[],l=[],f=0;f<r.length;f++){var d=r[f];d.data.transition=a,d.data.pos=d.elm.getBoundingClientRect(),n[d.key]?u.push(d):l.push(d)}this.kept=e(t,null,u),this.removed=l}return e(t,null,o)},beforeUpdate:function(){this.__patch__(this._vnode,this.kept,!1,!0),this._vnode=this.kept},updated:function(){var e=this.prevChildren,t=this.moveClass||this.name+"-move";if(e.length&&this.hasMove(e[0].elm,t)){e.forEach(Gt),e.forEach(Yt),e.forEach(Qt);document.body.offsetHeight;e.forEach(function(e){if(e.data.moved){var n=e.elm,r=n.style;St(n,t),r.transform=r.WebkitTransform=r.transitionDuration="",n.addEventListener(lo,n._moveCb=function e(r){r&&!/transform$/.test(r.propertyName)||(n.removeEventListener(lo,e),n._moveCb=null,Et(n,t))})}})}},methods:{hasMove:function(e,t){if(!ao)return!1;if(null!=this._hasMove)return this._hasMove;St(e,t);var n=Lt(e);return Et(e,t),this._hasMove=n.hasTransform}}},To={Transition:ko,TransitionGroup:Oo};Ae.config.isUnknownElement=Ze,Ae.config.isReservedTag=Ui,Ae.config.getTagNamespace=We,Ae.config.mustUseProp=Ti,u(Ae.options.directives,Co),u(Ae.options.components,To),Ae.prototype.__patch__=Br._isServer?p:bo,Ae.prototype.$mount=function(e,t){return e=e&&!Br._isServer?Ge(e):void 0,this._mount(e,t)},setTimeout(function(){Br.devtools&&Zr&&Zr.emit("init",Ae)},0);var So=!!Ur&&Xt("\n","&#10;"),Eo=document.createElement("div"),jo=/([^\s"'<>\/=]+)/,Lo=/(?:=)/,No=[/"([^"]*)"+/.source,/'([^']*)'+/.source,/([^\s"'=<>`]+)/.source],Do=new RegExp("^\\s*"+jo.source+"(?:\\s*("+Lo.source+")\\s*(?:"+No.join("|")+"))?"),Mo="[a-zA-Z_][\\w\\-\\.]*",Po="((?:"+Mo+"\\:)?"+Mo+")",Ro=new RegExp("^<"+Po),Io=/^\s*(\/?)>/,Bo=new RegExp("^<\\/"+Po+"[^>]*>"),Fo=/^<!DOCTYPE [^>]+>/i,Ho=/^<!--/,Uo=/^<!\[/,zo=!1;"x".replace(/x(.)?/g,function(e,t){zo=""===t});var Vo,Jo,qo,Ko,Wo,Zo,Go,Yo,Qo,Xo,ea,ta,na,ra,ia,oa,aa,sa,ca,ua,la,fa,da,pa,va=n("script,style",!0),ha=function(e){return"lang"===e.name&&"html"!==e.value},ma=function(e,t,n){return!!va(e)||!(!t||"template"!==e||1!==n.length||!n[0].attrs.some(ha))},ga={},ya=/&lt;/g,_a=/&gt;/g,ba=/&#10;/g,$a=/&amp;/g,wa=/&quot;/g,Ca=/\{\{((?:.|\n)+?)\}\}/g,xa=/[-.*+?^${}()|[\]\/\\]/g,ka=a(function(e){var t=e[0].replace(xa,"\\$&"),n=e[1].replace(xa,"\\$&");
 return new RegExp(t+"((?:.|\\n)+?)"+n,"g")}),Aa=/^v-|^@|^:/,Oa=/(.*?)\s+(?:in|of)\s+(.*)/,Ta=/\(([^,]*),([^,]*)(?:,([^,]*))?\)/,Sa=/^:|^v-bind:/,Ea=/^@|^v-on:/,ja=/:(.*)$/,La=/\.[^.]+/g,Na=/\u2028|\u2029/g,Da=a(en),Ma=/^xmlns:NS\d+/,Pa=/^NS\d+:/,Ra=a(Dn),Ia=/^\s*[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['.*?']|\[".*?"]|\[\d+]|\[[A-Za-z_$][\w$]*])*\s*$/,Ba={esc:27,tab:9,enter:13,space:32,up:38,left:37,right:39,down:40,delete:[8,46]},Fa={stop:"$event.stopPropagation();",prevent:"$event.preventDefault();",self:"if($event.target !== $event.currentTarget)return;"},Ha={bind:zn,cloak:p},Ua=(new RegExp("\\b"+"do,if,for,let,new,try,var,case,else,with,await,break,catch,class,const,super,throw,while,yield,delete,export,import,return,switch,default,extends,finally,continue,debugger,function,arguments".split(",").join("\\b|\\b")+"\\b"),{staticKeys:["staticClass"],transformNode:ar,genData:sr}),za={transformNode:cr,genData:ur},Va=[Ua,za],Ja={model:mr,text:wr,html:Cr},qa=Object.create(null),Ka={isIE:Vr,expectHTML:!0,modules:Va,staticKeys:v(Va),directives:Ja,isReservedTag:Ui,isUnaryTag:Ri,mustUseProp:Ti,getTagNamespace:We,isPreTag:Hi},Wa=a(function(e){var t=Ge(e);return t&&t.innerHTML}),Za=Ae.prototype.$mount;return Ae.prototype.$mount=function(e,t){if(e=e&&Ge(e),e===document.body||e===document.documentElement)return this;var n=this.$options;if(!n.render){var r=n.template;if(r)if("string"==typeof r)"#"===r.charAt(0)&&(r=Wa(r));else{if(!r.nodeType)return this;r=r.innerHTML}else e&&(r=Or(e));if(r){var i=kr(r,{warn:$i,shouldDecodeNewlines:So,delimiters:n.delimiters},this),o=i.render,a=i.staticRenderFns;n.render=o,n.staticRenderFns=a}}return Za.call(this,e,t)},Ae.compile=kr,Ae});
-
 jQuery(document).ready(function () {
-
-    Vue.component('modalWindow',{
-        template: window.template.modalWindow,
-        props:['visible'],
-        data: function(){
-            return{
-                inputType:"filePhoto",
-                modalData:{}
-            }
-        },
-        methods:{
-            modalEmitWindHide:function(){
-                this.$emit("hide");
-            },
-            changeFiletype: function(e){
-                this.inputType = $(e.currentTarget).val();
-            },
-            serialiseForm: function(data){
-                $.ajax({
-                    type: "POST",
-                    url: "/add",
-                    data: this.modalData,
-                    success: function(data){
-                        console.log("data",data);
-                    },
-                    error: function(){
-                        console.log("query error");
-                    }
-                    // dataType: dataTypek
-                });
-            },
-            showFile: function(fContent){
-                this.modalData["file"] = fContent
-            }
-        }
-    });
-
-    Vue.component('filePhoto',{
-        template: window.template.inputFile,
-        data:function(){
-            return{
-                fileUrl:null
-            }
-        },
-        methods:{
-            loadFile: function(e){
-                var file = $(e.currentTarget)[0].files[0];
-                var imageReq = /^image\//;
-                var that = this;
-                if(imageReq.test(file.type)){
-                    var reader = new FileReader();
-                    reader.onload = function(event){
-                        var content = event.target.result;
-                        that.fileUrl = content;
-                        var sendFile = {
-                            name:file.name,
-                            type:file.type,
-                            content:content
-                        };
-                        that.$emit("fileLoad",JSON.stringify(sendFile));
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
-        }
-    });
-
-    Vue.component('linkPhoto',{
-        template: window.template.inputLink
-    });
-
-    Vue.component('fileVideo',{
-        template: window.template.inputVideo
-    });
-
-    Vue.component('linkVideo',{
-        template: window.template.linkVideo
-    });
-
-    Vue.directive("onepage",{
-        inserted: function(el, binding){
-            $(el).fullpage({
-                sectionsColor: [null, "#1BBF7C", "#7E8F7C", "#1BBF7C"],
-                anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage'],
-                slidesNavigation: true,
-                menu: '#mainMenu',
-                scrollOverflow: true,
-                afterLoad: function (anchorLink, index) {
-                    if (index == 2) {
-                        getPortfolio(1, function(data){
-                            binding.value.splice(0,binding.value.length);
-                            for(var i=0; i< data.portfolios.length; i++){
-                                console.log("data.portfolios[i]",data.portfolios[i]);
-                                binding.value.push(data.portfolios[i]);
-                                $('.massonry-grid').masonry({
-                                    itemSelector: '.item'
-                                });
-                            }
-                            console.log("binding",binding);
-                        });
-
-                    }
-                },
-                afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
-                    console.log("!!!", anchorLink, index, slideAnchor, slideIndex);
-
-                }
-            });
-        }
-    });
-
     var app = new Vue({
         el:"#app",
         data:{
-            portfolioLinks:[
-                {link:"images/portfolio/firstPage/1.jpg"},
-                {link:"images/portfolio/firstPage/2.jpg"},
-                {link:"images/portfolio/firstPage/3.jpg"},
-                {link:"https://player.vimeo.com/video/201188546"}
-            ],
             modalWindowOpen:false,
-            portfolioList: [1,2,3]
+            openMenu: false,
+            portfolioList: {
+                1:[],
+                2:[],
+                3:[],
+                4:[]
+            },
+            slideCount: 4
         },
         methods:{
+            setPortfolio:function(data){
+                console.log("portfolios", data);
+            },
+
+            openMobileMenu:function(){
+                this.openMenu = !this.openMenu;
+            },
+
+            update: function(){
+                console.log("update");
+            },
+            
             modalWindShow: function(){
                 this.modalWindowOpen = !this.modalWindowOpen;
             }
         }
     });
-
-    function getPortfolio(slide, callback){
-        $.ajax({
-            type: "GET",
-            url: "/portfolio",
-            data: {
-                slide:1*slide
-            },
-            success: function(data){
-                callback(data);
-            },
-            error: function(){
-                console.log("query error");
-            }
-            // dataType: dataTypek
-        });
-    }
-
-
-
-
-
-    $('a[data-rel^=lightcase]').lightcase({
-        maxHeight: 1600,
-        labels: {
-            'errorMessage': 'Ресурс не найден...',
-            'sequenceInfo.of': ' из ',
-            'close': 'Закрыть',
-            'navigator.prev': 'След',
-            'navigator.next': 'Пред',
-            'navigator.play': 'Старт',
-            'navigator.pause': 'Пауза'
-        },
-        iframe:{
-            width : '800',
-            height : '500',
-            frameborder : 0,
-            allowfullscreen:true,
-            webkitallowfullscreen: true,
-            mozallowfullscreen: true
-        }
-    });
-
-
 });
 
+Vue.component('modalWindow',{
+    template: window.template.modalWindow,
+    props:['visible'],
+    data: function(){
+        return{
+            inputType:"filePhoto",
+            modalData:{}
+        }
+    },
+    methods:{
+
+        modalEmitWindHide:function(){
+            this.$emit("hide");
+        },
+        changeFiletype: function(e){
+            delete this.modalData.file;
+            delete this.modalData.cover;
+            delete this.modalData.linkFile;
+            this.inputType = $(e.currentTarget).val();
+        },
+        serialiseForm: function(data){
+            console.log("data serialise", data);
+            const formData = new FormData();
+
+            for(key in data){
+                formData.append(key, data[key]);
+            }
+            var that = this;
+            $.ajax({
+                type: "POST",
+                url: "/add",
+                processData: false,
+                contentType: false,
+                headers:{
+                    "Content-type":undefined
+                },
+                data: formData,
+                success: function(data){
+                    //при успешном добавлении
+                    if(data.status === 200){
+                        that.modalEmitWindHide();
+                    }
+
+                    console.log("data",data);
+                },
+                error: function(){
+                    console.log("query error");
+                }
+            });
+        },
+        setFile: function(fContent){
+            this.modalData["file"] = fContent;
+        },
+        setCover: function(fCoverContent){
+            this.modalData["cover"] = fCoverContent
+        },
+        setlinkPath: function(link){
+            this.modalData["linkFile"] = link;
+        }
+    }
+});
+Vue.component('filePhoto',{
+    template: window.template.inputFile,
+    data:function(){
+        return{
+            fileUrl:null
+        }
+    },
+    methods:{
+        loadFile: function(e){
+            const file = $(e.currentTarget)[0].files[0];
+            const URL =  window.URL || window.webkitURL;
+            this.fileUrl = URL.createObjectURL(file);
+            const imageReg = /^image\//;
+            if(imageReg.test(file.type)) {
+                this.$emit("fileLoad", file);
+            }
+        }
+    }
+});
+/**
+ * Created by kristofer on 11.04.17.
+ */
+Vue.component('fileVideo',{
+    template: window.template.inputVideo,
+    data:function(){
+        return{
+            videoUrl:null,
+            coverImgPath: null
+        }
+    },
+    methods:{
+        loadVideo: function(e){
+            const file = $(e.currentTarget)[0].files[0];
+            const URL =  window.URL || window.webkitURL;
+            const videoReg = /^video\//;
+            if(videoReg.test(file.type)){
+                this.fileUrl = URL.createObjectURL(file);
+                this.$emit("fileLoad",file);
+            }
+        },
+
+        coverLoad: function(e){
+            const file = $(e.currentTarget)[0].files[0];
+            const URL =  window.URL || window.webkitURL;
+            const imageReg = /^image\//;
+            if(imageReg.test(file.type)){
+                this.coverImgPath = URL.createObjectURL(file);
+                this.$emit("coverLoad",file);
+            }
+        }
+    }
+});
+/**
+ * Created by kristofer on 11.04.17.
+ */
+Vue.component('linkVideo', {
+    data:function(){
+        return{
+            coverImgPath: null
+        }
+    },
+    template: window.template.linkVideo,
+    methods: {
+        addFileLink: function (e) {
+            this.$emit("linkInp", e.target.value);
+        },
+        coverLoad: function (e) {
+            const file = $(e.currentTarget)[0].files[0];
+            const URL = window.URL || window.webkitURL;
+            const imageReg = /^image\//;
+            if (imageReg.test(file.type)) {
+                this.coverImgPath = URL.createObjectURL(file);
+                this.$emit("coverLoad", file);
+            }
+        }
+    }
+});
+/**
+ * Created by kristofer on 11.04.17.
+ */
+//компонент для загрузки ссылки на фото
+Vue.component('linkPhoto',{
+    template: window.template.inputLink,
+    methods:{
+        addFileLink: function (e) {
+            this.$emit("linkInp", e.target.value);
+        }
+    }
+});
+/**
+ * Created by kristofer on 11.04.17.
+ */
+Vue.directive("onepage",{
+
+    inserted: function(el, binding){
+
+        $(el).fullpage({
+            sectionsColor: [null, "#1BBF7C", "#7E8F7C", "#1BBF7C"],
+            anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage'],
+            slidesNavigation: true,
+            // controlArrows: false,
+            // lazyLoading: false,
+            menu: '#mainMenu',
+            scrollOverflow: true,
+            offsetSections: true,
+            // scrollOverflowReset: true,
+            afterLoad: function (anchorLink, index) {
+                if(index === 2){
+
+                    console.log("loaded", anchorLink, index);
+                    // console.log("data in directive", binding.value[1].length);
+                    if(binding.value[1].length == 0){
+                        getPortfolio(1, function(data){
+                            console.log("data load", data);
+                            if(binding.value[1].length > 0){
+                                binding.value[1].splice(0, data.portfolios.length)
+                            }
+                            for(var i=0; i< data.portfolios.length; i++){
+                                binding.value[1].push(data.portfolios[i]);
+                            }
+                            setTimeout(function(){
+                                $.fn.fullpage.reBuild();
+                                $('.massonry-grid').masonry({
+                                    itemSelector: '.item',
+                                    columnWidth: '.item'
+                                    // percentPosition: true
+                                });
+                            }, 100)
+
+                        });
+                    }
+
+
+                }
+            },
+
+
+            afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+                console.log("!!!", anchorLink, index, slideAnchor, slideIndex);
+                var slideIndex = slideIndex + 1;
+                if(binding.value[slideIndex].length == 0){
+                    getPortfolio(slideIndex, function(data){
+                        console.log("data load!", data);
+
+                        if(binding.value[slideIndex].length > 0){
+                            binding.value[slideIndex].splice(0, data.portfolios.length)
+                        }
+                        for(var i=0; i< data.portfolios.length; i++){
+                            binding.value[slideIndex].push(data.portfolios[i]);
+                        }
+                        $.fn.fullpage.reBuild();
+
+                    });
+                }
+
+
+            }
+        });
+    }
+});
+
+function getPortfolio(slide, callback){
+    $.ajax({
+        type: "GET",
+        url: "/portfolio",
+        data: {
+            slide:1*slide
+        },
+        success: function(data){
+            callback(data);
+        },
+        error: function(){
+            console.log("query error");
+        }
+        // dataType: dataTypek
+    });
+}
+/**
+ * Created by kristofer on 11.04.17.
+ */
+//инициализация галерии
+Vue.directive("lightcasegalery",{
+    inserted: function(el, binding) {
+        $(el).lightcase({
+            maxHeight: 1600,
+            labels: {
+                'errorMessage': 'Ресурс не найден...',
+                'sequenceInfo.of': ' из ',
+                'close': 'Закрыть',
+                'navigator.prev': 'След',
+                'navigator.next': 'Пред',
+                'navigator.play': 'Старт',
+                'navigator.pause': 'Пауза'
+            },
+            iframe:{
+                width : '800',
+                height : '500',
+                frameborder : 0,
+                allowfullscreen:true,
+                webkitallowfullscreen: true,
+                mozallowfullscreen: true
+            },
+            video:{
+                width : 800,
+                height : 450,
+                poster : 'https://player.vimeo.com/video/201188546',
+                preload : 'auto',
+                controls : true,
+                autobuffer : true,
+                autoplay : false,
+                loop : false
+            }
+        });
+    }
+});

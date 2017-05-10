@@ -1,4 +1,11 @@
 <li id="file" class="portfolioVariant">
-    <span>Файл видео</span><input id="fileLoad" type="file" name="files"/>
-    <div class="previewFileList"></div>
+    <span>Файл видео</span><input id="fileLoad" accept="video/*" type="file" name="files" v-on:change="loadVideo(event)"/>
+    <div class="previewFileList">
+        <video :src="videoUrl" width="150" height="150" >
+        </video>
+    </div>
+    <span>Обложка</span><input v-on:change="coverLoad(event)" type="file" id="imgVideoLoad" accept="image/*"/>
+    <div class="cover-img">
+        <img :src="coverImgPath"/>
+    </div>
 </li>

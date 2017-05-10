@@ -13,6 +13,7 @@ var config = require('config');
  */
 
 var port = normalizePort(process.env.PORT || config.get("app.port"));
+
 app.set('port', port);
 
 /**
